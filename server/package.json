@@ -1,0 +1,38 @@
+{
+  "name": "letsdostuff-server",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "seeder": "node scripts/seeder",
+    "seeder:import": "node scripts/seeder",
+    "seeder:d": "node scripts/seeder -d",
+    "seeder:destroy": "node scripts/seeder -d",
+    "seeder:delete": "node scripts/seeder -d",
+    "lint:server": "./node_modules/.bin/eslint"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-validator": "^6.14.1",
+    "helmet": "^5.1.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.4",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "normalize-url": "^7.0.3",
+    "xss-clean": "^0.1.1"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "airbnb"
+  ],
+  "rules": {
+    "max-len": ["error", {"code": 80}],
+    "no-nested-ternary": "off",
+    "comma-dangle": "off",
+    "linebreak-style": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off",
+    "no-unused-vars": "warn",
+    "react/jsx-fragments": ["error", "element"],
+    "object-curly-newline": ["off", {
+      "ObjectExpression": "always",
+      "ObjectPattern": {
+        "multiline": true,
+        "minProperties": 6,
+        "consistent": true
+      }
+    }],
+    "react/jsx-filename-extension": ["warn", {
+      "extensions": [
+        ".js",
+        ".jsx"
+      ]
+    }],
+    "jsx-a11y/label-has-associated-control": ["error", {
+      "labelAttributes": ["label"],
+      "controlComponents": ["Field"]
+    }],
+    "react/jsx-one-expression-per-line": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "./src"]
+      }
+    }
+  }
+}

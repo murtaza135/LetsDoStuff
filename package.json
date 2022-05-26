@@ -1,0 +1,32 @@
+{
+  "name": "letsdostuff",
+  "version": "1.0.0",
+  "description": "A simple todo app created using the mern stack",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server",
+    "server": "nodemon server/server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seeder": "node server/seeder",
+    "seeder:import": "node server/seeder",
+    "seeder:d": "node server/seeder -d",
+    "seeder:destroy": "node server/seeder -d",
+    "seeder:delete": "node server/seeder -d",
+    "lint:server": "./server/node_modules/.bin/eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murtaza135/LetsDoStuff.git"
+  },
+  "author": "Murtaza Akhtar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/murtaza135/LetsDoStuff/issues"
+  },
+  "homepage": "https://github.com/murtaza135/LetsDoStuff#readme",
+  "devDependencies": {
+    "concurrently": "^7.2.1",
+    "nodemon": "^2.0.16"
+  }
+}
