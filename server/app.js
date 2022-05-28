@@ -35,10 +35,11 @@ app.use(hpp());
 
 // Use Routes
 app.use('/api', routes);
-app.use((req, res) => res.status(500).json({ message: 'Error' }));
+// app.use((req, res) => res.status(500).json({ message: 'Error' }));
 // app.use((req, res, next) => next(new PageNotFoundError()));
 
 // Error handling middleware
-app.use((error, req, res, next) => errorHandler.handleErrors(error, res));
+// app.use((error, req, res, next) => errorHandler.handleErrors(error, res));
+app.use((error, req, res, next) => res.status(500).json({ message: 'Error500' }));
 
 export default app;

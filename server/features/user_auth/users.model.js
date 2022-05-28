@@ -42,4 +42,27 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+// Encrypt password before saving to database
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+// Match user entered password to hashed password in database and authenticate
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  const isMatch = await bcrypt.compare(enteredPassword, this.password);
+  return isMatch;
+};
+
+// Provide easy method to get all non-sensitive data for given user
+UserSchema.methods.getDetails = async function () {
+  const userDetails = this.toObject({ versionKey: false, useProjection: true });
+  delete userDetails.password;
+  return userDetails;
+};
+
 export default mongoose.model('User', UserSchema);
