@@ -7,11 +7,13 @@ import {
   updateProfile,
   deleteProfile
 } from './auth.controller.js';
+import { setRegistrationValidationRules } from './auth.validation.js';
+import validate from '../../middleware/validate.js';
 
 const router = express.Router();
 
 router.route('/register')
-  .post(registerUser);
+  .post(setRegistrationValidationRules(), validate, registerUser);
 
 router.route('/login')
   .post(loginUser);

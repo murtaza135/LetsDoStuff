@@ -1,21 +1,29 @@
 import asyncHandler from 'express-async-handler';
 import { registerUser as registerUserService } from './auth.services.js';
+import usersModel from './users.model.js';
+import { getSignedJwtToken } from '../../utils/customJwt.js';
+import BaseError from '../../error_handling/errors/baseError.js';
 
 // @desc Register new user
 // @route POST /api/auth/register
 // @access Public
 export const registerUser = asyncHandler(async (req, res, next) => {
-  const { name, email, password, confirmPassword } = req.body;
-  const reqData = { name, email, password, confirmPassword };
-  const { success, data, token, error } = await registerUserService(reqData);
-  return success ? res.status(201).json({ data, token }) : next(error);
+  const { name, email, password } = req.body;
+  const user = await usersModel.create({ name, email, password });
+  const userDetails = await user.getDetails();
+
+  return res.status(201).json({
+    data: userDetails,
+    token: getSignedJwtToken(user._id)
+  });
 });
 
 // @desc Log user in
 // @route POST /api/auth/login
 // @access Public
 export const loginUser = asyncHandler(async (req, res, next) => {
-
+  const { email, password } = req.body;
+  const reqData = { email, password };
 });
 
 // @desc Get profile of logged in user
