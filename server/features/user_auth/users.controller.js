@@ -8,7 +8,7 @@ import pick from '../../utils/pick.js';
 // @route GET /api/v1/users
 // @access Public
 export const getUsers = asyncHandler(async (req, res, next) => {
-
+  res.status(200).json(res.advancedResults);
 });
 
 // @desc Get single user
