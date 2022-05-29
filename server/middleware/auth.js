@@ -4,6 +4,7 @@ import { verifyTokenAndGetId } from '../utils/customJwt.js';
 import usersModel from '../features/user_auth/users.model.js';
 
 export const protect = asyncHandler(async (req, res, next) => {
+  // TODO check that user exists after retrieving from database
   const id = verifyTokenAndGetId(req.headers.authorization);
 
   if (!id) {

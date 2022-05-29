@@ -59,9 +59,11 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 // Provide easy method to get all non-sensitive data for given user
-UserSchema.methods.getDetails = async function () {
+UserSchema.methods.getDetails = function () {
   const userDetails = this.toObject({ versionKey: false, useProjection: true });
   delete userDetails.password;
+  // delete userDetails.createdAt;
+  // delete userDetails.updatedAt;
   return userDetails;
 };
 

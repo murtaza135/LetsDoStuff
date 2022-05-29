@@ -9,10 +9,10 @@ import BaseError from '../../error_handling/errors/baseError.js';
 export const registerUser = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
   const user = await usersModel.create({ name, email, password });
-  const userDetails = await user.getDetails();
+  const userDetails = user.getDetails();
 
   return res.status(201).json({
-    data: userDetails,
+    user: userDetails,
     token: getSignedJwtToken(user._id)
   });
 });
@@ -23,10 +23,10 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 export const loginUser = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
   const user = await usersModel.findOne({ email });
-  const userDetails = await user.getDetails();
+  const userDetails = user.getDetails();
 
   return res.status(200).json({
-    data: userDetails,
+    user: userDetails,
     token: getSignedJwtToken(user._id)
   });
 });
@@ -35,7 +35,8 @@ export const loginUser = asyncHandler(async (req, res, next) => {
 // @route GET /api/auth/profile
 // @access Private
 export const getProfile = asyncHandler(async (req, res, next) => {
-
+  const userDetails = req.user.getDetails();
+  return res.status(200).json({ user: userDetails });
 });
 
 // @desc Update profile (except password) of logged in user
