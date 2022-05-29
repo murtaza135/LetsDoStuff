@@ -40,6 +40,6 @@ app.use('/api', routes);
 
 // Error handling middleware
 // app.use((error, req, res, next) => errorHandler.handleErrors(error, res));
-app.use((error, req, res, next) => res.status(500).json({ message: 'Error500', error }));
+// app.use((error, req, res, next) => res.status(500).json({ message: 'Error500', error }));
 
 export default app;

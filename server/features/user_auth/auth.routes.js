@@ -6,11 +6,14 @@ import {
   loginUser,
   getProfile,
   updateProfile,
+  updatePassword,
   deleteProfile
 } from './auth.controller.js';
 import {
   setRegistrationValidationRules,
-  setLoginValidationRules
+  setLoginValidationRules,
+  setUpdateProfileValidationRules,
+  setUpdatePasswordValidationRules
 } from './auth.validation.js';
 
 const router = express.Router();
@@ -23,7 +26,10 @@ router.route('/login')
 
 router.route('/profile')
   .get(protect, getProfile)
-  .put(protect, updateProfile)
+  .put(protect, setUpdateProfileValidationRules(), validate, updateProfile)
   .delete(protect, deleteProfile);
+
+router.route('/profile/password')
+  .put(protect, setUpdatePasswordValidationRules(), validate, updatePassword);
 
 export default router;
