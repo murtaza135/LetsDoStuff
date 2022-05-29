@@ -15,7 +15,10 @@ export const getUsers = asyncHandler(async (req, res, next) => {
 // @route GET /api/v1/users/:id
 // @access Public
 export const getUser = asyncHandler(async (req, res, next) => {
-
+  const user = await usersModel.findById(req.params.id);
+  return user
+    ? res.status(200).json({ success: true, data: user.getDetails() })
+    : next(new BaseError(`User not found with ID '${req.params.id}'`, 404, null));
 });
 
 // @desc Create new user
