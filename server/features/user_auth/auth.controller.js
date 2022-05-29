@@ -1,5 +1,4 @@
 import asyncHandler from 'express-async-handler';
-import { registerUser as registerUserService } from './auth.services.js';
 import usersModel from './users.model.js';
 import { getSignedJwtToken } from '../../utils/customJwt.js';
 import BaseError from '../../error_handling/errors/baseError.js';
@@ -22,8 +21,14 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 // @route POST /api/auth/login
 // @access Public
 export const loginUser = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
-  const reqData = { email, password };
+  const { email } = req.body;
+  const user = await usersModel.findOne({ email });
+  const userDetails = await user.getDetails();
+
+  return res.status(200).json({
+    data: userDetails,
+    token: getSignedJwtToken(user._id)
+  });
 });
 
 // @desc Get profile of logged in user

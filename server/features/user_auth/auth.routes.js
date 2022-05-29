@@ -1,5 +1,6 @@
 import express from 'express';
 import { protect } from '../../middleware/auth.js';
+import validate from '../../middleware/validate.js';
 import {
   registerUser,
   loginUser,
@@ -7,8 +8,10 @@ import {
   updateProfile,
   deleteProfile
 } from './auth.controller.js';
-import { setRegistrationValidationRules } from './auth.validation.js';
-import validate from '../../middleware/validate.js';
+import {
+  setRegistrationValidationRules,
+  setLoginValidationRules
+} from './auth.validation.js';
 
 const router = express.Router();
 
@@ -16,7 +19,7 @@ router.route('/register')
   .post(setRegistrationValidationRules(), validate, registerUser);
 
 router.route('/login')
-  .post(loginUser);
+  .post(setLoginValidationRules(), validate, loginUser);
 
 router.route('/profile')
   .get(protect, getProfile)
