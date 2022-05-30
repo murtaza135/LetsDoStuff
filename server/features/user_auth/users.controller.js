@@ -1,6 +1,5 @@
 import asyncHandler from 'express-async-handler';
 import usersModel from './users.model.js';
-import { getSignedJwtToken } from '../../utils/customJwt.js';
 import BaseError from '../../error_handling/errors/baseError.js';
 import pick from '../../utils/pick.js';
 
@@ -56,5 +55,6 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 // @route DELETE /api/v1/users/:id
 // @access Private/Admin
 export const deleteUser = asyncHandler(async (req, res, next) => {
-
+  await usersModel.findByIdAndDelete(req.params.id);
+  res.status(200).json({ success: true, data: null });
 });

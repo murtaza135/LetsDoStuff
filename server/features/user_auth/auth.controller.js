@@ -74,8 +74,7 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 // @route DELETE /api/auth/profile
 // @access Private
 export const deleteProfile = asyncHandler(async (req, res, next) => {
-  const { user } = req;
-  user.remove();
+  await usersModel.deleteOne({ id: req.user.id });
   delete req.user;
   res.status(200).json({ success: true, user: null });
 });

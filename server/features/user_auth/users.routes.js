@@ -7,7 +7,8 @@ import {
   getUsers,
   getUser,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 } from './users.controller.js';
 import {
   setIncludeIdValidationRules,
@@ -24,6 +25,6 @@ router.route('/')
 router.route('/:id')
   .get(setIncludeIdValidationRules(), validate, getUser)
   .put(protect, adminRequired, setUpdateProfileValidationRules(), validate, updateUser)
-  .delete(protect, adminRequired,);
+  .delete(protect, adminRequired, setIncludeIdValidationRules(), validate, deleteUser);
 
 export default router;
