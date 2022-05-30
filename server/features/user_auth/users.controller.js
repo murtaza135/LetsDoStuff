@@ -4,14 +4,14 @@ import BaseError from '../../error_handling/errors/baseError.js';
 import pick from '../../utils/pick.js';
 
 // @desc Get all users
-// @route GET /api/v1/users
+// @route GET /api/users
 // @access Public
 export const getUsers = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);
 });
 
 // @desc Get single user
-// @route GET /api/v1/users/:id
+// @route GET /api/users/:id
 // @access Public
 export const getUser = asyncHandler(async (req, res, next) => {
   const user = await usersModel.findById(req.params.id);
@@ -21,7 +21,7 @@ export const getUser = asyncHandler(async (req, res, next) => {
 });
 
 // @desc Create new user
-// @route POST /api/v1/users
+// @route POST /api/users
 // @access Private/Admin
 export const createUser = asyncHandler(async (req, res, next) => {
   const newUserDetails = pick(req.body, ['name', 'email', 'password']);
@@ -34,7 +34,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
 });
 
 // @desc Update single user
-// @route PUT /api/v1/users/:id
+// @route PUT /api/users/:id
 // @access Private/Admin
 export const updateUser = asyncHandler(async (req, res, next) => {
   const detailsToUpdate = pick(req.body, ['name', 'email']);
@@ -52,7 +52,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 });
 
 // @desc Delete single user
-// @route DELETE /api/v1/users/:id
+// @route DELETE /api/users/:id
 // @access Private/Admin
 export const deleteUser = asyncHandler(async (req, res, next) => {
   await usersModel.findByIdAndDelete(req.params.id);
