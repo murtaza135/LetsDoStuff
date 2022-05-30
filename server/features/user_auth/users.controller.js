@@ -25,14 +25,31 @@ export const getUser = asyncHandler(async (req, res, next) => {
 // @route POST /api/v1/users
 // @access Private/Admin
 export const createUser = asyncHandler(async (req, res, next) => {
+  const newUserDetails = pick(req.body, ['name', 'email', 'password']);
+  const user = await usersModel.create(newUserDetails);
 
+  return res.status(201).json({
+    success: true,
+    data: user.getDetails()
+  });
 });
 
 // @desc Update single user
 // @route PUT /api/v1/users/:id
 // @access Private/Admin
 export const updateUser = asyncHandler(async (req, res, next) => {
+  const detailsToUpdate = pick(req.body, ['name', 'email']);
 
+  const updatedUser = await usersModel.findByIdAndUpdate(
+    req.params.id,
+    detailsToUpdate,
+    { new: true, runValidators: true }
+  );
+
+  return res.status(200).json({
+    success: true,
+    data: updatedUser.getDetails()
+  });
 });
 
 // @desc Delete single user

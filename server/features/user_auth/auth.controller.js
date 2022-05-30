@@ -10,11 +10,10 @@ import pick from '../../utils/pick.js';
 export const registerUser = asyncHandler(async (req, res, next) => {
   const registrationDetails = pick(req.body, ['name', 'email', 'password']);
   const user = await usersModel.create(registrationDetails);
-  const userDetails = user.getDetails();
 
   return res.status(201).json({
     success: true,
-    user: userDetails,
+    user: user.getDetails(),
     token: getSignedJwtToken(user._id)
   });
 });
@@ -25,11 +24,10 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 export const loginUser = asyncHandler(async (req, res, next) => {
   const { email } = req.body;
   const user = await usersModel.findOne({ email });
-  const userDetails = user.getDetails();
 
   return res.status(200).json({
     success: true,
-    user: userDetails,
+    user: user.getDetails(),
     token: getSignedJwtToken(user._id)
   });
 });
@@ -37,10 +35,10 @@ export const loginUser = asyncHandler(async (req, res, next) => {
 // @desc Get profile of logged in user
 // @route GET /api/auth/profile
 // @access Private
-export const getProfile = asyncHandler(async (req, res, next) => {
-  const userDetails = req.user.getDetails();
-  return res.status(200).json({ success: true, user: userDetails });
-});
+export const getProfile = asyncHandler(async (req, res, next) => res.status(200).json({
+  success: true,
+  user: req.user.getDetails()
+}));
 
 // @desc Update profile (except password) of logged in user
 // @route PUT /api/auth/profile
@@ -51,13 +49,13 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
   const updatedUser = await usersModel.findByIdAndUpdate(
     req.user._id,
     detailsToUpdate,
-    {
-      new: true,
-      runValidators: true
-    }
+    { new: true, runValidators: true }
   );
 
-  return res.status(200).json({ success: true, user: updatedUser.getDetails() });
+  return res.status(200).json({
+    success: true,
+    user: updatedUser.getDetails()
+  });
 });
 
 // @desc Update password
@@ -66,7 +64,10 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 export const updatePassword = asyncHandler(async (req, res, next) => {
   req.user.password = req.body.newPassword;
   await req.user.save();
-  return res.status(200).json({ success: true, user: req.user.getDetails() });
+  return res.status(200).json({
+    success: true,
+    user: req.user.getDetails()
+  });
 });
 
 // @desc Delete profile of logged in user
