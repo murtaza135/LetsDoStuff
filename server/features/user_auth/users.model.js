@@ -1,14 +1,8 @@
 /* eslint-disable func-names */
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-import crypto from 'crypto';
-import path from 'path';
-import url from 'url';
-
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-dotenv.config({ path: path.join(__dirname, 'config', 'config.env') });
+// import jwt from 'jsonwebtoken';
+// import crypto from 'crypto';
 
 const UserSchema = new mongoose.Schema(
   {
