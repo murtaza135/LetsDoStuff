@@ -3,42 +3,57 @@ import todosModel from './todos.model.js';
 import BaseError from '../../error_handling/errors/baseError.js';
 import pick from '../../utils/pick.js';
 
-// @desc Get all todos for a specific user
-// @route GET /api/users/:userId/todos
+// @desc Get all todos for logged in user
+// @route GET /api/todos
 // @access Private
-export const getTodosByUserId = asyncHandler(async (req, res, next) => {
+export const getTodos = asyncHandler(async (req, res, next) => {
+  const todos = await todosModel.find({ userId: req.user._id });
 
+  return res.status(200).json({
+    success: true,
+    data: todos,
+    count: todos.length
+  });
 });
 
-// @desc Get the specified todo
+// @desc Get the specified todo if it belongs to the logged in user
 // @route GET /api/todos/:id
 // @access Private
-export const getTodoById = asyncHandler(async (req, res, next) => {
+export const getTodo = asyncHandler(async (req, res, next) => {
+  const todo = await todosModel.findById(req.params.id);
 
+  if (todo.userId.toString() !== req.user.id.toString()) {
+    return next(new BaseError('You do not have access to this todo', 500, null));
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: todo
+  });
 });
 
-// @desc Add a new todo
-// @route POST /api/users/:userId/todos
+// @desc Add a new todo for the logged in user
+// @route POST /api/todos
 // @access Private
 export const addTodo = asyncHandler(async (req, res, next) => {
 
 });
 
-// @desc Update the specified todo
+// @desc Update the specified todo if it belongs to the logged in user
 // @route PUT /api/todos/:id
 // @access Private
 export const updateTodo = asyncHandler(async (req, res, next) => {
 
 });
 
-// @desc Update the specified todo to done
+// @desc Update the specified todo to done if it belongs to the logged in user
 // @route PUT /api/todos/:id/done
 // @access Private
 export const udpateTodoToDone = asyncHandler(async (req, res, next) => {
 
 });
 
-// @desc Delete the specified todo
+// @desc Delete the specified todo if it belongs to the logged in user
 // @route DELETE /api/todos/:id
 // @access Private
 export const deleteTodo = asyncHandler(async (req, res, next) => {
