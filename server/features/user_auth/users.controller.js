@@ -37,11 +37,11 @@ export const createUser = asyncHandler(async (req, res, next) => {
 // @route PUT /api/users/:id
 // @access Private/Admin
 export const updateUser = asyncHandler(async (req, res, next) => {
-  const detailsToUpdate = pick(req.body, ['name', 'email']);
+  const newUserDetails = pick(req.body, ['name', 'email']);
 
   const updatedUser = await usersModel.findByIdAndUpdate(
     req.params.id,
-    detailsToUpdate,
+    newUserDetails,
     { new: true, runValidators: true }
   );
 

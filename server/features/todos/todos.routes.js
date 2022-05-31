@@ -13,7 +13,8 @@ import {
 } from './todos.controller.js';
 import {
   setFindTodoValidationRules,
-  setAddTodoValidationRules
+  setAddTodoValidationRules,
+  setUpdateTodoValidationRules
 } from './todos.validation.js';
 
 const router = express.Router({ mergeParams: true });
@@ -26,7 +27,7 @@ router.route('/')
 
 router.route('/:id')
   .get(setFindTodoValidationRules(), validate, getTodo)
-  .put(updateTodo)
+  .put(setUpdateTodoValidationRules(), validate, updateTodo)
   .put(udpateTodoToComplete)
   .delete(deleteTodo);
 
