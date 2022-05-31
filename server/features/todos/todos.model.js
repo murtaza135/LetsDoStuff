@@ -7,6 +7,10 @@ const TodoSchema = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Please provide a corresponding user']
     },
+    complete: {
+      type: Boolean,
+      default: false
+    },
     title: {
       type: String,
       required: [true, 'Please add a title'],

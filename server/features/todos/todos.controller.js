@@ -36,7 +36,19 @@ export const getTodo = asyncHandler(async (req, res, next) => {
 // @route POST /api/todos
 // @access Private
 export const addTodo = asyncHandler(async (req, res, next) => {
+  const newTodoDetails = pick(req.body, [
+    'userId', 'title', 'description', 'deadlineDate', 'tags', 'important'
+  ]);
 
+  const todo = await todosModel.create({
+    userId: req.user._id,
+    ...newTodoDetails
+  });
+
+  return res.status(201).json({
+    success: true,
+    data: todo
+  });
 });
 
 // @desc Update the specified todo if it belongs to the logged in user
@@ -46,10 +58,10 @@ export const updateTodo = asyncHandler(async (req, res, next) => {
 
 });
 
-// @desc Update the specified todo to done if it belongs to the logged in user
+// @desc Update the specified todo to complete if it belongs to the logged in user
 // @route PUT /api/todos/:id/done
 // @access Private
-export const udpateTodoToDone = asyncHandler(async (req, res, next) => {
+export const udpateTodoToComplete = asyncHandler(async (req, res, next) => {
 
 });
 
