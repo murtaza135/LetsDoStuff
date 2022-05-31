@@ -1,6 +1,8 @@
 /* eslint-disable func-names */
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import validator from 'validator';
+
 // import jwt from 'jsonwebtoken';
 // import crypto from 'crypto';
 
@@ -16,10 +18,7 @@ const UserSchema = new mongoose.Schema(
       required: [true, 'Please add an email'],
       unique: [true, 'This email is already taken'],
       trim: true,
-      match: [
-        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-        'Please add a valid email'
-      ]
+      validate: [validator.isEmail, 'Please add a valid email']
     },
     password: {
       type: String,
@@ -63,5 +62,7 @@ UserSchema.methods.getDetails = function () {
   // delete userDetails.updatedAt;
   return userDetails;
 };
+
+// TODO cascade delete todos when user is deleted?
 
 export default mongoose.model('User', UserSchema);
