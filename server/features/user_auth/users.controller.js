@@ -56,5 +56,5 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 // @access Private/Admin
 export const deleteUser = asyncHandler(async (req, res, next) => {
   await usersModel.findByIdAndDelete(req.params.id);
-  res.status(200).json({ success: true, data: null });
+  return res.status(200).json({ success: true, data: null });
 });

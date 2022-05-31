@@ -44,7 +44,8 @@ export const setUpdateTodoValidationRules = () => [
     .custom(ensureTodoExists('Todo does not exist', 500)),
   body('complete', '"Complete" may only be true or false')
     .optional({ nullable: true }).isBoolean(),
-  body('title', 'Please provide a title').not().isEmpty(),
+  body('title', 'Please provide a title')
+    .optional().not().isEmpty(),
   body('description', 'Please provide a valid description')
     .optional({ nullable: true }).not().isEmpty(),
   body('deadlineDate', 'Please provide a valid date')
