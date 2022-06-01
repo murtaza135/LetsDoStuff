@@ -1,10 +1,9 @@
 import BaseError from './baseError.js';
-import httpStatusCodes from '../httpStatusCodes.js';
 
 export default class ForbiddenError extends BaseError {
   constructor(
     message,
-    httpCode = httpStatusCodes.FORBIDDEN,
+    httpCode = 403,
     isOperational = true,
   ) {
     super(message, httpCode, isOperational);

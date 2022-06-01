@@ -9,7 +9,7 @@ import path from 'path';
 import url from 'url';
 import connectDB from './config/db.js';
 import routes from './features/routes.js';
-import errorHandler from './error_handling/errorHandler.js';
+import errorHandler from './error_handling/error_handler/errorHandler.js';
 import PageNotFoundError from './error_handling/errors/pageNotFoundError.js';
 
 // Initial setup
@@ -35,11 +35,9 @@ app.use(hpp());
 
 // Use Routes
 app.use('/api', routes);
-// app.use((req, res) => res.status(500).json({ message: 'Error' }));
-// app.use((req, res, next) => next(new PageNotFoundError()));
+app.use((req, res, next) => next(new PageNotFoundError()));
 
 // Error handling middleware
-// app.use((error, req, res, next) => errorHandler.handleErrors(error, res));
-// app.use((error, req, res, next) => res.status(500).json({ message: 'Error500', error }));
+app.use(errorHandler.handleErrors);
 
 export default app;
