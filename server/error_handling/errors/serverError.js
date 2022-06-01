@@ -7,5 +7,6 @@ export default class ServerError extends BaseError {
     isOperational = false
   ) {
     super(message, httpCode, isOperational);
+    this.isIdentified = false;
   }
 }
