@@ -1,8 +1,8 @@
 import asyncHandler from 'express-async-handler';
 import usersModel from './users.model.js';
 import { getSignedJwtToken } from '../../utils/customJwt.js';
-import BaseError from '../../error_handling/errors/baseError.js';
 import pick from '../../utils/pick.js';
+import UnauthenticatedError from '../../error_handling/errors/unauthenticatedError.js';
 
 // @desc Register new user
 // @route POST /api/auth/register
@@ -22,8 +22,13 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 // @route POST /api/auth/login
 // @access Public
 export const loginUser = asyncHandler(async (req, res, next) => {
-  const { email } = req.body;
-  const user = await usersModel.findOne({ email });
+  const { email, password } = req.body;
+  const user = await usersModel.findOne({ email }).select('+password');
+  const isMatch = await user?.matchPassword(password);
+
+  if (!isMatch) {
+    throw new UnauthenticatedError('Invalid email or password');
+  }
 
   return res.status(200).json({
     success: true,
@@ -35,10 +40,12 @@ export const loginUser = asyncHandler(async (req, res, next) => {
 // @desc Get profile of logged in user
 // @route GET /api/auth/profile
 // @access Private
-export const getProfile = asyncHandler(async (req, res, next) => res.status(200).json({
-  success: true,
-  user: req.user.getDetails()
-}));
+export const getProfile = asyncHandler(async (req, res, next) => (
+  res.status(200).json({
+    success: true,
+    user: req.user.getDetails()
+  })
+));
 
 // @desc Update profile (except password) of logged in user
 // @route PUT /api/auth/profile
@@ -62,8 +69,17 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 // @route PUT /api/auth/profile/password
 // @access Private
 export const updatePassword = asyncHandler(async (req, res, next) => {
-  req.user.password = req.body.newPassword;
+  const { oldPassword, newPassword } = req.body;
+  const user = await usersModel.findById(req.user._id).select('+password');
+  const isMatch = await user.matchPassword(oldPassword);
+
+  if (!isMatch) {
+    throw new UnauthenticatedError('Invalid credentials');
+  }
+
+  req.user.password = newPassword;
   await req.user.save();
+
   return res.status(200).json({
     success: true,
     user: req.user.getDetails()

@@ -1,6 +1,17 @@
 import { body } from 'express-validator';
+import asyncHandler from 'express-async-handler';
 import BaseError from '../../error_handling/errors/baseError.js';
 import usersModel from './users.model.js';
+
+const ensureItemExists = (errorMessage, errorCode) => asyncHandler(async (email) => {
+  const user = await usersModel.findOne({ email });
+
+  if (!user) {
+    throw new BaseError(errorMessage, errorCode, null);
+  }
+
+  return true;
+});
 
 const ensureUserExists = (errorMessage, errorCode) => (email) => (
   usersModel.findOne({ email })
@@ -25,14 +36,15 @@ const ensureUserDoesNotExist = (errorMessage, errorCode) => (email) => (
 );
 
 // TODO clean up
-// eslint-disable-next-line max-len
-const confirmMatchingPasswords = (otherPassword, errorMessage, errorCode) => (confirmPassword, { req }) => {
-  if (confirmPassword !== req.body[otherPassword]) {
-    throw new BaseError(errorMessage, errorCode, null);
-  }
+const confirmMatchingPasswords = (otherPassword, errorMessage, errorCode) => (
+  (confirmPassword, { req }) => {
+    if (confirmPassword !== req.body[otherPassword]) {
+      throw new BaseError(errorMessage, errorCode, null);
+    }
 
-  return true;
-};
+    return true;
+  }
+);
 
 // TODO clean up: this requires an email from either req.user or req.body, find a better way
 // TODO to ensure that passwords match
@@ -72,8 +84,7 @@ export const setUpdateProfileValidationRules = () => [
 
 export const setUpdatePasswordValidationRules = () => [
   body('oldPassword', 'Password must be at least 6 characters long')
-    .isLength({ min: 6 })
-    .custom(ensurePasswordIsCorrect('Invalid email or password', 500)),
+    .isLength({ min: 6 }),
   body('newPassword', 'Password must be at least 6 characters long')
     .isLength({ min: 6 }),
   body('confirmPassword')
