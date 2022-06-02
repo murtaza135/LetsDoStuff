@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import usersModel from './users.model.js';
 import { getSignedJwtToken } from '../../utils/customJwt.js';
 import pick from '../../utils/pick.js';
-import UnauthenticatedError from '../../error_handling/errors/unauthenticatedError.js';
+import { ensureItemExists, ensurePasswordIsValid } from '../../utils/db_validator.js';
 
 // @desc Register new user
 // @route POST /api/auth/register
@@ -24,11 +24,8 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 export const loginUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await usersModel.findOne({ email }).select('+password');
-  const isMatch = await user?.matchPassword(password);
-
-  if (!isMatch) {
-    throw new UnauthenticatedError('Invalid email or password');
-  }
+  ensureItemExists(user, 'Invalid credentials');
+  await ensurePasswordIsValid(user, password, 'Invalid credentials');
 
   return res.status(200).json({
     success: true,
@@ -71,11 +68,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 export const updatePassword = asyncHandler(async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
   const user = await usersModel.findById(req.user._id).select('+password');
-  const isMatch = await user.matchPassword(oldPassword);
-
-  if (!isMatch) {
-    throw new UnauthenticatedError('Invalid credentials');
-  }
+  await ensurePasswordIsValid(user, oldPassword, 'Invalid credentials');
 
   req.user.password = newPassword;
   await req.user.save();
@@ -91,6 +84,4 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 // @access Private
 export const deleteProfile = asyncHandler(async (req, res, next) => {
   await usersModel.deleteOne({ id: req.user.id });
-  delete req.user;
-  res.status(200).json({ success: true, user: null });
 });

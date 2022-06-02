@@ -1,7 +1,7 @@
 import usersModel from '../features/user_auth/users.model.js';
 import NotFoundError from '../error_handling/errors/notFoundError.js';
 import ForbiddenError from '../error_handling/errors/forbiddenError.js';
-import UnauthenticatedError from '../error_handling/errors/unauthenticatedError.js';
+import DataValidationError from '../error_handling/errors/dataValidationError.js';
 import DuplicateItemError from '../error_handling/errors/duplicateItemError.js';
 
 export const ensureItemExists = (item, errorMessage) => {
@@ -62,7 +62,7 @@ export const findAndEnsureItemBelongsToUser = (
 );
 
 export const ensurePasswordIsValid = (
-  async (user, password, errorMessage = 'Invalid Credentials') => {
+  async (user, password, errorMessage = 'Invalid credentials') => {
     if (!user) {
       throw new NotFoundError(errorMessage);
     }
@@ -70,7 +70,7 @@ export const ensurePasswordIsValid = (
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
-      throw new UnauthenticatedError(errorMessage);
+      throw new DataValidationError(errorMessage);
     }
 
     return true;
