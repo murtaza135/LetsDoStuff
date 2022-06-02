@@ -67,8 +67,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 // @access Private
 export const updatePassword = asyncHandler(async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
-  const user = await usersModel.findById(req.user._id).select('+password');
-  await ensurePasswordIsValid(user, oldPassword, 'Invalid credentials');
+  await ensurePasswordIsValid(req.user, oldPassword, 'Invalid credentials');
 
   req.user.password = newPassword;
   await req.user.save();

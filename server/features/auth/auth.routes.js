@@ -1,5 +1,5 @@
 import express from 'express';
-import { protect } from '../../middleware/auth.js';
+import { authenticate } from '../../middleware/auth.js';
 import validate from '../../middleware/validate.js';
 import {
   registerUser,
@@ -25,11 +25,11 @@ router.route('/login')
   .post(setLoginValidationRules(), validate, loginUser);
 
 router.route('/profile')
-  .get(protect, getProfile)
-  .put(protect, setUpdateProfileValidationRules(), validate, updateProfile)
-  .delete(protect, deleteProfile);
+  .get(authenticate, getProfile)
+  .put(authenticate, setUpdateProfileValidationRules(), validate, updateProfile)
+  .delete(authenticate, deleteProfile);
 
 router.route('/profile/password')
-  .put(protect, setUpdatePasswordValidationRules(), validate, updatePassword);
+  .put(authenticate, setUpdatePasswordValidationRules(), validate, updatePassword);
 
 export default router;

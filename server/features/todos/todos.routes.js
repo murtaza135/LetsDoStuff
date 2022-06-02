@@ -1,5 +1,5 @@
 import express from 'express';
-import { protect } from '../../middleware/auth.js';
+import { authenticate } from '../../middleware/auth.js';
 import validate from '../../middleware/validate.js';
 import advancedResults from '../../middleware/advancedResults.js';
 import {
@@ -17,7 +17,7 @@ import {
 } from './todos.validator.js';
 
 const router = express.Router({ mergeParams: true });
-router.use(protect);
+router.use(authenticate);
 
 // TODO advancedResults?
 router.route('/')
