@@ -64,7 +64,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
     };
   }
 
-  res.advancedResults = {
+  res.apiFeatures = {
     success: true,
     pagination,
     count: results.length,

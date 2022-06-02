@@ -1,7 +1,7 @@
 import express from 'express';
 import { authenticate, authoriseAdmin } from '../../middleware/auth.js';
 import validate from '../../middleware/validate.js';
-import advancedResults from '../../middleware/advancedResults.js';
+import applyApiFeatures from '../../middleware/applyApiFeatures.js';
 import usersModel from './users.model.js';
 import {
   getUsers,
@@ -19,7 +19,7 @@ import {
 const router = express.Router();
 
 router.route('/')
-  .get(advancedResults(usersModel), getUsers)
+  .get(applyApiFeatures(usersModel), getUsers)
   .post(authenticate, authoriseAdmin, setCreateUserValidationRules(), validate, createUser);
 
 router.route('/:id')
