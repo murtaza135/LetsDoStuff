@@ -14,7 +14,7 @@ import {
   setLoginValidationRules,
   setUpdateProfileValidationRules,
   setUpdatePasswordValidationRules
-} from './auth.validation.js';
+} from './auth.validator.js';
 
 const router = express.Router();
 

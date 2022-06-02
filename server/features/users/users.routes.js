@@ -14,7 +14,7 @@ import {
   setIncludeIdValidationRules,
   setCreateUserValidationRules,
   setUpdateProfileValidationRules
-} from './users.validation.js';
+} from './users.validator.js';
 
 const router = express.Router();
 

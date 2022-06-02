@@ -1,4 +1,4 @@
-import usersModel from '../features/user_auth/users.model.js';
+import usersModel from '../features/users/users.model.js';
 import NotFoundError from '../error_handling/errors/notFoundError.js';
 import ForbiddenError from '../error_handling/errors/forbiddenError.js';
 import DataValidationError from '../error_handling/errors/dataValidationError.js';

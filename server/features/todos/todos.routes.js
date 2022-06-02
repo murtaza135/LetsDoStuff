@@ -14,7 +14,7 @@ import {
   setIncludeTodoIdValidationRules,
   setAddTodoValidationRules,
   setUpdateTodoValidationRules,
-} from './todos.validation.js';
+} from './todos.validator.js';
 
 const router = express.Router({ mergeParams: true });
 router.use(protect);

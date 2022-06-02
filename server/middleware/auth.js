@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import BaseError from '../error_handling/errors/baseError.js';
 import { verifyTokenAndGetId } from '../utils/customJwt.js';
-import usersModel from '../features/user_auth/users.model.js';
+import usersModel from '../features/users/users.model.js';
 
 export const protect = asyncHandler(async (req, res, next) => {
   // TODO check that user exists after retrieving from database
