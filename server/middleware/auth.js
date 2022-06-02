@@ -17,9 +17,19 @@ export const authenticate = asyncHandler(async (req, res, next) => {
   return next();
 });
 
-export const adminOnly = (req, res, next) => {
+export const authoriseAdmin = (req, res, next) => {
   if (!req.user?.isAdmin) {
     throw new ForbiddenError('Only admins may access this route');
+  }
+
+  return next();
+};
+
+export const authoriseRoles = (...roles) => (req, res, next) => {
+  if (!roles.includes(req.user?.role)) {
+    return next(new ForbiddenError(
+      `User with role '${req.user?.role}' is not authorised to access this route`
+    ));
   }
 
   return next();
