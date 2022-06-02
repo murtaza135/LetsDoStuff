@@ -61,7 +61,7 @@ export const findAndEnsureItemBelongsToUser = (
   }
 );
 
-export const ensurePasswordIsValid = (
+export const ensurePasswordIsValid = await (
   async (user, password, errorMessage = 'Invalid credentials') => {
     if (!user) {
       throw new NotFoundError(errorMessage);

@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import todosModel from './todos.model.js';
-import BaseError from '../../error_handling/errors/baseError.js';
 import pick from '../../utils/pick.js';
+import { ensureItemExists, ensureItemBelongsToUser } from '../../utils/db_validator.js';
 
 // @desc Get all todos for logged in user
 // @route GET /api/todos
@@ -21,11 +21,13 @@ export const getTodos = asyncHandler(async (req, res, next) => {
 // @access Private
 export const getTodo = asyncHandler(async (req, res, next) => {
   const todo = await todosModel.findById(req.params.id);
-
-  // TODO move into separate db_validator module
-  if (todo.userId.toString() !== req.user.id.toString()) {
-    return next(new BaseError('You do not have access to this todo', 500, null));
-  }
+  ensureItemExists(todo, 'Todo does not exist');
+  ensureItemBelongsToUser(
+    todo,
+    req.user.id.toString(),
+    'Todo does not exist',
+    'You do not have authorisation to access this todo'
+  );
 
   return res.status(200).json({
     success: true,
@@ -57,11 +59,13 @@ export const addTodo = asyncHandler(async (req, res, next) => {
 // @access Private
 export const updateTodo = asyncHandler(async (req, res, next) => {
   const todo = await todosModel.findById(req.params.id);
-
-  // TODO move into separate db_validator module
-  if (todo.userId.toString() !== req.user.id.toString()) {
-    return next(new BaseError('You do not have access to this todo', 500, null));
-  }
+  ensureItemExists(todo, 'Todo does not exist');
+  ensureItemBelongsToUser(
+    todo,
+    req.user.id.toString(),
+    'Todo does not exist',
+    'You do not have authorisation to access this todo'
+  );
 
   const newTodoDetails = pick(req.body, [
     'userId', 'complete', 'title', 'description', 'deadlineDate', 'tags', 'important'
@@ -84,11 +88,13 @@ export const updateTodo = asyncHandler(async (req, res, next) => {
 // @access Private
 export const udpateTodoToComplete = asyncHandler(async (req, res, next) => {
   const todo = await todosModel.findById(req.params.id);
-
-  // TODO move into separate db_validator module
-  if (todo.userId.toString() !== req.user.id.toString()) {
-    return next(new BaseError('You do not have access to this todo', 500, null));
-  }
+  ensureItemExists(todo, 'Todo does not exist');
+  ensureItemBelongsToUser(
+    todo,
+    req.user.id.toString(),
+    'Todo does not exist',
+    'You do not have authorisation to access this todo'
+  );
 
   const updatedTodo = await todosModel.findByIdAndUpdate(
     req.params.id,
@@ -107,11 +113,13 @@ export const udpateTodoToComplete = asyncHandler(async (req, res, next) => {
 // @access Private
 export const deleteTodo = asyncHandler(async (req, res, next) => {
   const todo = await todosModel.findById(req.params.id);
-
-  // TODO move into separate db_validator module
-  if (todo.userId.toString() !== req.user.id.toString()) {
-    return next(new BaseError('You do not have access to this todo', 500, null));
-  }
+  ensureItemExists(todo, 'Todo does not exist');
+  ensureItemBelongsToUser(
+    todo,
+    req.user.id.toString(),
+    'Todo does not exist',
+    'You do not have authorisation to access this todo'
+  );
 
   await todosModel.findByIdAndDelete(req.params.id);
   return res.status(200).json({ success: true, data: null });
