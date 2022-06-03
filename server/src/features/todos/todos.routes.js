@@ -1,33 +1,22 @@
 import express from 'express';
 import { authenticate } from '../../middleware/auth.js';
 import validate from '../../middleware/validate.js';
-import {
-  getTodos,
-  getTodo,
-  addTodo,
-  updateTodo,
-  udpateTodoToComplete,
-  deleteTodo
-} from './todos.controller.js';
-import {
-  setIncludeTodoIdValidationRules,
-  setAddTodoValidationRules,
-  setUpdateTodoValidationRules,
-} from './todos.validator.js';
+import * as controller from './todos.controller.js';
+import * as validator from './todos.validator.js';
 
 const router = express.Router({ mergeParams: true });
 router.use(authenticate);
 
 router.route('/')
-  .post(setAddTodoValidationRules(), validate, addTodo)
-  .get(getTodos);
+  .post(validator.setAddTodoValidationRules(), validate, controller.addTodo)
+  .get(controller.getTodos);
 
 router.route('/:id')
-  .get(setIncludeTodoIdValidationRules(), validate, getTodo)
-  .put(setUpdateTodoValidationRules(), validate, updateTodo)
-  .delete(setIncludeTodoIdValidationRules(), validate, deleteTodo);
+  .get(validator.setIncludeTodoIdValidationRules(), validate, controller.getTodo)
+  .put(validator.setUpdateTodoValidationRules(), validate, controller.updateTodo)
+  .delete(validator.setIncludeTodoIdValidationRules(), validate, controller.deleteTodo);
 
 router.route('/:id/complete')
-  .put(setIncludeTodoIdValidationRules(), validate, udpateTodoToComplete);
+  .put(validator.setIncludeTodoIdValidationRules(), validate, controller.udpateTodoToComplete);
 
 export default router;

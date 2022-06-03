@@ -1,35 +1,33 @@
 import express from 'express';
 import { authenticate } from '../../middleware/auth.js';
 import validate from '../../middleware/validate.js';
-import {
-  registerUser,
-  loginUser,
-  getProfile,
-  updateProfile,
-  updatePassword,
-  deleteProfile
-} from './auth.controller.js';
-import {
-  setRegistrationValidationRules,
-  setLoginValidationRules,
-  setUpdateProfileValidationRules,
-  setUpdatePasswordValidationRules
-} from './auth.validator.js';
+import * as controller from './auth.controller.js';
+import * as validator from './auth.validator.js';
 
 const router = express.Router();
 
 router.route('/register')
-  .post(setRegistrationValidationRules(), validate, registerUser);
+  .post(validator.setRegistrationValidationRules(), validate, controller.registerUser);
 
 router.route('/login')
-  .post(setLoginValidationRules(), validate, loginUser);
+  .post(validator.setLoginValidationRules(), validate, controller.loginUser);
 
 router.route('/profile')
-  .get(authenticate, getProfile)
-  .put(authenticate, setUpdateProfileValidationRules(), validate, updateProfile)
-  .delete(authenticate, deleteProfile);
+  .get(authenticate, controller.getProfile)
+  .put(
+    authenticate,
+    validator.setUpdateProfileValidationRules(),
+    validate,
+    controller.updateProfile
+  )
+  .delete(authenticate, controller.deleteProfile);
 
 router.route('/profile/password')
-  .put(authenticate, setUpdatePasswordValidationRules(), validate, updatePassword);
+  .put(
+    authenticate,
+    validator.setUpdatePasswordValidationRules(),
+    validate,
+    controller.updatePassword
+  );
 
 export default router;
