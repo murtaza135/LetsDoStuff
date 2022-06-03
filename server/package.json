@@ -6,6 +6,7 @@
     "start": "node src/server.js",
     "server": "nodemon src/server.js",
     "seeder": "node scripts/seeder",
+    "seeder:i": "node scripts/seeder",
     "seeder:import": "node scripts/seeder",
     "seeder:d": "node scripts/seeder -d",
     "seeder:destroy": "node scripts/seeder -d",
