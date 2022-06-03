@@ -2,10 +2,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-
-// TODO below
-// import jwt from 'jsonwebtoken';
-// import crypto from 'crypto';
+import todosModel from '../todos/todos.model.js';
 
 const UserSchema = new mongoose.Schema(
   {
@@ -58,6 +55,13 @@ UserSchema.pre('save', async function (next) {
   next();
 });
 
+// Cascade delete todos when user is deleted
+UserSchema.pre(['findOneAndDelete', 'findOneAndRemove', 'deleteOne'], async function (next) {
+  const user = await this.model.findOne(this.getFilter());
+  await todosModel.deleteMany({ userId: user._id });
+  next();
+});
+
 // Match user entered password to hashed password in database and authenticate
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   const isMatch = await bcrypt.compare(enteredPassword, this.password);
@@ -83,7 +87,5 @@ UserSchema.query.getData = function (timestamps = true) {
   query = timestamps === false ? this.select('-createdAt -updatedAt') : query;
   return query;
 };
-
-// TODO cascade delete todos when user is deleted?
 
 export default mongoose.model('User', UserSchema);
