@@ -1,17 +1,15 @@
 import { body, param } from 'express-validator';
-import BaseError from '../../error_handling/errors/baseError.js';
+import DataValidationError from '../../error_handling/errors/dataValidationError.js';
 
-// TODO create validation of params passed into advancedReesults
+const confirmPasswordMatches = (otherPassword, errorMessage) => (
+  (confirmPassword, { req }) => {
+    if (confirmPassword !== req.body[otherPassword]) {
+      throw new DataValidationError(errorMessage);
+    }
 
-// TODO clean up
-// eslint-disable-next-line max-len
-const confirmMatchingPasswords = (otherPassword, errorMessage, errorCode) => (confirmPassword, { req }) => {
-  if (confirmPassword !== req.body[otherPassword]) {
-    throw new BaseError(errorMessage, errorCode, null);
+    return true;
   }
-
-  return true;
-};
+);
 
 export const setIncludeIdValidationRules = () => [
   param('id', 'Please provide an ID').not().isEmpty()
@@ -22,7 +20,7 @@ export const setCreateUserValidationRules = () => [
   body('email', 'Please provide a valid email').isEmail(),
   body('password', 'Password must be at least 6 characters long').isLength({ min: 6 }),
   body('confirmPassword')
-    .custom(confirmMatchingPasswords('password', 'Passwords do not match', 500))
+    .custom(confirmPasswordMatches('password', 'Passwords do not match', 500))
 ];
 
 export const setUpdateProfileValidationRules = () => [
