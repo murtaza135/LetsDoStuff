@@ -3,7 +3,7 @@ import UnauthenticatedError from '../error_handling/errors/unauthenticatedError.
 import ForbiddenError from '../error_handling/errors/forbiddenError.js';
 import { verifyTokenAndGetId } from '../utils/customJwt.js';
 import usersModel from '../features/users/users.model.js';
-import { ensureItemExists } from '../utils/db_validator.js';
+import { ensureItemExists } from '../utils/dbValidator.js';
 
 export const authenticate = asyncHandler(async (req, res, next) => {
   const id = verifyTokenAndGetId(req.headers.authorization);

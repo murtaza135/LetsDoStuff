@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import usersModel from './users.model.js';
-import { ensureItemExists } from '../../utils/db_validator.js';
+import { ensureItemExists } from '../../utils/dbValidator.js';
 import pick from '../../utils/pick.js';
 import ApiFeatures from '../../utils/apiFeatures.js';
 

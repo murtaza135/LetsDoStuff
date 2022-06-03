@@ -2,7 +2,7 @@ import asyncHandler from 'express-async-handler';
 import usersModel from '../users/users.model.js';
 import { getSignedJwtToken } from '../../utils/customJwt.js';
 import pick from '../../utils/pick.js';
-import { ensureItemExists, ensurePasswordIsValid } from '../../utils/db_validator.js';
+import { ensureItemExists, ensurePasswordIsValid } from '../../utils/dbValidator.js';
 
 // @desc Register new user
 // @route POST /api/auth/register

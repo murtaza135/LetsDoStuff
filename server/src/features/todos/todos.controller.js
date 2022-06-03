@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import todosModel from './todos.model.js';
 import pick from '../../utils/pick.js';
-import { ensureItemExists, ensureItemBelongsToUser } from '../../utils/db_validator.js';
+import { ensureItemExists, ensureItemBelongsToUser } from '../../utils/dbValidator.js';
 import ApiFeatures from '../../utils/apiFeatures.js';
 
 // @desc Add a new todo for the logged in user
