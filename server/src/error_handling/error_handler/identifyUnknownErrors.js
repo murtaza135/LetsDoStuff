@@ -50,10 +50,9 @@ const checkDbBadObjectIdError = (error) => {
 const checkDbDuplicateKeyError = (error) => {
   if (error.code === 11000) {
     const errorKey = Object.keys(error.keyValue)[0];
-    const errorValue = Object.values(error.keyValue)[0];
-    const message = `${capitalise(errorKey)} '${errorValue}' is already taken`;
+    const message = `${capitalise(errorKey)} is already taken`;
     error.message = message;
-    error.type = 'DataValidationError';
+    error.type = 'DuplicateItemError';
     error.httpCode = 400;
     error.isOperational = true;
     error.isIdentified = true;
