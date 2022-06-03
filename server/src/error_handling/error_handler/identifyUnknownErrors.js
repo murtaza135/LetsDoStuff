@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { capitalise } from '../../utils/stringUtils.js';
 
 const checkJwtInvalidError = (error) => {
   if (error.name === 'JsonWebTokenError') {
@@ -48,7 +49,9 @@ const checkDbBadObjectIdError = (error) => {
 
 const checkDbDuplicateKeyError = (error) => {
   if (error.code === 11000) {
-    const message = 'Duplicate field value entered';
+    const errorKey = Object.keys(error.keyValue)[0];
+    const errorValue = Object.values(error.keyValue)[0];
+    const message = `${capitalise(errorKey)} '${errorValue}' is already taken`;
     error.message = message;
     error.type = 'DataValidationError';
     error.httpCode = 400;

@@ -9,7 +9,7 @@ export const setAddTodoValidationRules = () => [
   body('description', 'Please provide a valid description')
     .optional({ nullable: true }).not().isEmpty(),
   body('deadlineDate', 'Please provide a valid date')
-    .optional({ nullable: true }).isNumeric().toDate(),
+    .optional({ nullable: true }).toDate(),
   body('tags', 'Please provide an array of tags which are to be in String format')
     .optional({ nullable: true }).isArray(),
   body('important', '"Important" may only be true or false')
