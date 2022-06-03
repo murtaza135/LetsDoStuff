@@ -2,18 +2,17 @@ import asyncHandler from 'express-async-handler';
 import todosModel from './todos.model.js';
 import pick from '../../utils/pick.js';
 import { ensureItemExists, ensureItemBelongsToUser } from '../../utils/db_validator.js';
+import ApiFeatures from '../../utils/apiFeatures.js';
 
 // @desc Get all todos for logged in user
 // @route GET /api/todos
 // @access Private
 export const getTodos = asyncHandler(async (req, res, next) => {
-  const todos = await todosModel.find({ userId: req.user._id });
-
-  return res.status(200).json({
-    success: true,
-    data: todos,
-    count: todos.length
-  });
+  const queryParams = { ...req.query, userId: req.user._id };
+  const apiFeatures = new ApiFeatures(queryParams, todosModel);
+  await apiFeatures.applyAllAdvancedFeatures();
+  const data = await apiFeatures.getQueryData();
+  return res.status(200).json({ success: true, ...data });
 });
 
 // @desc Get the specified todo if it belongs to the logged in user

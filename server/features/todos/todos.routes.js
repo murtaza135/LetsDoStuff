@@ -1,7 +1,6 @@
 import express from 'express';
 import { authenticate } from '../../middleware/auth.js';
 import validate from '../../middleware/validate.js';
-import advancedResults from '../../middleware/advancedResults.js';
 import {
   getTodos,
   getTodo,
@@ -19,7 +18,6 @@ import {
 const router = express.Router({ mergeParams: true });
 router.use(authenticate);
 
-// TODO advancedResults?
 router.route('/')
   .get(getTodos)
   .post(setAddTodoValidationRules(), validate, addTodo);

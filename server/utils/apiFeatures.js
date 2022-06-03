@@ -1,11 +1,11 @@
 class ApiFeatures {
-  constructor(queryParams, model, populate) {
+  constructor(queryParams, model, populateKey) {
     this.query = null;
     this.queryParams = queryParams;
     this.advancedFeatures = {};
     this.pagination = {};
     this.model = model;
-    this.populateKey = populate;
+    this.populateKey = populateKey;
     this.findAdvancedFeatures();
     this.findByQueryConditions();
   }

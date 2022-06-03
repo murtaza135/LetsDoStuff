@@ -2,12 +2,16 @@ import asyncHandler from 'express-async-handler';
 import usersModel from './users.model.js';
 import BaseError from '../../error_handling/errors/baseError.js';
 import pick from '../../utils/pick.js';
+import ApiFeatures from '../../utils/apiFeatures.js';
 
 // @desc Get all users
 // @route GET /api/users
 // @access Public
 export const getUsers = asyncHandler(async (req, res, next) => {
-  res.status(200).json({ success: true, ...res.apiFeatures });
+  const apiFeatures = new ApiFeatures(req.query, usersModel);
+  await apiFeatures.applyAllAdvancedFeatures();
+  const data = await apiFeatures.getQueryData();
+  res.status(200).json({ success: true, ...data });
 });
 
 // @desc Get single user
