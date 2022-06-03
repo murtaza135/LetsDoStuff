@@ -19,8 +19,8 @@ const router = express.Router({ mergeParams: true });
 router.use(authenticate);
 
 router.route('/')
-  .get(getTodos)
-  .post(setAddTodoValidationRules(), validate, addTodo);
+  .post(setAddTodoValidationRules(), validate, addTodo)
+  .get(getTodos);
 
 router.route('/:id')
   .get(setIncludeTodoIdValidationRules(), validate, getTodo)

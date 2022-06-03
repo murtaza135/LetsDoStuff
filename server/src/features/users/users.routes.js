@@ -17,8 +17,8 @@ import {
 const router = express.Router();
 
 router.route('/')
-  .get(getUsers)
-  .post(authenticate, authoriseAdmin, setCreateUserValidationRules(), validate, createUser);
+  .post(authenticate, authoriseAdmin, setCreateUserValidationRules(), validate, createUser)
+  .get(getUsers);
 
 router.route('/:id')
   .get(setIncludeIdValidationRules(), validate, getUser)

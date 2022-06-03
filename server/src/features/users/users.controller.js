@@ -4,6 +4,19 @@ import BaseError from '../../error_handling/errors/baseError.js';
 import pick from '../../utils/pick.js';
 import ApiFeatures from '../../utils/apiFeatures.js';
 
+// @desc Create new user
+// @route POST /api/users
+// @access Private/Admin
+export const createUser = asyncHandler(async (req, res, next) => {
+  const newUserDetails = pick(req.body, ['name', 'email', 'password']);
+  const user = await usersModel.create(newUserDetails);
+
+  return res.status(201).json({
+    success: true,
+    data: user.getDetails()
+  });
+});
+
 // @desc Get all users
 // @route GET /api/users
 // @access Public
@@ -22,19 +35,6 @@ export const getUser = asyncHandler(async (req, res, next) => {
   return user
     ? res.status(200).json({ success: true, data: user.getDetails() })
     : next(new BaseError(`User not found with ID '${req.params.id}'`, 404, null));
-});
-
-// @desc Create new user
-// @route POST /api/users
-// @access Private/Admin
-export const createUser = asyncHandler(async (req, res, next) => {
-  const newUserDetails = pick(req.body, ['name', 'email', 'password']);
-  const user = await usersModel.create(newUserDetails);
-
-  return res.status(201).json({
-    success: true,
-    data: user.getDetails()
-  });
 });
 
 // @desc Update single user

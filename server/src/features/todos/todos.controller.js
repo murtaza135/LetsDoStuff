@@ -4,6 +4,25 @@ import pick from '../../utils/pick.js';
 import { ensureItemExists, ensureItemBelongsToUser } from '../../utils/db_validator.js';
 import ApiFeatures from '../../utils/apiFeatures.js';
 
+// @desc Add a new todo for the logged in user
+// @route POST /api/todos
+// @access Private
+export const addTodo = asyncHandler(async (req, res, next) => {
+  const newTodoDetails = pick(req.body, [
+    'userId', 'title', 'description', 'deadlineDate', 'tags', 'important'
+  ]);
+
+  const todo = await todosModel.create({
+    userId: req.user._id,
+    ...newTodoDetails
+  });
+
+  return res.status(201).json({
+    success: true,
+    data: todo
+  });
+});
+
 // @desc Get all todos for logged in user
 // @route GET /api/todos
 // @access Private
@@ -29,25 +48,6 @@ export const getTodo = asyncHandler(async (req, res, next) => {
   );
 
   return res.status(200).json({
-    success: true,
-    data: todo
-  });
-});
-
-// @desc Add a new todo for the logged in user
-// @route POST /api/todos
-// @access Private
-export const addTodo = asyncHandler(async (req, res, next) => {
-  const newTodoDetails = pick(req.body, [
-    'userId', 'title', 'description', 'deadlineDate', 'tags', 'important'
-  ]);
-
-  const todo = await todosModel.create({
-    userId: req.user._id,
-    ...newTodoDetails
-  });
-
-  return res.status(201).json({
     success: true,
     data: todo
   });
