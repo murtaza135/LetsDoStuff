@@ -34,6 +34,7 @@ app.use(xss());
 app.use(hpp());
 
 // Use Routes
+app.get('/_health', (req, res) => res.status(200).json({ success: true }));
 app.use('/api', routes);
 app.use((req, res, next) => next(new PageNotFoundError()));
 

@@ -10,15 +10,14 @@ const server = app.listen(PORT, () => {
   );
 });
 
-// TODO check out https://blog.heroku.com/best-practices-nodejs-errors
 process.on('uncaughtException', (error) => {
-  // TODO log to external file using something like pino or winston
   console.log(`Uncaught Exception Error: ${error.message}`.red);
   server.close(() => process.exit(1));
+  setTimeout(() => process.exit(1), 1000).unref();
 });
 
-process.on('unhandledRejection', (error, promise) => {
-  // TODO log to external file using something like pino or winston
+process.on('unhandledRejection', (error) => {
   console.log(`Unhandled Rejection Error: ${error.message}`.red);
   server.close(() => process.exit(1));
+  setTimeout(() => process.exit(1), 1000).unref();
 });
