@@ -140,7 +140,6 @@ yarn-error.log*
 # project specific
 resources/
 notes/
-config/
 
 # misc
 .DS_Store
