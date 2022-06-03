@@ -13,7 +13,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 
   return res.status(201).json({
     success: true,
-    user: user.getDetails(),
+    user: user.getData(),
     token: getSignedJwtToken(user._id)
   });
 });
@@ -29,7 +29,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    user: user.getDetails(),
+    user: user.getData(),
     token: getSignedJwtToken(user._id)
   });
 });
@@ -40,7 +40,7 @@ export const loginUser = asyncHandler(async (req, res, next) => {
 export const getProfile = asyncHandler(async (req, res, next) => (
   res.status(200).json({
     success: true,
-    user: req.user.getDetails()
+    user: req.user.getData()
   })
 ));
 
@@ -58,7 +58,7 @@ export const updateProfile = asyncHandler(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    user: updatedUser.getDetails()
+    user: updatedUser.getData()
   });
 });
 
@@ -74,7 +74,7 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    user: req.user.getDetails()
+    user: req.user.getData()
   });
 });
 

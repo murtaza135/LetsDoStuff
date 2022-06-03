@@ -1,5 +1,5 @@
 class ApiFeatures {
-  constructor(queryParams, model, populateKey) {
+  constructor(queryParams, model, populateKey, timestamps = true) {
     this.query = null;
     this.queryParams = queryParams;
     this.advancedFeatures = {};
@@ -7,7 +7,7 @@ class ApiFeatures {
     this.model = model;
     this.populateKey = populateKey;
     this.findAdvancedFeatures();
-    this.findByQueryConditions();
+    this.findByQueryConditions(timestamps);
   }
 
   findAdvancedFeatures = () => {
@@ -17,13 +17,14 @@ class ApiFeatures {
     return this;
   };
 
-  findByQueryConditions = () => {
+  findByQueryConditions = (timestamps = true) => {
     const queryString = JSON.stringify(this.queryParams).replace(
       /\b(gt|gte|lt|lte|in)\b/g,
       (match) => `$${match}`
     );
 
     this.query = this.model.find(JSON.parse(queryString));
+    this.query = this.query.getData ? this.query.getData(timestamps) : this.query;
     return this;
   };
 

@@ -55,12 +55,23 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 // Provide easy method to get all non-sensitive data for given user
-UserSchema.methods.getDetails = function () {
+UserSchema.methods.getData = function (timestamps = true) {
   const userDetails = this.toObject({ versionKey: false, useProjection: true });
   delete userDetails.password;
-  // delete userDetails.createdAt;
-  // delete userDetails.updatedAt;
+
+  if (timestamps === false) {
+    delete userDetails.createdAt;
+    delete userDetails.updatedAt;
+  }
+
   return userDetails;
+};
+
+// Provide easy method to get all non-sensitive data for given user
+UserSchema.query.getData = function (timestamps = true) {
+  let query = this.select('-password -__v');
+  query = timestamps === false ? this.select('-createdAt -updatedAt') : query;
+  return query;
 };
 
 // TODO cascade delete todos when user is deleted?

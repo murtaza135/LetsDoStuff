@@ -10,11 +10,7 @@ import ApiFeatures from '../../utils/apiFeatures.js';
 export const createUser = asyncHandler(async (req, res, next) => {
   const newUserDetails = pick(req.body, ['name', 'email', 'password']);
   const user = await usersModel.create(newUserDetails);
-
-  return res.status(201).json({
-    success: true,
-    data: user.getDetails()
-  });
+  return res.status(201).json({ success: true, data: user.getData() });
 });
 
 // @desc Get all users
@@ -33,7 +29,7 @@ export const getUsers = asyncHandler(async (req, res, next) => {
 export const getUser = asyncHandler(async (req, res, next) => {
   const user = await usersModel.findById(req.params.id);
   ensureItemExists(user, `User not found with ID '${req.params.id}'`);
-  return res.status(200).json({ success: true, data: user.getDetails() });
+  return res.status(200).json({ success: true, data: user.getData() });
 });
 
 // @desc Update single user
@@ -53,7 +49,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
-    data: updatedUser.getDetails()
+    data: updatedUser.getData()
   });
 });
 
