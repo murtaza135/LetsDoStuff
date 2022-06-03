@@ -8,7 +8,7 @@ import { ensureItemExists, ensurePasswordIsValid } from '../../utils/db_validato
 // @route POST /api/auth/register
 // @access Public
 export const registerUser = asyncHandler(async (req, res, next) => {
-  const registrationDetails = pick(req.body, ['name', 'email', 'password']);
+  const registrationDetails = pick(req.body, ['name', 'email', 'username', 'password']);
   const user = await usersModel.create(registrationDetails);
 
   return res.status(201).json({
@@ -22,8 +22,8 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 // @route POST /api/auth/login
 // @access Public
 export const loginUser = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = await usersModel.findOne({ email }).select('+password');
+  const { username, password } = req.body;
+  const user = await usersModel.findOne({ username }).select('+password');
   ensureItemExists(user, 'Invalid credentials');
   await ensurePasswordIsValid(user, password, 'Invalid credentials');
 
@@ -48,7 +48,7 @@ export const getProfile = asyncHandler(async (req, res, next) => (
 // @route PUT /api/auth/profile
 // @access Private
 export const updateProfile = asyncHandler(async (req, res, next) => {
-  const detailsToUpdate = pick(req.body, ['name', 'email']);
+  const detailsToUpdate = pick(req.body, ['name', 'email', 'username']);
 
   const updatedUser = await usersModel.findByIdAndUpdate(
     req.user._id,
@@ -82,5 +82,6 @@ export const updatePassword = asyncHandler(async (req, res, next) => {
 // @route DELETE /api/auth/profile
 // @access Private
 export const deleteProfile = asyncHandler(async (req, res, next) => {
-  await usersModel.deleteOne({ id: req.user.id });
+  await usersModel.findByIdAndDelete(req.user._id);
+  return res.status(200).json({ success: true, user: null });
 });

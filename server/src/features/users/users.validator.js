@@ -18,6 +18,7 @@ export const setIncludeIdValidationRules = () => [
 export const setCreateUserValidationRules = () => [
   body('name', 'Please provide a name').not().isEmpty(),
   body('email', 'Please provide a valid email').isEmail(),
+  body('username', 'Please provide a valid username').isAlphanumeric(),
   body('password', 'Password must be at least 6 characters long').isLength({ min: 6 }),
   body('confirmPassword')
     .custom(confirmPasswordMatches('password', 'Passwords do not match', 500))
@@ -28,5 +29,7 @@ export const setUpdateProfileValidationRules = () => [
   body('name', 'Please provide a valid name')
     .optional({ nullable: true }).not().isEmpty(),
   body('email', 'Please provide a valid email')
-    .optional({ nullable: true }).isEmail()
+    .optional({ nullable: true }).isEmail(),
+  body('username', 'Please provide a valid username')
+    .optional({ nullable: true }).isAlphanumeric()
 ];

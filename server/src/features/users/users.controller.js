@@ -8,7 +8,7 @@ import ApiFeatures from '../../utils/apiFeatures.js';
 // @route POST /api/users
 // @access Private/Admin
 export const createUser = asyncHandler(async (req, res, next) => {
-  const newUserDetails = pick(req.body, ['name', 'email', 'password']);
+  const newUserDetails = pick(req.body, ['name', 'email', 'username', 'password']);
   const user = await usersModel.create(newUserDetails);
   return res.status(201).json({ success: true, data: user.getData() });
 });
@@ -39,7 +39,7 @@ export const updateUser = asyncHandler(async (req, res, next) => {
   const user = await usersModel.findById(req.params.id);
   ensureItemExists(user, `User not found with ID '${req.params.id}'`);
 
-  const newUserDetails = pick(req.body, ['name', 'email']);
+  const newUserDetails = pick(req.body, ['name', 'email', 'username']);
 
   const updatedUser = await usersModel.findByIdAndUpdate(
     req.params.id,

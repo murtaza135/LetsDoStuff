@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
 
+// TODO below
 // import jwt from 'jsonwebtoken';
 // import crypto from 'crypto';
 
@@ -12,6 +13,15 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please add a name'],
       trim: true
+    },
+    username: {
+      type: String,
+      required: [true, 'Please add a username'],
+      unique: [true, 'This username is already taken'],
+      trim: true,
+      lowercase: true,
+      maxlength: [25, 'Username is too long'],
+      validate: [validator.isAlphanumeric, 'Your username can only have letters and numbers']
     },
     email: {
       type: String,
