@@ -1,5 +1,5 @@
 class ApiFeatures {
-  constructor(queryParams, model, populateKey, timestamps = true) {
+  constructor(queryParams, model, populateKey) {
     this.query = null;
     this.queryParams = queryParams;
     this.advancedFeatures = {};
@@ -7,31 +7,49 @@ class ApiFeatures {
     this.model = model;
     this.populateKey = populateKey;
     this.findAdvancedFeatures();
-    this.findByQueryConditions(timestamps);
+    this.findByQueryConditions();
   }
 
   findAdvancedFeatures = () => {
-    const { select, sort, page, limit, ...rest } = this.queryParams;
-    this.advancedFeatures = { select, sort, page, limit };
+    const { select, timestamps, sort, page, limit, ...rest } = this.queryParams;
+    this.advancedFeatures = { select, timestamps, sort, page, limit };
     this.queryParams = rest;
+    console.log(this.queryParams);
     return this;
   };
 
-  findByQueryConditions = (timestamps = true) => {
+  findByQueryConditions = () => {
     const queryString = JSON.stringify(this.queryParams).replace(
       /\b(gt|gte|lt|lte|in)\b/g,
       (match) => `$${match}`
     );
 
     this.query = this.model.find(JSON.parse(queryString));
-    this.query = this.query.getData ? this.query.getData(timestamps) : this.query;
     return this;
   };
 
+  // timestamps = () => {
+  //   if (this.advancedFeatures.timestamps?.toLowerCase() !== 'false') {
+  //     this.query = this.query.select('createdAt updatedAt');
+  //   }
+
+  //   return this;
+  // };
+
   select = () => {
-    if (this.advancedFeatures.select) {
-      const fields = this.advancedFeatures.select.replace(',', ' ');
+    const { select, timestamps } = this.advancedFeatures;
+    const fields = this.advancedFeatures.select?.replaceAll(',', ' ');
+
+    if (select && timestamps?.toLowerCase() === 'true') {
       this.query = this.query.select(fields);
+      this.query = this.query.select('createdAt updatedAt');
+    } else if (select) {
+      this.query = this.query.select(fields);
+    } else if (!select && timestamps?.toLowerCase() === 'false') {
+      this.query = this.query.select('-__v -password');
+      this.query = this.query.select('-createdAt -updatedAt');
+    } else {
+      this.query = this.query.select('-__v -password');
     }
 
     return this;
@@ -39,7 +57,7 @@ class ApiFeatures {
 
   sort = () => {
     if (this.advancedFeatures.sort) {
-      const sortBy = this.advancedFeatures.sort.replace(',', ' ');
+      const sortBy = this.advancedFeatures.sort.replaceAll(',', ' ');
       this.query = this.query.sort(sortBy);
     } else {
       this.query = this.query.sort('-createdAt');
@@ -77,6 +95,7 @@ class ApiFeatures {
   };
 
   applyAllAdvancedFeatures = async (defaultResultsPerPage = 25) => {
+    // this.timestamps();
     this.select();
     this.sort();
     await this.paginate(defaultResultsPerPage);
@@ -86,6 +105,9 @@ class ApiFeatures {
 
   getQueryData = async () => {
     const data = await this.query;
+    console.log(data);
+    delete data.__v;
+    delete data.password;
 
     return {
       pagination: this.pagination,

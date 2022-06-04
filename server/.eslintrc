@@ -14,7 +14,7 @@
     "linebreak-style": "off",
     "import/prefer-default-export": "off",
     "no-unused-vars": ["warn", { "argsIgnorePattern": "^error$|^req$|^res$|^next$" }],
-    "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id"] }],
+    "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id", "__v"] }],
     "object-curly-newline": ["off", {
       "ObjectExpression": "always",
       "ObjectPattern": {
