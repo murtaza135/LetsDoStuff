@@ -56,11 +56,4 @@ TodoSchema.methods.getData = function (timestamps = true) {
   return todoDetails;
 };
 
-// Provide easy method to get all non-sensitive data for given todo
-TodoSchema.query.getData = function (timestamps = true) {
-  let query = this.select('-__v');
-  query = timestamps === false ? this.select('-createdAt -updatedAt') : query;
-  return query;
-};
-
 export default mongoose.model('Todo', TodoSchema);

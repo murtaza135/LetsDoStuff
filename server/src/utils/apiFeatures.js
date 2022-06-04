@@ -14,7 +14,6 @@ class ApiFeatures {
     const { select, timestamps, sort, page, limit, ...rest } = this.queryParams;
     this.advancedFeatures = { select, timestamps, sort, page, limit };
     this.queryParams = rest;
-    console.log(this.queryParams);
     return this;
   };
 
@@ -27,14 +26,6 @@ class ApiFeatures {
     this.query = this.model.find(JSON.parse(queryString));
     return this;
   };
-
-  // timestamps = () => {
-  //   if (this.advancedFeatures.timestamps?.toLowerCase() !== 'false') {
-  //     this.query = this.query.select('createdAt updatedAt');
-  //   }
-
-  //   return this;
-  // };
 
   select = () => {
     const { select, timestamps } = this.advancedFeatures;

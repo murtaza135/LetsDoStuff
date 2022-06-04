@@ -82,11 +82,4 @@ UserSchema.methods.getData = function (timestamps = true) {
   return userDetails;
 };
 
-// Provide easy method to get all non-sensitive data for given user
-UserSchema.query.getData = function (timestamps = true) {
-  let query = this.select('-password -__v');
-  query = timestamps === false ? this.select('-createdAt -updatedAt') : query;
-  return query;
-};
-
 export default mongoose.model('User', UserSchema);
