@@ -11,8 +11,8 @@ class ApiFeatures {
   }
 
   findAdvancedFeatures = () => {
-    const { select, timestamps, sort, page, limit, ...rest } = this.queryParams;
-    this.advancedFeatures = { select, timestamps, sort, page, limit };
+    const { select, sort, page, limit, ...rest } = this.queryParams;
+    this.advancedFeatures = { select, sort, page, limit };
     this.queryParams = rest;
     return this;
   };
@@ -28,17 +28,12 @@ class ApiFeatures {
   };
 
   select = () => {
-    const { select, timestamps } = this.advancedFeatures;
-    const fields = this.advancedFeatures.select?.replaceAll(',', ' ');
+    if (this.advancedFeatures.select) {
+      const fields = this.advancedFeatures.select
+        .replaceAll(',', ' ')
+        .replace(/\btimestamps\b/, 'createdAt updatedAt');
 
-    if (select && timestamps?.toLowerCase() === 'true') {
       this.query = this.query.select(fields);
-      this.query = this.query.select('createdAt updatedAt');
-    } else if (select) {
-      this.query = this.query.select(fields);
-    } else if (!select && timestamps?.toLowerCase() === 'false') {
-      this.query = this.query.select('-__v -password');
-      this.query = this.query.select('-createdAt -updatedAt');
     } else {
       this.query = this.query.select('-__v -password');
     }
@@ -86,7 +81,6 @@ class ApiFeatures {
   };
 
   applyAllAdvancedFeatures = async (defaultResultsPerPage = 25) => {
-    // this.timestamps();
     this.select();
     this.sort();
     await this.paginate(defaultResultsPerPage);
@@ -96,7 +90,6 @@ class ApiFeatures {
 
   getQueryData = async () => {
     const data = await this.query;
-    console.log(data);
     delete data.__v;
     delete data.password;
 
