@@ -31,6 +31,19 @@ const TodoSchema = new mongoose.Schema(
   }
 );
 
+// Ensure that the tags attribute is always an array
+TodoSchema.pre('save', async function (next) {
+  this.tags = this.tags ? this.tags : [];
+  next();
+});
+
+// Ensure that the tags attribute is an array if null is passed in
+TodoSchema.pre('findOneAndUpdate', async function (next) {
+  const tags = this.get('tags');
+  this.update({ tags: tags === null ? [] : tags });
+  next();
+});
+
 // Provide easy method to get all non-sensitive data for given todo
 TodoSchema.methods.getData = function (timestamps = true) {
   const todoDetails = this.toObject({ versionKey: false, useProjection: true });

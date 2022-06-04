@@ -35,7 +35,7 @@ const checkDbBadObjectIdError = (error) => {
   if (error.name === 'CastError') {
     const messageList = error.message.split('"');
     const modelName = messageList[messageList.length - 2];
-    const message = `${modelName} not found with id of ${error.value}`;
+    const message = `${modelName} not found with ID '${error.value}'`;
     error.message = message;
     error.type = 'NotFoundError';
     error.httpCode = 404;
