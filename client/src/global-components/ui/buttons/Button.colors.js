@@ -16,9 +16,8 @@ const colorCSS = (backgroundColor, foregroundColor) => css`
 `;
 
 const colors = {
-  primary: colorCSS('primary', 'light'),
-  secondary: colorCSS('secondary'),
-  tertiary: colorCSS('tertiary'),
+  primary: colorCSS('primary', 'secondary'),
+  secondary: colorCSS('secondary', 'primaryShaded'),
   dark: colorCSS('dark'),
   medium: colorCSS('medium'),
   light: colorCSS('light'),

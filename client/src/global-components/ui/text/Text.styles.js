@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { primaryTheme as theme } from 'constants';
 import variants, { getValidVariant } from './Text.variants';
 
-// @props variant || color || stretch
+// @props variant || color || stretch || bold || italic || underline
 const Text = styled.p.attrs((props) => ({
   ...props,
   variant: getValidVariant(props.variant),

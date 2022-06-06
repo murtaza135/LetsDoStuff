@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { breakpoints, primaryTheme as theme } from 'constants';
+import { Button } from 'global-components/ui';
 
-const FormButton = styled.button`
+const FormButton = styled(Button)`
   font-size: 1.025rem;
   margin-top: 1rem;
   padding: 0.65rem 1.5rem;
