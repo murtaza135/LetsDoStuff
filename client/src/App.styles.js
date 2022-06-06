@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { primaryTheme as theme, typography } from 'constants';
 
-export const CSSReset = createGlobalStyle`
+const CSSReset = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
@@ -45,3 +45,5 @@ export const CSSReset = createGlobalStyle`
     font-family: ${typography.primary};
   }
 `;
+
+export default CSSReset;

@@ -2,12 +2,12 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login, Register, TodoDashboard, NotFound } from 'pages';
 import { PageContainer } from 'global-components/layout';
-import * as S from 'App.styles';
+import CSSReset from 'App.styles';
 import '@fontsource/roboto';
 
 const App = () => (
   <Fragment>
-    <S.CSSReset />
+    <CSSReset />
     <PageContainer>
       <Router>
         <Routes>
