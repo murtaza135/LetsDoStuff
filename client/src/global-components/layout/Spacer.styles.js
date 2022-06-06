@@ -16,6 +16,8 @@ const paddingMixin = css`
   padding-left: ${({ pl, px, p }) => pl || px || p};
 `;
 
+// @props m | mx | my | mt | mr | mb | ml
+// @props p | px | py | pt | pr | pb | pl
 const Spacer = styled.span`
   ${marginMixin};
   ${paddingMixin};

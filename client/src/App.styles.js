@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { primaryTheme, typography } from 'constants';
+import { primaryTheme as theme, typography } from 'constants';
 
 export const CSSReset = createGlobalStyle`
   * {
@@ -14,8 +14,8 @@ export const CSSReset = createGlobalStyle`
     min-height: 100vh;
     font-family: ${typography.primary};
     line-height: 1.5;
-    background: ${primaryTheme.light};
-    color: ${primaryTheme.dark};
+    background: ${theme.light};
+    color: ${theme.dark};
   }
 
   body #root {
