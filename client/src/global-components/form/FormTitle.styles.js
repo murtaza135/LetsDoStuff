@@ -5,7 +5,7 @@ const FormTitle = styled.h1`
   width: auto;
   align-self: flex-start;
   margin-bottom: 0.75rem;
-  border-bottom: 2px solid ${theme.primary};
+  border-bottom: 2px solid ${theme.secondary};
   padding: 0 0.75rem 0.25rem 0.2rem;
 `;
 

@@ -14,8 +14,8 @@ const CSSReset = createGlobalStyle`
     min-height: 100vh;
     font-family: ${typography.primary};
     line-height: 1.5;
-    background: ${theme.light};
-    color: ${theme.dark};
+    background: ${theme.primary};
+    color: ${theme.secondary};
   }
 
   body #root {

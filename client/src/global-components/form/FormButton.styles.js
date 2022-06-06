@@ -5,12 +5,13 @@ const FormButton = styled.button`
   font-size: 1.025rem;
   margin-top: 1rem;
   padding: 0.65rem 1.5rem;
-  color: ${theme.light};
-  background: ${theme.primary};
+  color: ${theme.primaryShaded};
+  background: ${theme.secondary};
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-weight: bold;
 
   &:hover {
     opacity: 0.75;

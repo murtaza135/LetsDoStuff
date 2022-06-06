@@ -3,8 +3,8 @@ import { Field } from 'formik';
 import { breakpoints, primaryTheme as theme } from 'constants';
 
 const FormInput = styled(Field)`
-  color: ${theme.light};
-  background: ${theme.darkToned};
+  color: ${theme.secondary};
+  background: ${theme.primaryShaded};
   border: ${({ error }) => (error ? `2px solid ${theme.danger}` : 'none')};
   border-radius: 5px;
   outline: none !important;

@@ -5,14 +5,12 @@ import FormInput from './FormInput.styles';
 import FormTextArea from './FormTextArea.styles';
 
 const FormField = ({ ...props }) => {
-  const [fields, meta] = useField(props);
-
-  const formField = props.type === 'textarea'
-    ? (<FormTextArea {...fields} {...props} error={meta.touched && meta.error} />)
-    : (<FormInput {...fields} {...props} error={meta.touched && meta.error} />);
+  const [fields] = useField(props);
 
   return (
-    { formField }
+    props.type === 'textarea'
+      ? <FormTextArea {...fields} {...props} />
+      : <FormInput {...fields} {...props} />
   );
 };
 

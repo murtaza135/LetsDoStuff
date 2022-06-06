@@ -12,7 +12,7 @@ const Form = styled(FormikForm)`
   flex-grow: 1;
   gap: 1rem;
 
-  border: ${({ noBorder }) => (noBorder ? 'none' : `2px solid ${theme.primary}`)};
+  border: ${({ noBorder }) => (noBorder ? 'none' : `2px solid ${theme.secondary}`)};
   border-radius: 5px;
   padding: 2.25rem 3.5rem 3rem;
 
