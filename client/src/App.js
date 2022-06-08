@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Login, Register, TodoDashboard, NotFound } from 'pages';
-import { PageContainer } from 'global-components/layout';
+import { Container } from 'global-components/layout';
 import CSSReset from 'App.styles';
 import '@fontsource/roboto';
 
 const App = () => (
   <Fragment>
     <CSSReset />
-    <PageContainer>
+    <Container>
       <Router>
         <Routes>
           <Route path="/" element={<TodoDashboard />} />
@@ -17,7 +17,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
-    </PageContainer>
+    </Container>
   </Fragment>
 );
 

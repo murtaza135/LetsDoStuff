@@ -3,9 +3,10 @@ import { widths } from 'constants';
 
 const Container = styled.div`
   display: block;
-  max-width: ${widths.container};
   height: 100%;
-  padding: 0 1.5rem;
+  width: 100%;
+  max-width: ${widths.container};
+  padding: 2rem 1.5rem 3rem;
   margin: auto;
   overflow: hidden;
 `;
