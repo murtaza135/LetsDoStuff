@@ -9,7 +9,6 @@ const Form = styled(FormikForm)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   gap: 1rem;
 
   border: ${({ noBorder }) => (noBorder ? 'none' : `2px solid ${theme.secondary}`)};
