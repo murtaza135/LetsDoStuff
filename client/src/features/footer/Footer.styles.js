@@ -18,12 +18,6 @@ export const FooterContentContainer = styled(Container)`
   padding: 1.7rem 1rem;
 `;
 
-export const Copyright = styled.p`
-  color: ${theme.primary};
-  font-size: ${sizes.s};
-  font-weight: bold;
-`;
-
 export const SocialOptions = styled.ul`
   display: flex;
   justify-content: space-evenly;

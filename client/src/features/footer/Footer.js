@@ -1,11 +1,15 @@
 import React from 'react';
+import { Text } from 'global-components/ui';
 import { socialItems } from './Footer.data';
 import * as S from './Footer.styles';
 
 const Footer = () => (
   <S.FooterContainer>
     <S.FooterContentContainer>
-      <S.Copyright>Copyright &#169; {new Date().getFullYear()}. All Rights Reserved.</S.Copyright>
+      <Text color="primary" bold>
+        Copyright &#169; {new Date().getFullYear()}. All Rights Reserved.
+      </Text>
+
       <S.SocialOptions>
         {socialItems.map(({ name, href, reactIcon }) => (
           <S.SocialItem key={name}>

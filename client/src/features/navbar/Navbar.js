@@ -1,5 +1,6 @@
 import React from 'react';
 import { TbChecklist } from 'react-icons/tb';
+import { Text } from 'global-components/ui';
 import * as S from './Navbar.styles';
 
 const Navbar = () => (
@@ -7,7 +8,7 @@ const Navbar = () => (
     <S.NavContentContainer>
       <S.NavLogo to="/">
         <S.NavIcon reactIcon={TbChecklist} />
-        <S.NavIconText>LetsDoStuff</S.NavIconText>
+        <Text size="m" color="primary" bold>LetsDoStuff</Text>
       </S.NavLogo>
 
       <S.NavOptions>

@@ -7,6 +7,6 @@ const Text = styled(TextBase).attrs((props) => ({
   size: props.size || 's',
   alignment: props.alignment || 'left',
   color: props.color || 'dark',
-}));
+}))``;
 
 export default Text;

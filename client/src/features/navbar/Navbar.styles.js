@@ -65,12 +65,6 @@ export const NavIcon = styled(({ reactIcon, children, ...props }) => (
   }
 `;
 
-export const NavIconText = styled.p`
-  font-size: ${sizes.m};
-  font-weight: bold;
-  color: ${theme.primary};
-`;
-
 export const NavOptions = styled.ul`
   display: flex;
   justify-content: space-evenly;
