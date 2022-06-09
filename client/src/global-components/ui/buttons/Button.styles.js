@@ -3,7 +3,7 @@ import getButtonElement from './Button.elements';
 import colors, { getValidColor } from './Button.colors';
 import sizes, { getValidSize } from './Button.sizes';
 
-// @props as || color || size || stretch || rounded || bold
+// @props to || href || color || size || stretch || rounded || bold
 const Button = styled.button.attrs((props) => ({
   ...props,
   as: getButtonElement(props.to, props.href),
