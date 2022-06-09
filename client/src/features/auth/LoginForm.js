@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, FormTitle, FormLabelledField, FormButton } from 'global-components/form';
 
 const initialValues = {
-  email: '',
+  username: '',
   password: ''
 };
 
@@ -10,7 +10,12 @@ const LoginForm = () => (
   <Formik initialValues={initialValues}>
     <Form>
       <FormTitle>Login</FormTitle>
-      <FormLabelledField name="email" type="email" placeholder="Enter Email" label="Email" />
+      <FormLabelledField
+        name="username"
+        type="text"
+        placeholder="Enter Username"
+        label="Username"
+      />
       <FormLabelledField
         name="password"
         type="password"

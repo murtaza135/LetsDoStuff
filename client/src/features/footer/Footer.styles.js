@@ -15,7 +15,7 @@ export const FooterContentContainer = styled(Container)`
   align-items: center;
   text-align: center;
   gap: 0.85rem;
-  padding: 1.7rem 0;
+  padding: 1.7rem 1rem;
 `;
 
 export const Copyright = styled.p`
