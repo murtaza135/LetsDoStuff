@@ -2,8 +2,9 @@ import styled from 'styled-components';
 import { Form as FormikForm } from 'formik';
 import { breakpoints, primaryTheme as theme } from 'constants';
 
+// @props $stretch || $noBorder
 const Form = styled(FormikForm)`
-  max-width: ${({ stretch }) => (stretch ? '1000rem' : '37.5rem')};
+  max-width: ${({ $stretch }) => ($stretch ? '1000rem' : '37.5rem')};
   & > * { width: 100%; }
   display: flex;
   flex-direction: column;
@@ -11,7 +12,7 @@ const Form = styled(FormikForm)`
   align-items: center;
   gap: 1rem;
 
-  border: ${({ noBorder }) => (noBorder ? 'none' : `2px solid ${theme.secondary}`)};
+  border: ${({ $noBorder }) => ($noBorder ? 'none' : `2px solid ${theme.secondary}`)};
   border-radius: 5px;
   padding: 2.25rem 3.5rem 3rem;
 

@@ -54,8 +54,8 @@ export const NavLogo = styled(Link)`
   }
 `;
 
-export const NavIcon = styled(({ reactIcon, children, ...props }) => (
-  React.createElement(reactIcon, props, children)
+export const NavIcon = styled(({ element, children, ...props }) => (
+  React.createElement(element, props, children)
 ))`
   font-size: ${sizes.xxl};
   color: ${theme.primary};
@@ -88,7 +88,7 @@ export const NavItem = styled.li`
 
 export const NavLink = styled(Link).attrs((props) => ({
   ...props,
-  active: props.active?.toString()
+  $active: props.$active
 }))`
   display: block;
   color: ${theme.primary};
@@ -96,7 +96,7 @@ export const NavLink = styled(Link).attrs((props) => ({
   font-weight: bold;
   padding: 0.2rem 0.5rem 0.4rem;
   border: none;
-  border-bottom: 3px solid ${({ active }) => (active ? theme.primary : 'transparent')};
+  border-bottom: 3px solid ${({ $active }) => ($active ? theme.primary : 'transparent')};
   transition: all 0.25s ease;
   cursor: pointer;
 

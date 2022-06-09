@@ -6,7 +6,7 @@ import * as S from './Footer.styles';
 const Footer = () => (
   <S.FooterContainer>
     <S.FooterContentContainer>
-      <Text color="primary" bold>
+      <Text $color="primary" $bold>
         Copyright &#169; {new Date().getFullYear()}. All Rights Reserved.
       </Text>
 
