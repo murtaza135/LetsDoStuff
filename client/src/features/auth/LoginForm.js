@@ -1,5 +1,6 @@
 import React from 'react';
 import { Formik, Form, FormTitle, FormLabelledField, FormButton } from 'global-components/form';
+import validator from './LoginForm.validator';
 
 const initialValues = {
   username: '',
@@ -7,7 +8,10 @@ const initialValues = {
 };
 
 const LoginForm = () => (
-  <Formik initialValues={initialValues}>
+  <Formik
+    initialValues={initialValues}
+    validationSchema={validator}
+  >
     <Form>
       <FormTitle>Login</FormTitle>
       <FormLabelledField

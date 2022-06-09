@@ -1,6 +1,8 @@
 import { body, param } from 'express-validator';
 import DataValidationError from '../../error_handling/errors/dataValidationError.js';
 
+const ALPHA_NUMERIC_UNDERSCORES_DASHES = /^[a-zA-Z0-9_-]*$/i;
+
 const confirmPasswordMatches = (otherPassword, errorMessage) => (
   (confirmPassword, { req }) => {
     if (confirmPassword !== req.body[otherPassword]) {
@@ -18,7 +20,8 @@ export const setIncludeIdValidationRules = () => [
 export const setCreateUserValidationRules = () => [
   body('name', 'Please provide a name').not().isEmpty(),
   body('email', 'Please provide a valid email').isEmail(),
-  body('username', 'Please provide a valid username').isAlphanumeric(),
+  body('username', 'Please provide a valid username')
+    .matches(ALPHA_NUMERIC_UNDERSCORES_DASHES),
   body('password', 'Password must be at least 6 characters long').isLength({ min: 6 }),
   body('confirmPassword')
     .custom(confirmPasswordMatches('password', 'Passwords do not match', 500))
@@ -31,5 +34,6 @@ export const setUpdateProfileValidationRules = () => [
   body('email', 'Please provide a valid email')
     .optional({ nullable: true }).isEmail(),
   body('username', 'Please provide a valid username')
-    .optional({ nullable: true }).isAlphanumeric()
+    .optional({ nullable: true })
+    .matches(ALPHA_NUMERIC_UNDERSCORES_DASHES)
 ];
