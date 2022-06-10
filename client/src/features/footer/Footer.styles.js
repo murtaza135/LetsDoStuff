@@ -4,7 +4,7 @@ import { sizes, primaryTheme as theme } from 'constants';
 
 export const FooterContainer = styled.footer`
   background: ${theme.secondary};
-  margin-top: 2rem;
+  margin-top: 6rem;
   flex-shrink: 0;
 `;
 

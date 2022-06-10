@@ -15,7 +15,7 @@ export const NavContainer = styled.nav`
   color: ${theme.primary};
   z-index: 5;
   padding: 1rem 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
 
   @media screen and  (max-width: ${breakpoints.sm}) {
     min-height: 135px;
