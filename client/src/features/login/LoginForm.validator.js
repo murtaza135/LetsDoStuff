@@ -1,10 +1,9 @@
 import * as Yup from 'yup';
-
-const ALPHA_NUMERIC_UNDERSCORES_DASHES = /^[a-zA-Z0-9_-]*$/i;
+import { re } from 'constants';
 
 const validator = Yup.object({
   username: Yup.string()
-    .matches(ALPHA_NUMERIC_UNDERSCORES_DASHES, 'Please provide a valid username')
+    .matches(re.alphaNumericUnderscoresDashes, 'Please provide a valid username')
     .required('Please provide a valid username'),
   password: Yup.string()
     .min(6, 'Password must be at least 6 characters long')
