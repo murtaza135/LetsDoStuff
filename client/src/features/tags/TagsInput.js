@@ -18,6 +18,7 @@ const TagsInput = () => {
   };
 
   const deleteTag = (tag) => {
+    // TODO add validation
     const tagsCopy = [...tags];
     const tagIndex = tagsCopy.findIndex((element) => element === tag);
 

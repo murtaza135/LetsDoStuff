@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as S from './TagsInput.styles';
+import * as S from './Tag.styles';
 
 const Tag = ({ children, onDelete }) => (
   <S.TagContainer>
-    <S.Tag>{children}</S.Tag>
+    <S.TagText>{children}</S.TagText>
     <S.TagCloseIcon onClick={() => onDelete(children)} />
   </S.TagContainer>
 );
