@@ -5,7 +5,7 @@ import FormLabel from '../FormLabel.styles';
 import FormField from './FormField';
 import FormErrorMessage from '../form-error-message/FormErrorMessage';
 
-const FormLaballedField = ({ name, type, placeholder, label }) => (
+const FormFieldGroup = ({ name, type, placeholder, label }) => (
   <FormGroup>
     <FormLabel htmlFor={name}>{label}</FormLabel>
     <FormField name={name} type={type} placeholder={placeholder} />
@@ -13,17 +13,17 @@ const FormLaballedField = ({ name, type, placeholder, label }) => (
   </FormGroup>
 );
 
-FormLaballedField.defaultProps = {
+FormFieldGroup.defaultProps = {
   type: 'text',
   label: null,
   placeholder: null,
 };
 
-FormLaballedField.propTypes = {
+FormFieldGroup.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired
 };
 
-export default FormLaballedField;
+export default FormFieldGroup;

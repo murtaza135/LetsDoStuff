@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, FormTitle, FormLabelledField, FormButton } from 'global-components/form';
+import { Formik, Form, FormTitle, FormFieldGroup, FormButton } from 'global-components/form';
 import validator from './RegisterForm.validator';
 
 const initialValues = {
@@ -17,31 +17,31 @@ const RegisterForm = () => (
   >
     <Form>
       <FormTitle>Register</FormTitle>
-      <FormLabelledField
+      <FormFieldGroup
         name="name"
         type="text"
         placeholder="Enter Name"
         label="Name"
       />
-      <FormLabelledField
+      <FormFieldGroup
         name="email"
         type="email"
         placeholder="Enter Email"
         label="Email"
       />
-      <FormLabelledField
+      <FormFieldGroup
         name="username"
         type="text"
         placeholder="Enter Username"
         label="Username"
       />
-      <FormLabelledField
+      <FormFieldGroup
         name="password"
         type="password"
         placeholder="Enter Password"
         label="Password"
       />
-      <FormLabelledField
+      <FormFieldGroup
         name="confirmPassword"
         type="password"
         placeholder="Confirm Password"

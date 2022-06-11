@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line max-len
-import { Formik, Form, FormTitle, FormLabelledField, FormButton, FormGroup, FormLabel } from 'global-components/form';
+import { Formik, Form, FormTitle, FormFieldGroup, FormButton, FormGroup, FormLabel } from 'global-components/form';
 import { Title } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
 
@@ -13,13 +13,13 @@ const TodoForm = () => (
   <Formik intialValues={intialValues}>
     <Form>
       <Title $size="m" $color="secondary">Add a Todo</Title>
-      <FormLabelledField
+      <FormFieldGroup
         name="title"
         type="text"
         placeholder="Title"
         label="Title"
       />
-      <FormLabelledField
+      <FormFieldGroup
         name="description"
         type="textarea"
         placeholder="Description"

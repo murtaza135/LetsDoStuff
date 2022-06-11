@@ -6,4 +6,4 @@ export { default as FormLabel } from './FormLabel.styles';
 export { default as FormTitle } from './FormTitle.styles';
 export { default as FormErrorMessage } from './form-error-message/FormErrorMessage';
 export { default as FormField } from './form-field/FormField';
-export { default as FormLabelledField } from './form-field/FormLabelledField';
+export { default as FormFieldGroup } from './form-field/FormFieldGroup';
