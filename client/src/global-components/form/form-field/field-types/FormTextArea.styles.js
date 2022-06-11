@@ -3,7 +3,7 @@ import FormInput from './FormInput.styles';
 
 const FormTextArea = styled(FormInput).attrs((props) => ({
   ...props,
-  as: 'textarea'
+  as: 'textarea',
 }))`
   min-height: 5rem;
   max-height: 25rem;

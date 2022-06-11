@@ -7,7 +7,7 @@ const Title = styled(TextBase).attrs((props) => ({
   as: 'h1',
   $size: props.$size || 'l',
   $alignment: props.$alignment || 'center',
-  $color: props.$color || 'dark',
+  $color: props.$color || 'dark'
 }))``;
 
 export default Title;

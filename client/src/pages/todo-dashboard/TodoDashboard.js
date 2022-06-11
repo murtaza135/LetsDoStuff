@@ -1,7 +1,11 @@
 import React from 'react';
+import { PageContainer } from 'global-components/layout';
+import TodoForm from 'features/todos/TodoForm';
 
 const TodoDashboard = () => (
-  <div>TodoDashboard</div>
+  <PageContainer>
+    <TodoForm />
+  </PageContainer>
 );
 
 export default TodoDashboard;

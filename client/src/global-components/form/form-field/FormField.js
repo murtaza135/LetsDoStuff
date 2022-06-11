@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
-import FormInput from './FormInput.styles';
-import FormTextArea from './FormTextArea.styles';
+import FormInput from './field-types/FormInput.styles';
+import FormTextArea from './field-types/FormTextArea.styles';
 
 const FormField = ({ ...props }) => {
   const [fields, meta] = useField(props);
   const isError = !!(meta.touched && meta.error);
 
-  return (
-    props.type === 'textarea'
-      ? <FormTextArea {...fields} {...props} $error={isError} />
-      : <FormInput {...fields} {...props} $error={isError} />
-  );
+  if (props.type === 'textarea') {
+    return <FormTextArea {...fields} {...props} $error={isError} />;
+  } if (props.type === 'date') {
+    return <FormInput {...fields} {...props} $error={isError} />;
+  }
+  return <FormInput {...fields} {...props} $error={isError} />;
 };
 
 FormField.defaultProps = {

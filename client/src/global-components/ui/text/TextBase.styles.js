@@ -4,17 +4,17 @@ import { sizes, primaryTheme as theme } from 'constants';
 // @props $size || $alignment || $color || $stretch || $bold || $italic || $underline
 const TextBase = styled.p.attrs((props) => ({
   ...props,
-  $size: sizes[props.$size] || props.$size || sizes.s,
-  $alignment: props.$alignment || 'left',
-  $color: theme[props.$color] || props.$color || theme.dark,
+  $size: props.$size,
+  $alignment: props.$alignment,
+  $color: props.$color,
   $stretch: props.$stretch,
   $bold: props.$bold,
   $italic: props.$italic,
   $underline: props.$underline
 }))`
-  font-size: ${({ $size }) => ($size)};
-  text-align: ${({ $alignment }) => ($alignment)};
-  color: ${({ $color }) => ($color)};
+  font-size: ${({ $size }) => (sizes[$size] || $size || sizes.s)};
+  text-align: ${({ $alignment }) => ($alignment || 'left')};
+  color: ${({ $color }) => (theme[$color] || $color || theme.dark)};
   width: ${({ $stretch }) => ($stretch && '100%')};
   font-weight: ${({ $bold }) => ($bold && 'bold')};
   font-style: ${({ $italic }) => ($italic && 'italic')};
