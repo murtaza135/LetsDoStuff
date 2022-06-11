@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
 import * as S from './TagsInput.styles';
+import Tag from './Tag';
 
-const TagsInput = ({ ...props }) => {
-  const [tagValue, setTagValue] = useState('');
+const TagsInput = () => {
   const tagsField = useRef(null);
-  const [tags, setTags] = useState([]);
+  const [tagValue, setTagValue] = useState('');
+  const [tags, setTags] = useState(['Hello', 'Bye', 'Yes']);
 
   const addTag = (event) => {
     if (event.key === 'Enter') {
@@ -17,15 +17,23 @@ const TagsInput = ({ ...props }) => {
     }
   };
 
+  const deleteTag = (tag) => {
+    const tagsCopy = [...tags];
+    const tagIndex = tagsCopy.findIndex((element) => element === tag);
+
+    if (tagIndex !== -1) {
+      tagsCopy.splice(tagIndex, 1);
+      setTags(tagsCopy);
+    }
+  };
+
   return (
     <S.TagsContainer
       tabIndex="0"
       onFocus={() => tagsField.current.focus()}
     >
-      <S.Tag>Hello</S.Tag>
-      <S.Tag>Bye</S.Tag>
-      <S.Tag>YESSS</S.Tag>
-      {tags.map((tag) => <S.Tag key={tag}>{tag}</S.Tag>)}
+      {tags.map((tag) => <Tag key={tag} onDelete={deleteTag}>{tag}</Tag>)}
+
       <S.TagsField
         ref={tagsField}
         name="tagsField"
@@ -37,7 +45,5 @@ const TagsInput = ({ ...props }) => {
     </S.TagsContainer>
   );
 };
-
-TagsInput.propTypes = {};
 
 export default TagsInput;
