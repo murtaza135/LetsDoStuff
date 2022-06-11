@@ -6,6 +6,7 @@ export const TagsContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   text-align: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
   color: ${theme.secondary};
   background-color: ${theme.primaryShaded};
@@ -40,7 +41,8 @@ export const Tag = styled.p.attrs((props) => ({
 `;
 
 export const TagsField = styled.input`
-  width: 100%;
+  flex-grow: 1;
+  width: 4rem;
   height: 2rem;
   color: ${theme.secondary};
   background-color: transparent;

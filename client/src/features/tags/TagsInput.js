@@ -5,6 +5,17 @@ import * as S from './TagsInput.styles';
 const TagsInput = ({ ...props }) => {
   const [tagValue, setTagValue] = useState('');
   const tagsField = useRef(null);
+  const [tags, setTags] = useState([]);
+
+  const addTag = (event) => {
+    if (event.key === 'Enter') {
+      if (!tags.includes(event.target.value)) {
+        setTags([...tags, event.target.value]);
+      }
+
+      setTagValue('');
+    }
+  };
 
   return (
     <S.TagsContainer
@@ -14,13 +25,14 @@ const TagsInput = ({ ...props }) => {
       <S.Tag>Hello</S.Tag>
       <S.Tag>Bye</S.Tag>
       <S.Tag>YESSS</S.Tag>
+      {tags.map((tag) => <S.Tag key={tag}>{tag}</S.Tag>)}
       <S.TagsField
         ref={tagsField}
-        $width="4rem"
+        name="tagsField"
         type="text"
-        name="tagField"
         value={tagValue}
         onChange={(event) => setTagValue(event.target.value)}
+        onKeyUp={addTag}
       />
     </S.TagsContainer>
   );
