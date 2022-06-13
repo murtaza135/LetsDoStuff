@@ -5,10 +5,10 @@ import FormLabel from '../FormLabel.styles';
 import FormField from './FormField';
 import FormErrorMessage from '../form-error-message/FormErrorMessage';
 
-const FormFieldGroup = ({ name, type, placeholder, label }) => (
+const FormFieldGroup = ({ name, type, placeholder, label, ...props }) => (
   <FormGroup>
     <FormLabel htmlFor={name}>{label}</FormLabel>
-    <FormField name={name} type={type} placeholder={placeholder} />
+    <FormField name={name} type={type} placeholder={placeholder} {...props} />
     <FormErrorMessage name={name} />
   </FormGroup>
 );

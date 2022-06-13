@@ -1,19 +1,32 @@
 import React from 'react';
 // eslint-disable-next-line max-len
-import { Formik, Form, FormTitle, FormFieldGroup, FormButton, FormGroup, FormLabel } from 'global-components/form';
+import { Formik, Form, FormTitle, FormFieldGroup, FormButton, FormGroup, FormLabel, FormCheckbox, FormErrorMessage, FormInput, FormTextArea } from 'global-components/form';
 import { Title } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
 
-const intialValues = {
+const initialValues = {
   title: '',
   description: ''
 };
 
 const TodoForm = () => (
-  <Formik intialValues={intialValues}>
+  <Formik initialValues={initialValues}>
     <Form>
       <Title $size="m" $color="secondary">Add a Todo</Title>
-      <FormFieldGroup
+
+      <FormGroup>
+        <FormLabel htmlFor="test">Test</FormLabel>
+        <FormCheckbox name="test" placeholder="Test">Test</FormCheckbox>
+        <FormErrorMessage name="test" />
+      </FormGroup>
+
+      <FormGroup>
+        <FormLabel htmlFor="test2">Test</FormLabel>
+        <FormInput name="test2" type="text" placeholder="Test" />
+        <FormErrorMessage name="test2" />
+      </FormGroup>
+
+      {/* <FormFieldGroup
         name="title"
         type="text"
         placeholder="Title"
@@ -24,11 +37,19 @@ const TodoForm = () => (
         type="textarea"
         placeholder="Description"
         label="Description"
+        $height="7rem"
       />
+      <FormFieldGroup
+        name="description"
+        type="checkbox"
+        placeholder="Description"
+        label="Description"
+      />
+      <FormCheckbox name="checkbox2">Checkbox</FormCheckbox>
       <FormGroup>
         <FormLabel>Tags</FormLabel>
         <TagsInput />
-      </FormGroup>
+      </FormGroup> */}
     </Form>
   </Formik>
 );

@@ -10,8 +10,8 @@ const FormField = ({ ...props }) => {
 
   if (props.type === 'textarea') {
     return <FormTextArea {...fields} {...props} $error={isError} />;
-  } if (props.type === 'date') {
-    return <FormInput {...fields} {...props} $error={isError} />;
+  } if (props.type === 'checkbox') {
+    return <FormInput type="checkbox" {...fields} {...props} $error={isError} />;
   }
   return <FormInput {...fields} {...props} $error={isError} />;
 };

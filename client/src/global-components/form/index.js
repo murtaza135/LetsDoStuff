@@ -7,3 +7,6 @@ export { default as FormTitle } from './FormTitle.styles';
 export { default as FormErrorMessage } from './form-error-message/FormErrorMessage';
 export { default as FormField } from './form-field/FormField';
 export { default as FormFieldGroup } from './form-field/FormFieldGroup';
+export { default as FormCheckbox } from './form-field/field-types/FormCheckbox';
+export { default as FormInput } from './form-field/field-types/FormInput.styles';
+export { default as FormTextArea } from './form-field/field-types/FormTextArea.styles';
