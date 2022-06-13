@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { Field } from 'formik';
-import { sizes, breakpoints, primaryTheme as theme } from 'constants';
+import { primaryTheme as theme } from 'constants';
 
 export const FormCheckboxContainer = styled.div`
-  display: inline;
+  display: inline-block;
   color: ${theme.secondary};
   background-color: ${theme.primaryShaded};
   border: ${({ $error }) => (
@@ -16,13 +15,15 @@ export const FormCheckboxContainer = styled.div`
   width: ${({ $stretch }) => ($stretch ? '100%' : 'auto')};
 `;
 
-export const FormCheckboxLabelContainer = styled.label`
+export const FormCheckboxLabel = styled.label`
+  font-size: 1.1rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   text-align: center;
   gap: 0.5rem;
   cursor: pointer;
+  overflow: hidden;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -54,8 +55,4 @@ export const FormCheckboxInput = styled.input`
     font-size: 15px;
     font-weight: bold;
   }
-`;
-
-export const FormCheckboxLabel = styled.p`
-  font-size: 1.1rem;
 `;
