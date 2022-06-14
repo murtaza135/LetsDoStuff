@@ -16,13 +16,7 @@ const TodoForm = () => (
 
       <FormGroup>
         <FormLabel htmlFor="test">Test</FormLabel>
-        <FormSelect name="test" label="test" id="test">
-          <option value="">Please Select</option>
-          <option value="hello">Hello</option>
-          <option value="bye">Bye</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </FormSelect>
+        <FormCheckbox name="test" label="Important?" />
         <FormErrorMessage name="test" />
       </FormGroup>
 

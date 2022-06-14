@@ -21,7 +21,7 @@ export const FormCheckboxLabel = styled.label`
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  gap: 0.5rem;
+  gap: 0.65rem;
   cursor: pointer;
   overflow: hidden;
 
