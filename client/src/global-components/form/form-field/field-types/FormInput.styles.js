@@ -14,9 +14,14 @@ const FormInput = styled(Field)`
   padding: 0.75rem;
   font-size: 1.1rem;
 
+  &:focus {
+    border: 
+      ${({ $error }) => ($error ? `2px solid ${theme.danger}` : `2px solid ${theme.warning}`)};
+  }
+
   &:-webkit-autofill,
-  &:-webkit-autofill:hover, 
-  &:-webkit-autofill:focus, 
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 100px ${theme.primaryShaded} inset !important;
     -webkit-text-fill-color: ${theme.secondary} !important;

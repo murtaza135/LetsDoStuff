@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line max-len
-import { Formik, Form, FormTitle, FormFieldGroup, FormButton, FormGroup, FormLabel, FormCheckbox, FormErrorMessage, FormInput, FormTextArea, FormDate } from 'global-components/form';
+import { Formik, Form, FormTitle, FormFieldGroup, FormButton, FormGroup, FormLabel, FormCheckbox, FormErrorMessage, FormInput, FormTextArea, FormDate, FormSelect } from 'global-components/form';
 import { Title } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
 
@@ -16,8 +16,13 @@ const TodoForm = () => (
 
       <FormGroup>
         <FormLabel htmlFor="test">Test</FormLabel>
-        <FormDate name="test" />
-        {/* <input type="date" name="test" id="test" /> */}
+        <FormSelect name="test" label="test" id="test">
+          <option value="">Please Select</option>
+          <option value="hello">Hello</option>
+          <option value="bye">Bye</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </FormSelect>
         <FormErrorMessage name="test" />
       </FormGroup>
 

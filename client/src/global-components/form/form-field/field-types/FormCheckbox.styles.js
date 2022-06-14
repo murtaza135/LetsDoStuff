@@ -35,6 +35,7 @@ export const FormCheckboxLabel = styled.label`
 
 export const FormCheckboxInput = styled.input`
   -webkit-appearance: none;
+  appearance: none;
   background-color: ${theme.primaryShaded};
   border: 2px solid ${theme.secondary};
   color: ${theme.secondary};

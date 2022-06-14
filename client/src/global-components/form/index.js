@@ -11,3 +11,4 @@ export { default as FormCheckbox } from './form-field/field-types/FormCheckbox';
 export { default as FormInput } from './form-field/field-types/FormInput.styles';
 export { default as FormTextArea } from './form-field/field-types/FormTextArea.styles';
 export { default as FormDate } from './form-field/field-types/FormDate';
+export { default as FormSelect } from './form-field/field-types/FormSelect';
