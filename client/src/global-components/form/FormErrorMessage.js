@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ErrorMessage, useFormikContext } from 'formik';
-import FormErrorMessageWrapper from './FormErrorMessageWrapper.styles';
+import { FormErrorMessageContainer } from './FormErrorMessage.styles';
 
 const FormErrorMessage = ({ name }) => {
   const formikContext = useFormikContext();
 
   return (
-    <FormErrorMessageWrapper>
+    <FormErrorMessageContainer>
       <ErrorMessage formik={formikContext} name={name} />
-    </FormErrorMessageWrapper>
+    </FormErrorMessageContainer>
   );
 };
 

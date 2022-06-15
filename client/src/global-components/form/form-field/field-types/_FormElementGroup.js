@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FormGroup from '../../FormGroup.styles';
 import FormLabel from '../../FormLabel.styles';
-import FormErrorMessage from '../../form-error-message/FormErrorMessage';
+import FormErrorMessage from '../../FormErrorMessage';
 
 const FormElementGroup = ({ element, name, label }) => (
   <FormGroup>

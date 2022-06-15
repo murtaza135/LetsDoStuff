@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FormGroup from '../FormGroup.styles';
 import FormLabel from '../FormLabel.styles';
 import FormField from './FormField';
-import FormErrorMessage from '../form-error-message/FormErrorMessage';
+import FormErrorMessage from '../FormErrorMessage';
 
 const FormFieldGroup = ({ name, type, placeholder, label, ...props }) => (
   <FormGroup>
