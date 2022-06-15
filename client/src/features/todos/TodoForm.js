@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line max-len
-import { Formik, Form, FormTitle, FormFieldGroup, FormButton, FormGroup, FormLabel, FormCheckbox, FormErrorMessage, FormInput, FormTextArea, FormDate, FormSelect, FormCheckboxGroup, FormDateGroup, FormInputGroup, FormSelectGroup, FormTextAreaGroup } from 'global-components/form';
+import { Formik, Form, FormTitle, FormButton, FormGroup, FormLabel, FormCheckbox, FormErrorMessage, FormInput, FormTextArea, FormDate, FormSelect, FormCheckboxGroup, FormDateGroup, FormInputGroup, FormSelectGroup, FormTextAreaGroup } from 'global-components/form';
 import { Title } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
-import FormInput from './field-types/FormInput.styles';
-import FormTextArea from './field-types/FormTextArea.styles';
+import FormInput from '../form-input-types/FormInput.styles';
+import FormTextArea from '../form-input-types/FormTextArea.styles';
 
 const FormField = ({ ...props }) => {
   const [fields, meta] = useField(props);
