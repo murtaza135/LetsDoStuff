@@ -5,9 +5,8 @@ export const FormDateContainer = styled.div`
   & input[name=${({ name }) => (name)}] {
     color: ${theme.secondary};
     background-color: ${theme.primaryShaded};
-    border: ${({ $error }) => (
-    $error ? `2px solid ${theme.danger}` : `1px solid ${theme.secondary}`
-  )};
+    border: 
+      ${({ $error }) => ($error ? `2px solid ${theme.danger}` : `1px solid ${theme.secondary}`)};
     border-radius: 5px;
     outline: none !important;
     padding: 0.75rem;

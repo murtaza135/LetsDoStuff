@@ -14,9 +14,8 @@ export const FormSelect = styled.select`
   outline: none !important;
 
   &:focus {
-    border: ${({ $error }) => (
-    $error ? `2px solid ${theme.danger}` : `2px solid ${theme.warning}`
-  )};
+    border: 
+      ${({ $error }) => ($error ? `2px solid ${theme.danger}` : `2px solid ${theme.warning}`)};
   }
 
   & > * {
