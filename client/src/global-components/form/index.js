@@ -15,5 +15,3 @@ export { default as FormSelect } from './form-input-types/FormSelect';
 export { default as FormSelectGroup } from './form-input-types/FormSelectGroup';
 export { default as FormTextArea } from './form-input-types/FormTextArea.styles';
 export { default as FormTextAreaGroup } from './form-input-types/FormTextAreaGroup';
-export { default as FormField } from './form-field/FormField';
-export { default as FormFieldGroup } from './form-field/FormFieldGroup';
