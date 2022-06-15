@@ -4,10 +4,11 @@ import { useField } from 'formik';
 import * as S from './FormCheckbox.styles';
 
 const FormCheckbox = ({ type, ...props }) => {
-  const [fields] = useField({ ...props, type: 'checkbox' });
+  const [fields, meta] = useField({ ...props, type: 'checkbox' });
+  const isError = !!(meta.touched && meta.error);
 
   return (
-    <S.FormCheckboxContainer $stretch={props.$stretch}>
+    <S.FormCheckboxContainer $stretch={props.$stretch} $error={isError}>
       <S.FormCheckboxLabel>
         <S.FormCheckboxInput type="checkbox" {...fields} {...props} />
         {props.label}

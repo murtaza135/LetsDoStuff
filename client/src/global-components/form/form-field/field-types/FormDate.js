@@ -6,11 +6,12 @@ import * as S from './FormDate.styles';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const FormDate = ({ ...props }) => {
-  const [fields, , { setValue }] = useField(props);
+  const [fields, meta, { setValue }] = useField(props);
+  const isError = !!(meta.touched && meta.error);
   const selectedDate = (fields.value && new Date(fields.value)) || (new Date());
 
   return (
-    <S.FormDateContainer name={props.name}>
+    <S.FormDateContainer name={props.name} $error={isError}>
       <DatePicker
         {...fields}
         {...props}

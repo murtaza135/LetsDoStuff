@@ -3,7 +3,9 @@ import { primaryTheme as theme } from 'constants';
 
 export const FormSelect = styled.select`
   background-color: ${theme.primaryShaded};
-  border: 1px solid ${theme.secondary};
+  border: ${({ $error }) => (
+    $error ? `2px solid ${theme.danger}` : `1px solid ${theme.secondary}`
+  )};
   color: ${theme.secondary};
   padding: 10px;
   font-size: 1.1rem;
@@ -12,7 +14,9 @@ export const FormSelect = styled.select`
   outline: none !important;
 
   &:focus {
-    border: 2px solid ${theme.warning};
+    border: ${({ $error }) => (
+    $error ? `2px solid ${theme.danger}` : `2px solid ${theme.warning}`
+  )};
   }
 
   & > * {

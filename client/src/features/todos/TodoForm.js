@@ -15,15 +15,32 @@ const TodoForm = () => (
       <Title $size="m" $color="secondary">Add a Todo</Title>
 
       <FormGroup>
-        <FormLabel htmlFor="test">Test</FormLabel>
-        <FormCheckbox name="test" label="Important?" />
-        <FormErrorMessage name="test" />
+        <FormLabel htmlFor="test1">Test</FormLabel>
+        <FormCheckbox name="test1" label="Important?" />
+        <FormErrorMessage name="test1" />
       </FormGroup>
 
       <FormGroup>
         <FormLabel htmlFor="test2">Test</FormLabel>
-        <FormInput name="test2" type="text" placeholder="Test" />
+        <FormDate name="test2" />
         <FormErrorMessage name="test2" />
+      </FormGroup>
+
+      <FormGroup>
+        <FormLabel htmlFor="test3">Test</FormLabel>
+        <FormSelect name="test3">
+          <option value="hello">  Hello</option>
+          <option value="bye">Bye</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </FormSelect>
+        <FormErrorMessage name="test3" />
+      </FormGroup>
+
+      <FormGroup>
+        <FormLabel htmlFor="test4">Test</FormLabel>
+        <FormInput name="test4" type="text" placeholder="Test" />
+        <FormErrorMessage name="test4" />
       </FormGroup>
 
       {/* <FormFieldGroup
