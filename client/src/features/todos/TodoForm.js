@@ -6,7 +6,9 @@ import {
   FormCheckboxGroup,
   FormDateGroup,
   FormInputGroup,
-  FormSelectGroup
+  FormSelectGroup,
+  FormGroup,
+  FormLabel
 } from 'global-components/form';
 import { Title } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
@@ -28,7 +30,10 @@ const TodoForm = () => (
         <option value="bye">Bye</option>
         <option value="No">no</option>
       </FormSelectGroup>
-      <TagsInput />
+      <FormGroup>
+        <FormLabel htmlFor="tags">Tags</FormLabel>
+        <TagsInput />
+      </FormGroup>
       <FormButton type="submit">Submit</FormButton>
     </Form>
   </Formik>
