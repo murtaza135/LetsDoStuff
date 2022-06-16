@@ -5,7 +5,8 @@ import {
   FormButton,
   FormCheckboxGroup,
   FormDateGroup,
-  FormInputGroup
+  FormInputGroup,
+  FormSelectGroup
 } from 'global-components/form';
 import { Title } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
@@ -22,6 +23,11 @@ const TodoForm = () => (
       <FormCheckboxGroup name="test1" label="test1" checkboxLabel="testing?" />
       <FormDateGroup name="test2" label="test2" />
       <FormInputGroup name="test3" label="test3" type="text" placeholder="some text here..." />
+      <FormSelectGroup name="test4" label="test4">
+        <option value="hello">Hello</option>
+        <option value="bye">Bye</option>
+        <option value="No">no</option>
+      </FormSelectGroup>
       <TagsInput />
       <FormButton type="submit">Submit</FormButton>
     </Form>

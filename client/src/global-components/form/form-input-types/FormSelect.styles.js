@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primaryTheme as theme } from 'constants';
+import { breakpoints, primaryTheme as theme } from 'constants';
 
 export const FormSelect = styled.select`
   background-color: ${theme.primaryShaded};
@@ -7,7 +7,7 @@ export const FormSelect = styled.select`
     $error ? `2px solid ${theme.danger}` : `1px solid ${theme.secondary}`
   )};
   color: ${theme.secondary};
-  padding: 10px;
+  padding: 0.75rem;
   font-size: 1.1rem;
   border-radius: 5px;
   cursor: pointer;
@@ -20,5 +20,10 @@ export const FormSelect = styled.select`
 
   & > * {
     font-size: 1.05rem;
+  }
+
+  @media screen and (max-width: ${breakpoints.sm}) {
+    padding: 0.6rem;
+    font-size: 1rem;
   }
 `;
