@@ -20,10 +20,7 @@ export const TagsContainer = styled.div`
   }
 `;
 
-export const TagsField = styled.input.attrs((props) => ({
-  ...props,
-  autoComplete: 'off'
-}))`
+export const TagsInnerInput = styled.input`
   flex-grow: 1;
   width: 4rem;
   height: 2rem;

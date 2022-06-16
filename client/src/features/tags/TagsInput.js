@@ -8,6 +8,7 @@ const TagsInput = () => {
   const [tags, setTags] = useState(['Hello', 'Bye', 'Yes']);
 
   const addTag = (event) => {
+    // TODO add validation
     if (event.key === 'Enter') {
       if (!tags.includes(event.target.value)) {
         setTags([...tags, event.target.value]);
@@ -18,7 +19,6 @@ const TagsInput = () => {
   };
 
   const deleteTag = (tag) => {
-    // TODO add validation
     const tagsCopy = [...tags];
     const tagIndex = tagsCopy.findIndex((element) => element === tag);
 
@@ -35,10 +35,11 @@ const TagsInput = () => {
     >
       {tags.map((tag) => <Tag key={tag} onDelete={deleteTag}>{tag}</Tag>)}
 
-      <S.TagsField
+      <S.TagsInnerInput
         ref={tagsField}
         name="tagsField"
         type="text"
+        autoComplete="off"
         value={tagValue}
         onChange={(event) => setTagValue(event.target.value)}
         onKeyUp={addTag}
