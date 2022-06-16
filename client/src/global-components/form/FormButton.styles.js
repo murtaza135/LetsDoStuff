@@ -7,7 +7,7 @@ const FormButton = styled(Button)`
   margin-top: 1rem;
   padding: 0.65rem 1.5rem;
   color: ${theme.primaryShaded};
-  background: ${theme.secondary};
+  background: ${theme.warning};
   border: none;
   border-radius: 5px;
   cursor: pointer;

@@ -6,12 +6,14 @@ import {
   FormCheckboxGroup,
   FormDateGroup,
   FormInputGroup,
-  FormSelectGroup,
+  FormTextAreaGroup,
   FormGroup,
   FormLabel
 } from 'global-components/form';
-import { Title } from 'global-components/ui';
+import { Title, Text } from 'global-components/ui';
+import { Spacer } from 'global-components/layout';
 import TagsInput from '../tags/TagsInput';
+import * as S from './TodoForm.styles';
 
 const initialValues = {
   title: '',
@@ -22,19 +24,32 @@ const TodoForm = () => (
   <Formik initialValues={initialValues}>
     <Form>
       <Title $size="m" $color="secondary">Add a Todo</Title>
-      <FormCheckboxGroup name="test1" label="test1" checkboxLabel="testing?" />
-      <FormDateGroup name="test2" label="test2" />
-      <FormInputGroup name="test3" label="test3" type="text" placeholder="some text here..." />
-      <FormSelectGroup name="test4" label="test4">
-        <option value="hello">Hello</option>
-        <option value="bye">Bye</option>
-        <option value="No">no</option>
-      </FormSelectGroup>
+      <FormInputGroup name="title" label="Title *" placeholder="Title" type="text" />
+      <FormTextAreaGroup
+        name="description"
+        label="Description"
+        placeholder="Description"
+        $height="8rem"
+      />
+      <S.FlexContainer>
+        <FormDateGroup name="deadlineDate" label="Deadline" />
+        <FormCheckboxGroup
+          name="important"
+          label="Important?"
+          checkboxLabel="Important?"
+          $stretch
+        />
+      </S.FlexContainer>
+
       <FormGroup>
-        <FormLabel htmlFor="tags">Tags</FormLabel>
+        <FormLabel>Tags</FormLabel>
         <TagsInput />
       </FormGroup>
-      <FormButton type="submit">Submit</FormButton>
+
+      <FormButton type="submit">Add Todo</FormButton>
+
+      <Spacer mb="0.5rem" />
+      <Text $color="medium">* required</Text>
     </Form>
   </Formik>
 );
