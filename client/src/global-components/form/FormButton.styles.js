@@ -4,7 +4,7 @@ import { Button } from 'global-components/ui';
 
 const FormButton = styled(Button)`
   font-size: 1.025rem;
-  margin-top: 1rem;
+  margin-top: ${({ margin }) => margin || '1rem'};
   padding: 0.65rem 1.5rem;
   color: ${theme.primaryShaded};
   background: ${theme.warning};
@@ -13,6 +13,7 @@ const FormButton = styled(Button)`
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: bold;
+  width: 100%;
 
   &:hover {
     opacity: 0.75;
