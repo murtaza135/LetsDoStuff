@@ -16,13 +16,13 @@ export const TagContainer = styled.div.attrs((props) => ({
   color: ${theme.primaryShaded};
   border: none;
   border-radius: 7px;
-  padding: 0.35rem 0.5rem;
+  padding: 0.3rem 0.45rem;
   cursor: default;
 `;
 
 export const TagText = styled.p`
   color: ${theme.primaryShaded};
-  font-size: ${sizes.s};
+  font-size: ${({ $small }) => ($small ? '0.8em' : sizes.s)};
   font-weight: bold;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
