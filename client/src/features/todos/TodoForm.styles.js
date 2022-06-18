@@ -1,6 +1,32 @@
+import React from 'react';
 import styled from 'styled-components';
-import { breakpoints } from 'constants';
+import { breakpoints, primaryTheme as theme } from 'constants';
 import AnimateHeight from 'react-animate-height';
+import { Form as FormikForm } from 'global-components/form';
+import { FaTimes } from 'react-icons/fa';
+
+export const Form = styled(FormikForm)`
+  position: relative;
+`;
+
+export const CloseButton = styled(({ children, ...props }) => (
+  React.createElement(FaTimes, props, children)
+))`
+  width: auto;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.6rem;
+  padding: 0.3rem;
+  border: 1px solid ${theme.secondary};
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
+`;
 
 export const FlexContainer = styled.div`
   display: flex;

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import {
   Formik,
-  Form,
   FormButton,
   FormCheckboxGroup,
   FormDateGroup,
@@ -32,16 +31,18 @@ const TodoForm = () => {
 
   return (
     <Formik initialValues={initialValues}>
-      <Form
+      <S.Form
         ref={form}
         tabIndex="0"
         onFocus={() => setFocus(true)}
         onBlur={handleBlur}
       >
+        {focus && <S.CloseButton onClick={() => form.current.blur()} />}
+
         <Title $size="m" $color="secondary">Add a Todo</Title>
         <FormInputGroup name="title" label="Title *" placeholder="Title" type="text" />
 
-        <S.AnimateHeightContainer duration={600} height={focus ? 'auto' : 0}>
+        <S.AnimateHeightContainer duration={500} height={focus ? 'auto' : 0}>
           <FormTextAreaGroup
             name="description"
             label="Description"
@@ -73,7 +74,7 @@ const TodoForm = () => {
           <Spacer mb="0.5rem" />
           <Text $color="medium">* required</Text>
         </S.AnimateHeightContainer>
-      </Form>
+      </S.Form>
     </Formik>
   );
 };
