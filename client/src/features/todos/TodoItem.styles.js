@@ -4,14 +4,18 @@ import { sizes, primaryTheme as theme } from 'constants';
 
 export const TodoItemContainer = styled.div`
   max-width: ${({ $stretch }) => ($stretch ? '1000rem' : '37.5rem')};
-  & > * { width: 100%; }
   border-radius: 10px;
   background-color: ${theme.primaryShaded};
-  padding: 1rem 3.5rem 1rem 2.5rem;
+  padding: 1rem 5rem 1rem 2.5rem;
 
   position: relative;
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
+`;
+
+export const TodoDataContainer = styled.div`
+  width: 100%;
 `;
 
 export const TodoItemTitle = styled.h1`
@@ -32,8 +36,38 @@ export const TodoItemDate = styled.p`
   user-select: none;
 `;
 
-export const TodoItemDescription = styled.p`
+export const TagsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+`;
 
+export const IconsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.35rem;
+  width: auto;
+
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+
+`;
+
+export const Icon = styled(({ element, children, ...props }) => (
+  React.createElement(element, props, children)
+))`
+  font-size: ${({ $size }) => $size || sizes.s};
+  color: ${({ $color }) => $color || theme.secondary};
+  transition: opacity 0.25s ease;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 export const TodoItemImportant = styled.div.attrs(() => ({
@@ -100,39 +134,5 @@ export const TodoItemImportant = styled.div.attrs(() => ({
   &:hover > .tooltiptext {
     visibility: visible;
     opacity: 1;
-  }
-`;
-
-export const TagsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.7rem;
-`;
-
-export const IconsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  gap: 0.4rem;
-  width: auto;
-
-  position: absolute;
-  top: 0.7rem;
-  right: 0.7rem;
-
-`;
-
-export const Icon = styled(({ element, children, ...props }) => (
-  React.createElement(element, props, children)
-))`
-  font-size: ${sizes.s};
-  transition: color 0.3s ease;
-  cursor: pointer;
-  
-  &:hover {
-    color: ${theme.warning};
-    opacity: 0.8;
   }
 `;

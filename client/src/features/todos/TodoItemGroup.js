@@ -31,6 +31,12 @@ const TodoItemGroup = () => (
         tags={['Hello', 'Bye', 'Yes']}
         important
       />
+      <TodoItem
+        title="Hello World"
+        deadlineDate={new Date()}
+        tags={['Hello', 'Bye', 'Yes']}
+        important
+      />
     </S.TodoItems>
   </S.TodoItemGroupContainer>
 );

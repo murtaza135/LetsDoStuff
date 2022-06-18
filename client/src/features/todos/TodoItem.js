@@ -1,24 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tag from 'features/tags/Tag';
-import { FaTimes } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
+import { ImBin } from 'react-icons/im';
+import { CgCheckO } from 'react-icons/cg';
+import { primaryTheme as theme } from 'constants';
 import * as S from './TodoItem.styles';
 
 // eslint-disable-next-line no-unused-vars
 const TodoItem = ({ title, description, deadlineDate, tags, important }) => (
   <S.TodoItemContainer>
+    <S.TodoDataContainer>
+      <S.TodoItemTitle>{title}</S.TodoItemTitle>
+      {deadlineDate && (
+        <S.TodoItemDate>{deadlineDate?.toDateString().substring(4)}</S.TodoItemDate>
+      )}
+    </S.TodoDataContainer>
+
+    {tags.length > 0 && (
+      <S.TagsContainer>
+        {tags.map((tag) => <Tag key={tag} small>{tag}</Tag>)}
+      </S.TagsContainer>
+    )}
+
     {important && <S.TodoItemImportant />}
+
     <S.IconsContainer>
-      <S.Icon element={FiEdit} />
-      <S.Icon element={FaTimes} />
+      <S.Icon element={CgCheckO} $size="1.2rem" $color={theme.success} />
+      <S.Icon element={FiEdit} $color={theme.warning} />
+      <S.Icon element={ImBin} $color={theme.danger} />
     </S.IconsContainer>
-    <S.TodoItemTitle>{title}</S.TodoItemTitle>
-    <S.TodoItemDate>{deadlineDate?.toDateString().substring(4)}</S.TodoItemDate>
-    <S.TodoItemDescription />
-    <S.TagsContainer>
-      {tags.map((tag) => <Tag key={tag} small>{tag}</Tag>)}
-    </S.TagsContainer>
   </S.TodoItemContainer>
 );
 
