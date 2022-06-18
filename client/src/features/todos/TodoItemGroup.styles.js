@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { sizes } from 'constants';
+import { widths, sizes } from 'constants';
 
 export const TodoItemGroupContainer = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const TodoItemGroupContainer = styled.div`
 `;
 
 export const TodoMetaData = styled.div`
-  max-width: 37.5rem;
+  max-width: ${widths.todoContainer};
   font-size: ${sizes.s};
   font-weight: bold;
 

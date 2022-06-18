@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { Form as FormikForm } from 'formik';
-import { breakpoints, primaryTheme as theme } from 'constants';
+import { widths, breakpoints, primaryTheme as theme } from 'constants';
 
 // @props $stretch || $noBorder
 const Form = styled(FormikForm)`
-  max-width: ${({ $stretch }) => ($stretch ? '1000rem' : '37.5rem')};
+  max-width: ${({ $stretch }) => ($stretch ? '1000rem' : widths.formContainer)};
   & > * { width: 100%; }
   display: flex;
   flex-direction: column;

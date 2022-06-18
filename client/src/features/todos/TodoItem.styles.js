@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { sizes, primaryTheme as theme } from 'constants';
+import { widths, sizes, primaryTheme as theme } from 'constants';
 
 export const TodoItemContainer = styled.div`
-  max-width: ${({ $stretch }) => ($stretch ? '1000rem' : '37.5rem')};
+  max-width: ${({ $stretch }) => ($stretch ? '1000rem' : widths.todoContainer)};
   border-radius: 10px;
   background-color: ${theme.primaryShaded};
   padding: 1rem 5rem 1rem 2.5rem;
