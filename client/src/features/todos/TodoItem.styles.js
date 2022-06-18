@@ -17,11 +17,19 @@ export const TodoItemContainer = styled.div`
 export const TodoItemTitle = styled.h1`
   font-size: ${sizes.m};
   font-weight: bold;
+  cursor: default;
 `;
 
 export const TodoItemDate = styled.p`
   font-size: ${sizes.s};
   transform: translateY(-1px);
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 export const TodoItemDescription = styled.p`
