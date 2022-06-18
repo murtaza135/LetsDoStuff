@@ -6,8 +6,27 @@ import TodoItem from 'features/todos/TodoItem';
 const TodoDashboard = () => (
   <PageContainer>
     <TodoForm />
-    <TodoItem title="temp" />
-    <TodoItem title="temp" />
+    <TodoItem
+      title="Hello World"
+      deadlineDate={new Date()}
+      important
+    />
+    <TodoItem
+      title="Hello World"
+      deadlineDate={new Date()}
+      tags={['Hello']}
+    />
+    <TodoItem
+      title="Bye World"
+      tags={['Hello', 'Bye']}
+      important
+    />
+    <TodoItem
+      title="Hello World"
+      deadlineDate={new Date()}
+      tags={['Hello', 'Bye', 'Yes']}
+      important
+    />
   </PageContainer>
 );
 
