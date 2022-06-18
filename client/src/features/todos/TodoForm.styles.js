@@ -28,7 +28,7 @@ export const CloseButton = styled(({ children, ...props }) => (
   }
 `;
 
-export const FlexContainer = styled.div`
+export const TodoFormDataContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

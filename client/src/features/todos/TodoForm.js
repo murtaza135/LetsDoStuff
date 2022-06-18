@@ -50,7 +50,7 @@ const TodoForm = () => {
             $height="8rem"
           />
 
-          <S.FlexContainer>
+          <S.TodoFormDataContainer>
             <FormDateGroup
               name="deadlineDate"
               label="Deadline"
@@ -62,7 +62,7 @@ const TodoForm = () => {
               checkboxLabel="Important?"
               $stretch
             />
-          </S.FlexContainer>
+          </S.TodoFormDataContainer>
 
           <FormGroup>
             <FormLabel>Tags</FormLabel>
