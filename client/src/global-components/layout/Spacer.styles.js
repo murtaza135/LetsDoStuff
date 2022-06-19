@@ -18,7 +18,7 @@ const paddingCSS = css`
 
 // @props $m | $mx | $my | $mt | $mr | $mb | $ml
 // @props $p | $px | $py | $pt | $pr | $pb | $pl
-export const spacerCSS = css`
+export const spacerMixin = css`
   ${marginCSS};
   ${paddingCSS};
 `;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { sizes, primaryTheme as theme } from 'constants';
-import { spacerCSS } from 'global-components/layout';
+import { spacerMixin } from 'global-components/layout';
 
 // @props $size || $alignment || $color || $stretch || $bold || $italic || $underline
 const TextBase = styled.p.attrs((props) => ({
@@ -13,7 +13,7 @@ const TextBase = styled.p.attrs((props) => ({
   $italic: props.$italic,
   $underline: props.$underline
 }))`
-  ${spacerCSS};
+  ${spacerMixin};
   font-size: ${({ $size }) => (sizes[$size] || $size || sizes.s)};
   text-align: ${({ $alignment }) => ($alignment || 'left')};
   color: ${({ $color }) => (theme[$color] || $color || theme.dark)};

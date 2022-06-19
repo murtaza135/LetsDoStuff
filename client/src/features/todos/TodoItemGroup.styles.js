@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { widths, sizes } from 'constants';
+import { noSelectMixin } from 'global-components/other';
 
 export const TodoItemGroupContainer = styled.div`
   display: flex;
@@ -10,6 +11,7 @@ export const TodoItemGroupContainer = styled.div`
 `;
 
 export const TodoMetaData = styled.div`
+  ${noSelectMixin};
   max-width: ${widths.todoContainer};
   font-size: ${sizes.s};
   font-weight: bold;
@@ -19,13 +21,6 @@ export const TodoMetaData = styled.div`
   justify-content: space-between;
   align-items: center;
   text-align: center;
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 `;
 
 export const TodoItems = styled.div`

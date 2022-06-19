@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
 import { sizes, breakpoints, primaryTheme as theme } from 'constants';
+import { noSelectMixin } from 'global-components/other';
 
 export const TagContainer = styled.div.attrs((props) => ({
   ...props,
@@ -21,15 +22,10 @@ export const TagContainer = styled.div.attrs((props) => ({
 `;
 
 export const TagText = styled.p`
+  ${noSelectMixin};
   color: ${theme.primaryShaded};
   font-size: ${({ $small }) => ($small ? '0.8em' : sizes.s)};
   font-weight: bold;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 
   @media screen and (max-width: ${breakpoints.xs}) {
     font-size: ${({ $small }) => ($small ? '0.7em' : '0.9rem')};

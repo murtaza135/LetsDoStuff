@@ -10,7 +10,6 @@ import {
   FormLabel
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
-import { Spacer } from 'global-components/layout';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 

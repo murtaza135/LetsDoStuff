@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { widths, sizes, breakpoints, primaryTheme as theme } from 'constants';
+import { noSelectMixin } from 'global-components/other';
 
 export const TodoItemContainer = styled.div`
   max-width: ${({ $stretch }) => ($stretch ? '1000rem' : widths.todoContainer)};
@@ -25,15 +26,9 @@ export const TodoItemTitle = styled.h1`
 `;
 
 export const TodoItemDate = styled.p`
+  ${noSelectMixin};
   font-size: ${sizes.s};
   transform: translateY(-1px);
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 `;
 
 export const TagsContainer = styled.div`
@@ -77,6 +72,7 @@ export const Icon = styled(({ element, children, ...props }) => (
 export const TodoItemImportant = styled.div.attrs(() => ({
   children: ['!', <span className="tooltiptext">Important</span>]
 }))`
+  ${noSelectMixin};
   font-size: ${sizes.m};
   background-color: ${theme.primaryShaded};
   color: ${theme.danger};
@@ -93,13 +89,6 @@ export const TodoItemImportant = styled.div.attrs(() => ({
   position: absolute;
   top: -10px;
   left: -10px;
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 
   & > .tooltiptext {
     visibility: hidden;
