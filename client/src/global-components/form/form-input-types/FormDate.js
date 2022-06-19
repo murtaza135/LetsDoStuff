@@ -1,6 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-constant-condition */
-/* eslint-disable no-self-compare */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';

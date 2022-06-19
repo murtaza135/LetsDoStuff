@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import FormInput from './FormInput.styles';
+import { FormInputStyled } from './FormInput.styles';
 
-const FormTextArea = styled(FormInput).attrs((props) => ({
+export const FormTextAreaStyled = styled(FormInputStyled).attrs((props) => ({
   ...props,
   as: 'textarea',
   $height: props.$height
@@ -11,5 +11,3 @@ const FormTextArea = styled(FormInput).attrs((props) => ({
   height: ${({ $height }) => $height};
   resize: vertical;
 `;
-
-export default FormTextArea;

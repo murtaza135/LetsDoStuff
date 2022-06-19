@@ -3,7 +3,7 @@ import { Field } from 'formik';
 import { breakpoints, primaryTheme as theme } from 'constants';
 
 // @props $error
-const FormInput = styled(Field)`
+export const FormInputStyled = styled(Field)`
   color: ${theme.secondary};
   background-color: ${theme.primaryShaded};
   border: ${({ $error }) => (
@@ -32,5 +32,3 @@ const FormInput = styled(Field)`
     font-size: 1rem;
   }
 `;
-
-export default FormInput;
