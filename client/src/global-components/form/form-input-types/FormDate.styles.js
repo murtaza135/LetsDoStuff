@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { breakpoints, primaryTheme as theme } from 'constants';
+import { marginMixin } from 'global-components/layout';
 
 export const FormDateContainer = styled.div`
   & input[name=${({ name }) => (name)}] {
+    ${marginMixin};
     color: ${theme.secondary};
     background-color: ${theme.primaryShaded};
     border: 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useField } from 'formik';
 import * as S from './FormCheckbox.styles';
 
-const FormCheckbox = ({ ...props }) => {
+const FormCheckbox = ({ children, ...props }) => {
   const [fields, meta] = useField({ ...props, type: 'checkbox' });
   const isError = !!(meta.touched && meta.error);
 
@@ -11,20 +11,20 @@ const FormCheckbox = ({ ...props }) => {
     <S.FormCheckboxContainer $stretch={props.$stretch} $error={isError}>
       <S.FormCheckboxLabel>
         <S.FormCheckboxInput {...fields} {...props} type="checkbox" />
-        {props.label}
+        {children}
       </S.FormCheckboxLabel>
     </S.FormCheckboxContainer>
   );
 };
 
 FormCheckbox.defaultProps = {
-  label: '',
+  children: '',
   $stretch: false
 };
 
 FormCheckbox.propTypes = {
   name: PropTypes.string.isRequired,
-  label: PropTypes.string,
+  children: PropTypes.string,
   $stretch: PropTypes.bool
 };
 

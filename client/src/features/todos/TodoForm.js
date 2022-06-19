@@ -61,12 +61,10 @@ const TodoForm = () => {
               minDate={new Date()}
               isClearable
             />
-            <FormCheckboxGroup
-              name="important"
-              label="Important?"
-              checkboxLabel="Important?"
-              $stretch
-            />
+
+            <FormCheckboxGroup name="important" label="Important?" $stretch>
+              Important?
+            </FormCheckboxGroup>
           </S.TodoFormDataContainer>
 
           <FormGroup>

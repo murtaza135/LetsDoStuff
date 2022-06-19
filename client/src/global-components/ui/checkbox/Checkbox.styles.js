@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { breakpoints, primaryTheme as theme } from 'constants';
 import { marginMixin } from 'global-components/layout';
+import { noSelectMixin } from 'global-components/other';
 
 export const CheckboxContainer = styled.div`
   ${marginMixin};
@@ -18,6 +19,7 @@ export const CheckboxContainer = styled.div`
 `;
 
 export const CheckboxLabel = styled.label`
+  ${noSelectMixin};
   font-size: 1.1rem;
   display: flex;
   justify-content: flex-start;
@@ -26,13 +28,6 @@ export const CheckboxLabel = styled.label`
   gap: 0.65rem;
   cursor: pointer;
   overflow: hidden;
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 
   @media screen and (max-width: ${breakpoints.sm}) {
     font-size: 0.9rem;

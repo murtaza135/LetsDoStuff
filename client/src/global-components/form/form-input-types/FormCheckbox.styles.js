@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { breakpoints, primaryTheme as theme } from 'constants';
+import { marginMixin } from 'global-components/layout';
+import { noSelectMixin } from 'global-components/other';
 
 export const FormCheckboxContainer = styled.div`
+  ${marginMixin};
   display: inline-block;
   color: ${theme.secondary};
   background-color: ${theme.primaryShaded};
@@ -20,6 +23,7 @@ export const FormCheckboxContainer = styled.div`
 `;
 
 export const FormCheckboxLabel = styled.label`
+  ${noSelectMixin};
   font-size: 1.1rem;
   display: flex;
   justify-content: flex-start;
@@ -28,13 +32,6 @@ export const FormCheckboxLabel = styled.label`
   gap: 0.65rem;
   cursor: pointer;
   overflow: hidden;
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 
   @media screen and (max-width: ${breakpoints.sm}) {
     font-size: 1rem;

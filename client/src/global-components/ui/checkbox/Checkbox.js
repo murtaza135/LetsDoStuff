@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as S from './Checkbox.styles';
 
-const Checkbox = ({ $noBorder, children, ...props }) => (
-  <S.CheckboxContainer $noBorder={$noBorder}>
+const Checkbox = ({ children, ...props }) => (
+  <S.CheckboxContainer $stretch={props.$stretch} $noBorder={props.$noBorder}>
     <S.CheckboxLabel>
       <S.FormCheckboxInput {...props} type="checkbox" />
       {children}
@@ -13,11 +13,13 @@ const Checkbox = ({ $noBorder, children, ...props }) => (
 
 Checkbox.defaultProps = {
   children: '',
+  $stretch: false,
   $noBorder: false
 };
 
 Checkbox.propTypes = {
   children: PropTypes.string,
+  $stretch: PropTypes.bool,
   $noBorder: PropTypes.bool
 };
 

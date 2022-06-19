@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import { Field } from 'formik';
 import { breakpoints, primaryTheme as theme } from 'constants';
+import { marginMixin } from 'global-components/layout';
 
 // @props $error
 export const FormInputStyled = styled(Field)`
+  ${marginMixin};
   color: ${theme.secondary};
   background-color: ${theme.primaryShaded};
   border: ${({ $error }) => (

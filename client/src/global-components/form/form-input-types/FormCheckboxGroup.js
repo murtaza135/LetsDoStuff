@@ -4,21 +4,19 @@ import FormElementGroup from './_FormElementGroup';
 import FormCheckbox from './FormCheckbox';
 
 const FormCheckboxGroup = ({ ...props }) => {
-  const element = <FormCheckbox {...props} label={props.checkboxLabel} />;
+  const element = <FormCheckbox {...props} />;
   return <FormElementGroup {...props} element={element} />;
 };
 
 FormCheckboxGroup.defaultProps = {
-  checkboxLabel: '',
-  $stretch: false,
-  label: ''
+  label: '',
+  $stretch: false
 };
 
 FormCheckboxGroup.propTypes = {
   name: PropTypes.string.isRequired,
-  checkboxLabel: PropTypes.string,
-  $stretch: PropTypes.bool,
-  label: PropTypes.string
+  label: PropTypes.string,
+  $stretch: PropTypes.bool
 };
 
 export default FormCheckboxGroup;

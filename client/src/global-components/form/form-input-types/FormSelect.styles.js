@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { breakpoints, primaryTheme as theme } from 'constants';
+import { marginMixin } from 'global-components/layout';
 
 export const FormSelect = styled.select`
+  ${marginMixin};
   background-color: ${theme.primaryShaded};
   border: ${({ $error }) => (
     $error ? `2px solid ${theme.danger}` : `1px solid ${theme.secondary}`
