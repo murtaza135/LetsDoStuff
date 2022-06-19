@@ -71,8 +71,7 @@ const TodoForm = () => {
 
           <FormButton type="submit" margin="1.75rem">Add Todo</FormButton>
 
-          <Spacer mb="0.5rem" />
-          <Text $color="medium">* required</Text>
+          <Text $color="medium" $mt="1rem">* required</Text>
         </S.AnimateHeightContainer>
       </S.Form>
     </Formik>
