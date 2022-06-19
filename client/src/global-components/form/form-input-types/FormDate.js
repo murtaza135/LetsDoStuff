@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-constant-condition */
+/* eslint-disable no-self-compare */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useField } from 'formik';
@@ -8,13 +11,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 const FormDate = ({ ...props }) => {
   const [fields, meta, { setValue }] = useField(props);
   const isError = !!(meta.touched && meta.error);
-  const selectedDate = (fields.value && new Date(fields.value)) || (new Date());
+  const selectedDate = (fields.value && new Date(fields.value)) || (null);
 
   return (
     <S.FormDateContainer name={props.name} $error={isError}>
       <DatePicker
         {...fields}
         {...props}
+        autoComplete="off"
         dateFormat="dd/MM/yyyy"
         selected={selectedDate}
         onChange={setValue}

@@ -54,6 +54,8 @@ const TodoForm = () => {
               name="deadlineDate"
               label="Deadline"
               onCalendarClose={() => form.current.focus({ preventScroll: true })}
+              minDate={new Date()}
+              isClearable
             />
             <FormCheckboxGroup
               name="important"

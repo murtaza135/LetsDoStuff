@@ -24,4 +24,24 @@ export const FormDateContainer = styled.div`
       font-size: 1rem;
     }
   }
+
+  & button[aria-label="Close"] {
+    padding-right: 0.65rem;
+    transition: opacity 0.25s ease;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  & button[aria-label="Close"]::after {
+    background-color: transparent;
+    border: 2px solid ${theme.secondary};
+    color: ${theme.secondary};
+    font-size: 1rem;
+    font-weight: bold;
+    height: 1.1rem;
+    width: 1.1rem;
+    text-align: center;
+  }
 `;
