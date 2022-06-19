@@ -56,9 +56,10 @@ const TodoForm = () => {
           <S.TodoFormDataContainer>
             <FormDateGroup
               name="deadlineDate"
-              label="Deadline"
+              label="Deadline Date"
               onCalendarClose={() => form.current.focus({ preventScroll: true })}
               minDate={new Date()}
+              placeholderText="Date"
               isClearable
             />
 

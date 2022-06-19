@@ -7,8 +7,7 @@ import { CgCheckO } from 'react-icons/cg';
 import { primaryTheme as theme } from 'constants';
 import * as S from './TodoItem.styles';
 
-// eslint-disable-next-line no-unused-vars
-const TodoItem = ({ title, description, deadlineDate, tags, important }) => (
+const TodoItem = ({ title, deadlineDate, tags, important }) => (
   <S.TodoItemContainer>
     <S.TodoDataContainer>
       <S.TodoItemTitle>{title}</S.TodoItemTitle>
@@ -19,7 +18,7 @@ const TodoItem = ({ title, description, deadlineDate, tags, important }) => (
 
     {tags.length > 0 && (
       <S.TagsContainer>
-        {tags.map((tag) => <Tag key={tag} small>{tag}</Tag>)}
+        {tags.map((tag) => <Tag key={tag} $small>{tag}</Tag>)}
       </S.TagsContainer>
     )}
 
@@ -34,7 +33,6 @@ const TodoItem = ({ title, description, deadlineDate, tags, important }) => (
 );
 
 TodoItem.defaultProps = {
-  description: '',
   deadlineDate: null,
   tags: [],
   important: false
@@ -42,7 +40,6 @@ TodoItem.defaultProps = {
 
 TodoItem.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string,
   deadlineDate: PropTypes.instanceOf(Date),
   tags: PropTypes.arrayOf(PropTypes.string),
   important: PropTypes.bool,
