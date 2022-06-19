@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { marginMixin } from 'global-components/layout';
 import getButtonElement from './Button.elements';
 import colors, { getValidColor } from './Button.colors';
 import sizes, { getValidSize } from './Button.sizes';
@@ -13,6 +14,7 @@ const Button = styled.button.attrs((props) => ({
   $rounded: props.$rounded,
   $bold: props.$bold
 }))`
+  ${marginMixin};
   ${({ $color }) => colors[$color]};
   ${({ $size }) => sizes[$size]};
 

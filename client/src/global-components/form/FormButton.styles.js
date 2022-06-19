@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 import { breakpoints, primaryTheme as theme } from 'constants';
 import { Button } from 'global-components/ui';
+import { marginMixin } from 'global-components/layout';
 
-const FormButton = styled(Button)`
+const FormButton = styled(Button).attrs((props) => ({
+  $mt: props.$mt || '1rem'
+}))`
+  ${marginMixin};
   font-size: 1.025rem;
-  margin-top: ${({ $margin }) => $margin || '1rem'};
   padding: 0.65rem 1.5rem;
   color: ${theme.primaryShaded};
   background: ${theme.warning};

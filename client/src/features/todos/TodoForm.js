@@ -74,7 +74,7 @@ const TodoForm = () => {
             <TagsInput />
           </FormGroup>
 
-          <FormButton type="submit" $margin="1.75rem">Add Todo</FormButton>
+          <FormButton type="submit" $mt="1.75rem">Add Todo</FormButton>
 
           <Text $color="medium" $mt="1rem">* required</Text>
         </S.AnimateHeightContainer>

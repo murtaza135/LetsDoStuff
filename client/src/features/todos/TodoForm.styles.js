@@ -34,7 +34,7 @@ export const TodoFormDataContainer = styled.div`
   align-items: center;
   gap: 1.5rem;
 
-  @media screen and (max-width: ${breakpoints.xs}) {
+  @media screen and (max-width: ${breakpoints.s}) {
     flex-direction: column;
     gap: 1rem;
   }
