@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { widths, sizes, primaryTheme as theme } from 'constants';
+import { widths, sizes, breakpoints, primaryTheme as theme } from 'constants';
 
 export const TodoItemContainer = styled.div`
   max-width: ${({ $stretch }) => ($stretch ? '1000rem' : widths.todoContainer)};
@@ -41,6 +41,10 @@ export const TagsContainer = styled.div`
   flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 0.25rem;
+
+  @media screen and (max-width: ${breakpoints.xs}) {
+    gap: 0.5rem;
+  }
 `;
 
 export const IconsContainer = styled.div`

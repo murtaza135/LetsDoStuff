@@ -1,7 +1,7 @@
 import widths from './widths';
 
 const breakpoints = {
-  xs: '375px',
+  xs: '372px',
   sm: '550px',
   s: '550px',
   m: '750px',

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
-import { sizes, primaryTheme as theme } from 'constants';
+import { sizes, breakpoints, primaryTheme as theme } from 'constants';
 
 export const TagContainer = styled.div.attrs((props) => ({
   ...props,
@@ -30,6 +30,10 @@ export const TagText = styled.p`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  @media screen and (max-width: ${breakpoints.xs}) {
+    font-size: ${({ $small }) => ($small ? '0.7em' : '0.9rem')};
+  }
 `;
 
 export const TagCloseIcon = styled(({ children, ...props }) => (
