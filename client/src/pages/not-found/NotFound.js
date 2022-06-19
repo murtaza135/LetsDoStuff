@@ -1,7 +1,8 @@
 import React from 'react';
+import NotFoundError from 'features/not-found/NotFound';
 
 const NotFound = () => (
-  <div>NotFound</div>
+  <NotFoundError />
 );
 
 export default NotFound;

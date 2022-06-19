@@ -18,7 +18,7 @@ const Button = styled.button.attrs((props) => ({
   ${({ $color }) => colors[$color]};
   ${({ $size }) => sizes[$size]};
 
-  width: ${({ $stretch }) => ($stretch && '100%')};
+  width: ${({ $stretch }) => ($stretch ? '100%' : 'auto')};
   border: none;
   border-radius: ${({ $rounded }) => ($rounded ? '100rem' : '5px')};
   font-weight: ${({ $bold }) => ($bold && 'bold')};
