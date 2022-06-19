@@ -1,13 +1,12 @@
-import React from 'react';
-import { PageContainer } from 'global-components/layout';
+import React, { Fragment } from 'react';
 import TodoForm from 'features/todos/TodoForm';
 import TodoItemGroup from 'features/todos/TodoItemGroup';
 
 const TodoDashboard = () => (
-  <PageContainer>
+  <Fragment>
     <TodoForm />
     <TodoItemGroup />
-  </PageContainer>
+  </Fragment>
 );
 
 export default TodoDashboard;

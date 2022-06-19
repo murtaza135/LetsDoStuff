@@ -1,19 +1,14 @@
 import styled from 'styled-components';
 
-// @props $posX || $posY
-const PageContainer = styled.div.attrs((props) => ({
-  ...props,
-  $posX: props.$posX || 'center',
-  $posY: props.$posY || 'start',
-  $gap: props.$gap || '2rem'
-}))`
+// @props $gap
+const PageContainer = styled.div`
   width: 100%;
   & > * { width: 100%; }
   display: flex;
   flex-direction: column;
-  justify-content: ${({ $posY }) => $posY};
-  align-items: ${({ $posX }) => $posX};
-  gap: ${({ $gap }) => $gap};
+  justify-content: flex-start;
+  align-items: center;
+  gap: ${({ $gap }) => $gap || '2rem'};
 `;
 
 export default PageContainer;
