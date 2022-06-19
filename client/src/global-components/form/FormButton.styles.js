@@ -4,7 +4,7 @@ import { Button } from 'global-components/ui';
 
 const FormButton = styled(Button)`
   font-size: 1.025rem;
-  margin-top: ${({ margin }) => margin || '1rem'};
+  margin-top: ${({ $margin }) => $margin || '1rem'};
   padding: 0.65rem 1.5rem;
   color: ${theme.primaryShaded};
   background: ${theme.warning};

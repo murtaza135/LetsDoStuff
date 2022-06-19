@@ -12,6 +12,7 @@ import {
 import { Title, Text } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
+import validator from './TodoForm.validator';
 
 const initialValues = {
   title: '',
@@ -29,7 +30,10 @@ const TodoForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues}>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validator}
+    >
       <S.Form
         ref={form}
         tabIndex="0"
@@ -70,7 +74,7 @@ const TodoForm = () => {
             <TagsInput />
           </FormGroup>
 
-          <FormButton type="submit" margin="1.75rem">Add Todo</FormButton>
+          <FormButton type="submit" $margin="1.75rem">Add Todo</FormButton>
 
           <Text $color="medium" $mt="1rem">* required</Text>
         </S.AnimateHeightContainer>
