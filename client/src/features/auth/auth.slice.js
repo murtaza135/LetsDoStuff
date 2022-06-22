@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { apiSlice } from 'features/api/api.slice';
+import { authApiSlice } from './authApi.slice';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -9,14 +9,14 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        apiSlice.endpoints.login.matchFulfilled,
+        authApiSlice.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.token = payload.token;
           state.user = payload.user;
         }
       )
       .addMatcher(
-        apiSlice.endpoints.login.matchRejected,
+        authApiSlice.endpoints.login.matchRejected,
         (state) => {
           state.token = null;
           state.user = null;
