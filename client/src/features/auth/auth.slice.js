@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { authApiSlice } from './authApi.slice';
+import { authApiSlice } from './auth.apislice';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -11,6 +11,7 @@ export const authSlice = createSlice({
     },
     logout: (state) => {
       state.token = null;
+      state.user = null;
     }
   },
   extraReducers: (builder) => {

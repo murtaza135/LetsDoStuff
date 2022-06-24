@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, Form, FormTitle, FormInputGroup, FormButton } from 'global-components/form';
-import { useLoginMutation } from 'features/auth/authApi.slice';
+import { useLoginMutation } from 'features/auth/auth.apislice';
 import { useNavigate } from 'react-router-dom';
 import validator from './LoginForm.validator';
 
