@@ -6,8 +6,7 @@ import { authApiSlice } from 'features/auth/authApi.slice';
 import { store } from './store/store';
 import App from './App';
 
-const token = localStorage.getItem('token');
-store.dispatch(initialiseAuth({ token }));
+store.dispatch(initialiseAuth());
 store.dispatch(authApiSlice.endpoints.getProfile.initiate());
 
 const container = document.getElementById('root');
