@@ -13,6 +13,22 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
+        authApiSlice.endpoints.register.matchFulfilled,
+        (state, { payload }) => {
+          state.token = payload.token;
+          state.user = payload.user;
+          localStorage.setItem('token', payload.token);
+        }
+      )
+      .addMatcher(
+        authApiSlice.endpoints.register.matchRejected,
+        (state) => {
+          state.token = null;
+          state.user = null;
+          localStorage.removeItem('token');
+        }
+      )
+      .addMatcher(
         authApiSlice.endpoints.login.matchFulfilled,
         (state, { payload }) => {
           state.token = payload.token;
@@ -32,6 +48,20 @@ export const authSlice = createSlice({
         authApiSlice.endpoints.getProfile.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
+        }
+      )
+      .addMatcher(
+        authApiSlice.endpoints.updateProfile.matchFulfilled,
+        (state, { payload }) => {
+          state.user = payload.user;
+        }
+      )
+      .addMatcher(
+        authApiSlice.endpoints.deleteProfile.matchFulfilled,
+        (state) => {
+          state.token = null;
+          state.user = null;
+          localStorage.removeItem('token');
         }
       );
   }
