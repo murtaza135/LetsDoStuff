@@ -9,6 +9,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials }
       })
     }),
+    profile: builder.query({
+      query: () => '/auth/profile'
+    })
   })
 });
 
