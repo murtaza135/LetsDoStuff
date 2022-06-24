@@ -8,7 +8,7 @@ import App from './App';
 
 const token = localStorage.getItem('token');
 store.dispatch(initialiseAuth({ token }));
-store.dispatch(authApiSlice.endpoints.profile.initiate());
+store.dispatch(authApiSlice.endpoints.getProfile.initiate());
 
 const container = document.getElementById('root');
 const root = createRoot(container);

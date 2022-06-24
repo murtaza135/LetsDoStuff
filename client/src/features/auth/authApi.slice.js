@@ -9,10 +9,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials }
       })
     }),
-    profile: builder.query({
+    getProfile: builder.query({
       query: () => '/auth/profile'
     })
   })
 });
 
-export const { useLoginMutation } = authApiSlice;
+export const { useLoginMutation, useGetProfileQuery } = authApiSlice;

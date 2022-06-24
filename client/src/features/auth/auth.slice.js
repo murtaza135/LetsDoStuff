@@ -29,7 +29,7 @@ export const authSlice = createSlice({
         }
       )
       .addMatcher(
-        authApiSlice.endpoints.profile.matchFulfilled,
+        authApiSlice.endpoints.getProfile.matchFulfilled,
         (state, { payload }) => {
           state.user = payload.user;
         }
