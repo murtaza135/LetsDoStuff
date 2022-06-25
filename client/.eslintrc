@@ -12,6 +12,7 @@
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
     "no-unused-vars": "warn",
+    "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id"] }],
     "react/jsx-fragments": ["error", "element"],
     "object-curly-newline": ["off", {
       "ObjectExpression": "always",
