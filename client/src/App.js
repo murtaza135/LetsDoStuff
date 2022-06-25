@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 import { Login, Register, TodoDashboard, NotFound } from 'pages';
 import Navbar from 'features/navbar/Navbar';
 import Footer from 'features/footer/Footer';
 import PrivateOutlet from 'features/auth/PrivateOutlet';
+import PublicOnlyOutlet from 'features/auth/PublicOnlyOutlet';
 import { Container, PageContainer } from 'global-components/layout';
 import CSSReset from 'App.styles';
 import '@fontsource/roboto';
@@ -17,8 +18,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Outlet />}>
             <Route path="*" element={<NotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+
+            <Route element={<PublicOnlyOutlet />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Route>
 
             <Route element={<PrivateOutlet />}>
               <Route index element={<TodoDashboard />} />

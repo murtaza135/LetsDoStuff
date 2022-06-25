@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { widths, sizes, primaryTheme as theme } from 'constants';
+import { widths, sizes } from 'constants';
 import { noSelectMixin } from 'global-components/other';
 
 export const TodoItemGroupContainer = styled.div`
