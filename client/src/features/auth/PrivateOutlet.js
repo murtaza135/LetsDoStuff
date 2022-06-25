@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser, selectCurrentToken } from './auth.selectors';
 
 const PrivateOutlet = () => {
-  const token = useSelector(selectCurrentToken);
   const location = useLocation();
+  const token = useSelector(selectCurrentToken);
 
   return (
     token

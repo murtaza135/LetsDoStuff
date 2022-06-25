@@ -1,6 +1,6 @@
 export const publicNavItems = [
-  { name: 'Register', href: '/register' },
   { name: 'Login', href: '/login' },
+  { name: 'Register', href: '/register' }
 ];
 
 export const privateNavItems = [
