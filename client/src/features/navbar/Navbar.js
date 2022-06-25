@@ -2,20 +2,16 @@ import React from 'react';
 import { TbChecklist } from 'react-icons/tb';
 import { Text } from 'global-components/ui';
 import { useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useLogout } from 'features/auth/auth.hooks';
 import { selectCurrentToken } from 'features/auth/auth.selectors';
-import { logout } from 'features/auth/auth.slice';
 import { publicNavItems, privateNavItems } from './Navbar.data';
 import * as S from './Navbar.styles';
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const token = useSelector(selectCurrentToken);
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
+  const logout = useLogout();
 
   return (
     <S.NavContainer>
@@ -40,7 +36,7 @@ const Navbar = () => {
 
           {token && (
             <S.NavItem>
-              <S.NavLink as="p" onClick={handleLogout}>Logout</S.NavLink>
+              <S.NavLink as="p" onClick={() => logout()}>Logout</S.NavLink>
             </S.NavItem>
           )}
         </S.NavOptions>
