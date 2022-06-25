@@ -43,7 +43,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
     }),
     updateTodoToComplete: builder.mutation({
       query: (data) => ({
-        url: `/todos/${data._id}`,
+        url: `/todos/${data._id}/complete`,
         method: 'PUT'
       }),
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]

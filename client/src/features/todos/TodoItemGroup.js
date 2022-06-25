@@ -6,7 +6,7 @@ import { useCustomGetAllTodosQuery } from './todos.hooks';
 
 const TodoItemGroup = () => {
   const { data: todos, isLoading, isError } = useCustomGetAllTodosQuery();
-  console.log(todos);
+  const nonCompleteTodos = todos ? todos.filter(({ complete }) => !complete) : [];
 
   if (isLoading) {
     return <Spinner />;
@@ -20,7 +20,7 @@ const TodoItemGroup = () => {
     );
   }
 
-  if (todos.length === 0) {
+  if (nonCompleteTodos.length === 0) {
     return (
       <S.TodoItemGroupContainer>
         <Text $size="m" $color="secondary" $my="4rem" $noSelect>You have no todos!</Text>
@@ -31,16 +31,18 @@ const TodoItemGroup = () => {
   return (
     <S.TodoItemGroupContainer>
       <S.TodoMetaData>
-        <span>Todos: {todos.length}</span>
+        <span>Todos: {nonCompleteTodos.length}</span>
         <span>
-          Important: {todos.reduce((count, todo) => (todo.important ? count + 1 : count), 0)}
+          Important: {' '}
+          {nonCompleteTodos.reduce((count, todo) => (todo.important ? count + 1 : count), 0)}
         </span>
       </S.TodoMetaData>
 
       <S.TodoItems>
-        {todos.map(({ _id, title, deadlineDate, important, tags }) => (
+        {nonCompleteTodos.map(({ _id, title, deadlineDate, important, tags }) => (
           <TodoItem
             key={_id}
+            _id={_id}
             title={title}
             deadlineDate={deadlineDate}
             important={important}

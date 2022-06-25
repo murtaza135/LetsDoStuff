@@ -6,9 +6,12 @@ import { ImBin } from 'react-icons/im';
 import { CgCheckO } from 'react-icons/cg';
 import { primaryTheme as theme } from 'constants';
 import * as S from './TodoItem.styles';
+import { useUpdateTodoToCompleteMutation, useDeleteTodoMutation } from './todos.apislice';
 
-const TodoItem = ({ title, deadlineDate, tags, important }) => {
+const TodoItem = ({ _id, title, deadlineDate, tags, important }) => {
   const deadlineDateParsed = deadlineDate ? new Date(deadlineDate) : null;
+  const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
+  const [deleteTodoMutation] = useDeleteTodoMutation();
 
   return (
     <S.TodoItemContainer $important={important}>
@@ -22,19 +25,25 @@ const TodoItem = ({ title, deadlineDate, tags, important }) => {
 
         {tags.length > 0 && (
           <S.TagsContainer>
-            {tags.map(({ value, _id }) => {
-              console.log({ value, _id });
-              return <Tag key={_id} $small>{value}</Tag>;
-            })}
+            {tags.map(({ value, _id: tagId }) => <Tag key={tagId} $small>{value}</Tag>)}
           </S.TagsContainer>
         )}
 
         {important && <S.TodoItemImportant />}
 
         <S.IconsContainer>
-          <S.Icon element={CgCheckO} $size="1.2rem" $color={theme.success} />
+          <S.Icon
+            element={CgCheckO}
+            $size="1.2rem"
+            $color={theme.success}
+            onClick={() => updateTodoToComplete({ _id })}
+          />
           <S.Icon element={FiEdit} $color={theme.warning} />
-          <S.Icon element={ImBin} $color={theme.danger} />
+          <S.Icon
+            element={ImBin}
+            $color={theme.danger}
+            onClick={() => deleteTodoMutation({ _id })}
+          />
         </S.IconsContainer>
       </span>
     </S.TodoItemContainer>
@@ -48,6 +57,7 @@ TodoItem.defaultProps = {
 };
 
 TodoItem.propTypes = {
+  _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   deadlineDate: PropTypes.oneOfType([
     PropTypes.instanceOf(Date),
@@ -57,7 +67,6 @@ TodoItem.propTypes = {
     value: PropTypes.string,
     _id: PropTypes.string
   })),
-  // tags: PropTypes.arrayOf(PropTypes.string),
   important: PropTypes.bool,
 };
 
