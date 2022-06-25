@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { widths, sizes } from 'constants';
+import { widths, sizes, primaryTheme as theme } from 'constants';
 import { noSelectMixin } from 'global-components/other';
 
 export const TodoItemGroupContainer = styled.div`
@@ -8,6 +8,7 @@ export const TodoItemGroupContainer = styled.div`
   align-items: center;
   gap: 1.85rem;
   width: 100%;
+  max-width: ${widths.todoContainer};
 `;
 
 export const TodoMetaData = styled.div`

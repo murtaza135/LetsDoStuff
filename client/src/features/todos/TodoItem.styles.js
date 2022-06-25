@@ -13,6 +13,10 @@ export const TodoItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+
+  border: ${({ $important }) => (
+    $important ? `1px solid ${theme.danger}` : `1px solid ${theme.secondary}`
+  )};
 `;
 
 export const TodoDataContainer = styled.div`

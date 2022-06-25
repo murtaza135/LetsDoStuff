@@ -8,7 +8,7 @@ import { primaryTheme as theme } from 'constants';
 import * as S from './TodoItem.styles';
 
 const TodoItem = ({ title, deadlineDate, tags, important }) => (
-  <S.TodoItemContainer>
+  <S.TodoItemContainer $important={important}>
     <S.TodoDataContainer>
       <S.TodoItemTitle>{title}</S.TodoItemTitle>
       {deadlineDate && (
