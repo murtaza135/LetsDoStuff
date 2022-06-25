@@ -24,12 +24,12 @@ const Navbar = () => {
         <S.NavOptions>
           {token
             ? privateNavItems.map(({ name, href }) => (
-              <S.NavItem>
+              <S.NavItem key={name}>
                 <S.NavLink to={href} $active={pathname === href}>{name}</S.NavLink>
               </S.NavItem>
             ))
             : publicNavItems.map(({ name, href }) => (
-              <S.NavItem>
+              <S.NavItem key={name}>
                 <S.NavLink to={href} $active={pathname === href}>{name}</S.NavLink>
               </S.NavItem>
             ))}

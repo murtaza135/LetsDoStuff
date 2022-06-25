@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { apiSlice } from 'features/api/api.slice';
 
 export const todosApiSlice = apiSlice.injectEndpoints({
@@ -12,15 +13,15 @@ export const todosApiSlice = apiSlice.injectEndpoints({
     }),
     getAllTodos: builder.query({
       query: () => '/todos',
-      transformResponse: (response) => ({
-        ...response,
-        data: response.data.map((todo) => ({
-          ...todo,
-          deadlineDate: todo.deadlineDate ? new Date(todo.deadlineDate) : null,
-          createdAt: todo.createdAt ? new Date(todo.createdAt) : null,
-          updatedAt: todo.updatedAt ? new Date(todo.updatedAt) : null
-        }))
-      }),
+      // transformResponse: (response) => ({
+      //   ...response,
+      //   data: response.data.map((todo) => ({
+      //     ...todo,
+      //     deadlineDate: todo.deadlineDate ? new Date(todo.deadlineDate) : null,
+      //     createdAt: todo.createdAt ? new Date(todo.createdAt) : null,
+      //     updatedAt: todo.updatedAt ? new Date(todo.updatedAt) : null
+      //   }))
+      // }),
       providesTags: (result) => [
         { type: 'Todo', id: 'LIST' },
         ...result.data.map(({ _id }) => ({ type: 'Todo', id: _id }))

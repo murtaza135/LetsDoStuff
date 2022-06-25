@@ -1,44 +1,43 @@
 import React from 'react';
+import { Spinner } from 'global-components/ui';
 import TodoItem from './TodoItem';
 import * as S from './TodoItemGroup.styles';
+import { useGetAllTodosQuery } from './todos.apislice';
 
-const TodoItemGroup = () => (
-  <S.TodoItemGroupContainer>
-    <S.TodoMetaData>
-      <span>Todos: 4</span>
-      <span>Important: 3</span>
-    </S.TodoMetaData>
+const TodoItemGroup = () => {
+  const { data, isLoading, isSuccess, isError, error } = useGetAllTodosQuery();
+  const todos = data?.data;
 
-    <S.TodoItems>
-      <TodoItem
-        title="Hello World, How do you do?"
-        deadlineDate={new Date()}
-        important
-      />
-      <TodoItem
-        title="Hello World"
-        deadlineDate={new Date()}
-        tags={['Hello']}
-      />
-      <TodoItem
-        title="Bye World"
-        tags={['Hello', 'Bye']}
-        important
-      />
-      <TodoItem
-        title="Hello World"
-        deadlineDate={new Date()}
-        tags={['Hello', 'Bye', 'Yes']}
-        important
-      />
-      <TodoItem
-        title="Hello World"
-        deadlineDate={new Date()}
-        tags={['Hello', 'Bye', 'Yes']}
-        important
-      />
-    </S.TodoItems>
-  </S.TodoItemGroupContainer>
-);
+  if (isLoading) {
+    return <Spinner />;
+  }
+
+  if (isError) {
+    return <p>Could not load todos...</p>;
+  }
+
+  return (
+    <S.TodoItemGroupContainer>
+      <S.TodoMetaData>
+        <span>Todos: {todos.length}</span>
+        <span>
+          Important: {todos.reduce((count, todo) => (todo.important ? count + 1 : count), 0)}
+        </span>
+      </S.TodoMetaData>
+
+      <S.TodoItems>
+        {todos.map(({ _id: id, title, deadlineDate, important, tags }) => (
+          <TodoItem
+            key={id}
+            title={title}
+            deadlineDate={new Date(deadlineDate)}
+            important={important}
+            tags={tags}
+          />
+        ))}
+      </S.TodoItems>
+    </S.TodoItemGroupContainer>
+  );
+};
 
 export default TodoItemGroup;
