@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { initialiseAuth } from 'features/auth/auth.slice';
 import { authApiSlice } from 'features/auth/auth.apislice';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { store } from './store/store';
 import App from './App';
 
@@ -15,7 +16,11 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <Routes>
+          <Route path="/*" element={<App />} />
+        </Routes>
+      </Router>
     </Provider>
   </React.StrictMode>
 );
