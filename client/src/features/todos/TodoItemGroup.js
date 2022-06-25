@@ -6,6 +6,7 @@ import { useCustomGetAllTodosQuery } from './todos.hooks';
 
 const TodoItemGroup = () => {
   const { data: todos, isLoading, isError } = useCustomGetAllTodosQuery();
+  console.log(todos);
 
   if (isLoading) {
     return <Spinner />;

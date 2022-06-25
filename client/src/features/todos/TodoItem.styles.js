@@ -74,7 +74,7 @@ export const Icon = styled(({ element, children, ...props }) => (
 `;
 
 export const TodoItemImportant = styled.div.attrs(() => ({
-  children: ['!', <span className="tooltiptext">Important</span>]
+  children: ['!', <span key="1" className="tooltiptext">Important</span>]
 }))`
   ${noSelectMixin};
   font-size: ${sizes.m};

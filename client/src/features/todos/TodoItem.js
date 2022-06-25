@@ -12,26 +12,31 @@ const TodoItem = ({ title, deadlineDate, tags, important }) => {
 
   return (
     <S.TodoItemContainer $important={important}>
-      <S.TodoDataContainer>
-        <S.TodoItemTitle>{title}</S.TodoItemTitle>
-        {deadlineDateParsed && (
-          <S.TodoItemDate>{deadlineDateParsed?.toDateString().substring(4)}</S.TodoItemDate>
+      <span>
+        <S.TodoDataContainer>
+          <S.TodoItemTitle>{title}</S.TodoItemTitle>
+          {deadlineDateParsed && (
+            <S.TodoItemDate>{deadlineDateParsed?.toDateString().substring(4)}</S.TodoItemDate>
+          )}
+        </S.TodoDataContainer>
+
+        {tags.length > 0 && (
+          <S.TagsContainer>
+            {tags.map(({ value, _id }) => {
+              console.log({ value, _id });
+              return <Tag key={_id} $small>{value}</Tag>;
+            })}
+          </S.TagsContainer>
         )}
-      </S.TodoDataContainer>
 
-      {tags.length > 0 && (
-        <S.TagsContainer>
-          {tags.map((tag) => <Tag key={tag} $small>{tag}</Tag>)}
-        </S.TagsContainer>
-      )}
+        {important && <S.TodoItemImportant />}
 
-      {important && <S.TodoItemImportant />}
-
-      <S.IconsContainer>
-        <S.Icon element={CgCheckO} $size="1.2rem" $color={theme.success} />
-        <S.Icon element={FiEdit} $color={theme.warning} />
-        <S.Icon element={ImBin} $color={theme.danger} />
-      </S.IconsContainer>
+        <S.IconsContainer>
+          <S.Icon element={CgCheckO} $size="1.2rem" $color={theme.success} />
+          <S.Icon element={FiEdit} $color={theme.warning} />
+          <S.Icon element={ImBin} $color={theme.danger} />
+        </S.IconsContainer>
+      </span>
     </S.TodoItemContainer>
   );
 };
@@ -48,7 +53,11 @@ TodoItem.propTypes = {
     PropTypes.instanceOf(Date),
     PropTypes.string
   ]),
-  tags: PropTypes.arrayOf(PropTypes.string),
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string,
+    _id: PropTypes.string
+  })),
+  // tags: PropTypes.arrayOf(PropTypes.string),
   important: PropTypes.bool,
 };
 

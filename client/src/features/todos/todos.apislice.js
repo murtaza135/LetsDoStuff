@@ -1,4 +1,5 @@
 import { apiSlice } from 'features/api/api.slice';
+import { v4 as uuidv4 } from 'uuid';
 
 export const todosApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,6 +13,13 @@ export const todosApiSlice = apiSlice.injectEndpoints({
     }),
     getAllTodos: builder.query({
       query: () => '/todos',
+      transformResponse: (response) => ({
+        ...response,
+        data: response.data.map((item) => ({
+          ...item,
+          tags: item.tags.map((tag) => ({ value: tag, _id: uuidv4() }))
+        })).reverse()
+      }),
       providesTags: (result) => [
         { type: 'Todo', id: 'LIST' },
         ...result ? result.data.map(({ _id }) => ({ type: 'Todo', id: _id })) : []
@@ -21,7 +29,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
       query: (data) => `/todos/${data._id}`,
       transformResponse: (response) => ({
         ...response.data,
-        // tags: response.data.tags.map((tag) => ({value: tag, _id: uuidv4()}))
+        tags: response.data.tags.map((tag) => ({ value: tag, _id: uuidv4() }))
       }),
       providesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
     }),
