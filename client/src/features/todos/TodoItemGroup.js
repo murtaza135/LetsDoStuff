@@ -1,19 +1,30 @@
 import React from 'react';
-import { Spinner } from 'global-components/ui';
+import { Spinner, Text } from 'global-components/ui';
 import TodoItem from './TodoItem';
 import * as S from './TodoItemGroup.styles';
-import { useGetAllTodosQuery } from './todos.apislice';
+import { useCustomGetAllTodosQuery } from './todos.hooks';
 
 const TodoItemGroup = () => {
-  const { data, isLoading, isSuccess, isError, error } = useGetAllTodosQuery();
-  const todos = data?.data;
+  const { data: todos, isLoading, isError } = useCustomGetAllTodosQuery();
 
   if (isLoading) {
     return <Spinner />;
   }
 
   if (isError) {
-    return <p>Could not load todos...</p>;
+    return (
+      <S.TodoItemGroupContainer>
+        <Text $size="m" $color="secondary" $my="4rem" $noSelect>Could not load todos...</Text>
+      </S.TodoItemGroupContainer>
+    );
+  }
+
+  if (todos.length === 0) {
+    return (
+      <S.TodoItemGroupContainer>
+        <Text $size="m" $color="secondary" $my="4rem" $noSelect>You have no todos!</Text>
+      </S.TodoItemGroupContainer>
+    );
   }
 
   return (
@@ -26,11 +37,11 @@ const TodoItemGroup = () => {
       </S.TodoMetaData>
 
       <S.TodoItems>
-        {todos.map(({ _id: id, title, deadlineDate, important, tags }) => (
+        {todos.map(({ _id, title, deadlineDate, important, tags }) => (
           <TodoItem
-            key={id}
+            key={_id}
             title={title}
-            deadlineDate={new Date(deadlineDate)}
+            deadlineDate={deadlineDate}
             important={important}
             tags={tags}
           />

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { sizes, primaryTheme as theme } from 'constants';
 import { spacerMixin } from 'global-components/layout';
+import { noSelectMixin } from 'global-components/other';
 
-// @props $size || $alignment || $color || $stretch || $bold || $italic || $underline
+// @props $size || $alignment || $color || $stretch || $bold || $italic || $underline || $noSelect
 const TextBase = styled.p.attrs((props) => ({
   ...props,
   $size: props.$size,
@@ -21,6 +22,7 @@ const TextBase = styled.p.attrs((props) => ({
   font-weight: ${({ $bold }) => ($bold && 'bold')};
   font-style: ${({ $italic }) => ($italic && 'italic')};
   text-decoration: ${({ $underline }) => ($underline && 'underline')};
+  ${({ $noSelect }) => ($noSelect && noSelectMixin)};
 `;
 
 export default TextBase;

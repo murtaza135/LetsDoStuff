@@ -24,9 +24,9 @@ const App = () => (
               <Route path="/register" element={<Register />} />
             </Route>
 
-            <Route element={<PrivateOutlet />}>
-              <Route index element={<TodoDashboard />} />
-            </Route>
+            {/* <Route element={<PrivateOutlet />}> */}
+            <Route index element={<TodoDashboard />} />
+            {/* </Route> */}
           </Route>
         </Routes>
       </PageContainer>

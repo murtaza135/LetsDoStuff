@@ -7,14 +7,16 @@ export const authApiSlice = apiSlice.injectEndpoints({
         url: '/auth/register',
         method: 'POST',
         body: { ...credentials }
-      })
+      }),
+      invalidatesTags: [{ type: 'Todo', id: 'LIST' }]
     }),
     login: builder.mutation({
       query: (credentials) => ({
         url: '/auth/login',
         method: 'POST',
         body: { ...credentials }
-      })
+      }),
+      invalidatesTags: [{ type: 'Todo', id: 'LIST' }]
     }),
     getProfile: builder.query({
       query: () => '/auth/profile'
@@ -37,7 +39,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: '/auth/profile',
         method: 'DELETE'
-      })
+      }),
+      invalidatesTags: [{ type: 'Todo', id: 'LIST' }]
     }),
   })
 });

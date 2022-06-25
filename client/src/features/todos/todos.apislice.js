@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import { apiSlice } from 'features/api/api.slice';
 
 export const todosApiSlice = apiSlice.injectEndpoints({
@@ -13,30 +12,16 @@ export const todosApiSlice = apiSlice.injectEndpoints({
     }),
     getAllTodos: builder.query({
       query: () => '/todos',
-      // transformResponse: (response) => ({
-      //   ...response,
-      //   data: response.data.map((todo) => ({
-      //     ...todo,
-      //     deadlineDate: todo.deadlineDate ? new Date(todo.deadlineDate) : null,
-      //     createdAt: todo.createdAt ? new Date(todo.createdAt) : null,
-      //     updatedAt: todo.updatedAt ? new Date(todo.updatedAt) : null
-      //   }))
-      // }),
       providesTags: (result) => [
         { type: 'Todo', id: 'LIST' },
-        ...result.data.map(({ _id }) => ({ type: 'Todo', id: _id }))
+        ...result ? result.data.map(({ _id }) => ({ type: 'Todo', id: _id })) : []
       ]
     }),
     getTodo: builder.query({
       query: (data) => `/todos/${data._id}`,
       transformResponse: (response) => ({
-        ...response,
-        data: {
-          ...response.data,
-          deadlineDate: response.data.deadlineDate ? new Date(response.data.deadlineDate) : null,
-          createdAt: response.data.createdAt ? new Date(response.data.createdAt) : null,
-          updatedAt: response.data.updatedAt ? new Date(response.data.updatedAt) : null
-        }
+        ...response.data,
+        // tags: response.data.tags.map((tag) => ({value: tag, _id: uuidv4()}))
       }),
       providesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
     }),

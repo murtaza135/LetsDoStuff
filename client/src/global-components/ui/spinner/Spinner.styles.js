@@ -8,7 +8,7 @@ const Spinner = styled.img.attrs(() => ({
 }))`
   display: block;
   margin: 2.5rem auto;
-  width: 100px;
+  width: 75px;
 `;
 
 export default Spinner;
