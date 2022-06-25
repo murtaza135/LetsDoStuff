@@ -16,9 +16,9 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         ...response,
         data: response.data.map((todo) => ({
           ...todo,
-          deadlineDate: new Date(todo.deadlineDate),
-          createdAt: new Date(todo.createdAt),
-          updatedAt: new Date(todo.updatedAt)
+          deadlineDate: todo.deadlineDate ? new Date(todo.deadlineDate) : null,
+          createdAt: todo.createdAt ? new Date(todo.createdAt) : null,
+          updatedAt: todo.updatedAt ? new Date(todo.updatedAt) : null
         }))
       }),
       providesTags: (result) => [
@@ -32,9 +32,9 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         ...response,
         data: {
           ...response.data,
-          deadlineDate: new Date(response.data.deadlineDate),
-          createdAt: new Date(response.data.createdAt),
-          updatedAt: new Date(response.data.updatedAt)
+          deadlineDate: response.data.deadlineDate ? new Date(response.data.deadlineDate) : null,
+          createdAt: response.data.createdAt ? new Date(response.data.createdAt) : null,
+          updatedAt: response.data.updatedAt ? new Date(response.data.updatedAt) : null
         }
       }),
       providesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
