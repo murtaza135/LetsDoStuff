@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import Tag from 'features/tags/Tag';
 import { FiEdit } from 'react-icons/fi';
@@ -11,13 +11,14 @@ import { useUpdateTodoToCompleteMutation, useDeleteTodoMutation } from './todos.
 
 // TODO create function for parsing date ensuring exceptions are caught
 const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) => {
+  const todoItemRef = useRef(null);
   const deadlineDateParsed = deadlineDate ? new Date(deadlineDate) : null;
   const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
   const { editTodo } = useContext(TodoFormContext);
 
   return (
-    <S.TodoItemContainer $important={important}>
+    <S.TodoItemContainer ref={todoItemRef} $important={important}>
       <span>
         <S.TodoDataContainer>
           <S.TodoItemTitle>{title}</S.TodoItemTitle>
@@ -44,7 +45,9 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) =>
           <S.Icon
             element={FiEdit}
             $color={theme.warning}
-            onClick={() => editTodo({ _id, title, description, deadlineDate, tags, important })}
+            onClick={() => (
+              editTodo({ _id, title, description, deadlineDate, tags, important }, todoItemRef)
+            )}
           />
           <S.Icon
             element={ImBin}

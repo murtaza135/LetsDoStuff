@@ -17,10 +17,11 @@ import TodoFormContext from './TodoFormContext';
 import { useUpdateTodoMutation } from './todos.apislice';
 
 const EditTodoForm = () => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
-  const { todoDetails, finishEditTodo } = useContext(TodoFormContext);
+  const { todoDetails, todoRef, finishEditTodo } = useContext(TodoFormContext);
   const [updateTodo] = useUpdateTodoMutation();
+  // console.log(todoRef);
 
   const initialValues = {
     ...todoDetails,
@@ -30,12 +31,15 @@ const EditTodoForm = () => {
   };
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
 
   const handleSubmit = async (values) => {
     try {
       await updateTodo(values).unwrap();
+      console.log(todoRef);
+      // todoRef?.current?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      window.scrollTo({ top: todoRef?.current?.scrollHeight || 0, left: 0, behavior: 'smooth' });
       finishEditTodo();
     } catch (error) {
       // TODO add error component
