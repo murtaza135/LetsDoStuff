@@ -11,7 +11,7 @@ export const TodoFormProvider = ({ children }) => {
   const editTodo = useCallback((data, todoItemReference = null) => {
     setTodoDetails(data);
     setTodoFormState('edit');
-    todoItemRef.current = todoItemReference;
+    todoItemRef.current = todoItemReference.current;
   }, [setTodoDetails, setTodoFormState, todoItemRef]);
 
   const finishEditTodo = useCallback(() => {

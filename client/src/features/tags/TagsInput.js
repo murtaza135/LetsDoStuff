@@ -1,17 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+import { capitalizeFirstLetter } from 'utils/string.utils';
 import * as S from './TagsInput.styles';
 import Tag from './Tag';
 
-const TagsInput = () => {
-  const tagsField = useRef(null);
+const TagsInput = React.forwardRef((props, tagsFieldRef) => {
   const [tagValue, setTagValue] = useState('');
   const [tags, setTags] = useState(['Hello', 'Bye', 'Yes']);
 
   const addTag = (event) => {
     // TODO add validation
     if (event.key === 'Enter') {
-      if (!tags.includes(event.target.value)) {
-        setTags([...tags, event.target.value]);
+      const value = event.target.value.toLowerCase();
+      const doesTagAlreadyExist = !tags.map((tag) => tag.toLowerCase()).includes(value);
+
+      if (doesTagAlreadyExist) {
+        setTags([...tags, capitalizeFirstLetter(value)]);
       }
 
       setTagValue('');
@@ -31,12 +34,12 @@ const TagsInput = () => {
   return (
     <S.TagsContainer
       tabIndex="0"
-      onFocus={() => tagsField.current.focus()}
+      onFocus={() => tagsFieldRef.current.focus()}
     >
       {tags.map((tag) => <Tag key={tag} onDelete={deleteTag}>{tag}</Tag>)}
 
       <S.TagsInnerInput
-        ref={tagsField}
+        ref={tagsFieldRef}
         name="tagsField"
         type="text"
         autoComplete="off"
@@ -46,6 +49,6 @@ const TagsInput = () => {
       />
     </S.TagsContainer>
   );
-};
+});
 
 export default TagsInput;

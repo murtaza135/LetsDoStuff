@@ -19,44 +19,42 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) =>
 
   return (
     <S.TodoItemContainer ref={todoItemRef} tabIndex="0" $important={important}>
-      <span>
-        <S.TodoDataContainer>
-          <S.TodoItemTitle>{title}</S.TodoItemTitle>
-          {deadlineDateParsed && (
-            <S.TodoItemDate>{deadlineDateParsed?.toDateString().substring(4)}</S.TodoItemDate>
-          )}
-        </S.TodoDataContainer>
-
-        {tags.length > 0 && (
-          <S.TagsContainer>
-            {tags.map(({ value, _id: tagId }) => <Tag key={tagId} $small>{value}</Tag>)}
-          </S.TagsContainer>
+      <S.TodoDataContainer>
+        <S.TodoItemTitle>{title}</S.TodoItemTitle>
+        {deadlineDateParsed && (
+          <S.TodoItemDate>{deadlineDateParsed?.toDateString().substring(4)}</S.TodoItemDate>
         )}
+      </S.TodoDataContainer>
 
-        {important && <S.TodoItemImportant />}
+      {tags.length > 0 && (
+        <S.TagsContainer>
+          {tags.map(({ value, _id: tagId }) => <Tag key={tagId} $small>{value}</Tag>)}
+        </S.TagsContainer>
+      )}
 
-        <S.IconsContainer>
-          <S.Icon
-            element={CgCheckO}
-            $size="1.2rem"
-            $color={theme.success}
-            onClick={() => updateTodoToComplete({ _id })}
-          />
-          <S.Icon
-            element={FiEdit}
-            $color={theme.warning}
-            onClick={() => (editTodo(
-              { _id, title, description, deadlineDate, tags, important },
-              todoItemRef.current
-            ))}
-          />
-          <S.Icon
-            element={ImBin}
-            $color={theme.danger}
-            onClick={() => deleteTodoMutation({ _id })}
-          />
-        </S.IconsContainer>
-      </span>
+      {important && <S.TodoItemImportant />}
+
+      <S.IconsContainer>
+        <S.Icon
+          element={CgCheckO}
+          $size="1.2rem"
+          $color={theme.success}
+          onClick={() => updateTodoToComplete({ _id })}
+        />
+        <S.Icon
+          element={FiEdit}
+          $color={theme.warning}
+          onClick={() => (editTodo(
+            { _id, title, description, deadlineDate, tags, important },
+            todoItemRef
+          ))}
+        />
+        <S.Icon
+          element={ImBin}
+          $color={theme.danger}
+          onClick={() => deleteTodoMutation({ _id })}
+        />
+      </S.IconsContainer>
     </S.TodoItemContainer>
   );
 };

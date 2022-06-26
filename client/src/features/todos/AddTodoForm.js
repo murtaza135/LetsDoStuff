@@ -25,6 +25,7 @@ const initialValues = {
 // TODO add optimistic rendering
 const AddTodoForm = () => {
   const form = useRef(null);
+  const tagsInput = useRef(null);
   const [focus, setFocus] = useState(false);
   const [addTodo] = useAddTodoMutation();
 
@@ -44,6 +45,12 @@ const AddTodoForm = () => {
     }
   };
 
+  const preventTagsInputSubmit = (event) => {
+    if (tagsInput.current === document.activeElement) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -55,6 +62,7 @@ const AddTodoForm = () => {
         tabIndex="0"
         onFocus={() => setFocus(true)}
         onBlur={handleBlur}
+        onSubmit={preventTagsInputSubmit}
       >
         {focus && <S.CloseButton onClick={() => form.current.blur()} />}
 
@@ -86,7 +94,7 @@ const AddTodoForm = () => {
 
           <FormGroup>
             <FormLabel>Tags</FormLabel>
-            <TagsInput />
+            <TagsInput ref={tagsInput} />
           </FormGroup>
 
           <FormButton type="submit" $mt="1.75rem">Add Todo</FormButton>
