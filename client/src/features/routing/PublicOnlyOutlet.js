@@ -1,17 +1,17 @@
 import React from 'react';
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser, selectCurrentToken } from './auth.selectors';
+import { selectCurrentToken } from '../auth/auth.selectors';
 
-const PrivateOutlet = () => {
+const PublicOnlyOutlet = () => {
   const location = useLocation();
   const token = useSelector(selectCurrentToken);
 
   return (
-    token
+    !token
       ? <Outlet />
-      : <Navigate to="/login" state={{ from: location }} replace />
+      : <Navigate to="/" state={{ from: location }} replace />
   );
 };
 
-export default PrivateOutlet;
+export default PublicOnlyOutlet;

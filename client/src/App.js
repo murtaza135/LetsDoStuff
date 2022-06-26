@@ -3,8 +3,9 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { Login, Register, TodoDashboard, NotFound } from 'pages';
 import Navbar from 'features/navbar/Navbar';
 import Footer from 'features/footer/Footer';
-import PrivateOutlet from 'features/auth/PrivateOutlet';
-import PublicOnlyOutlet from 'features/auth/PublicOnlyOutlet';
+import PageInitialiserOutlet from 'features/routing/PageInitialiserOutlet';
+import PrivateOutlet from 'features/routing/PrivateOutlet';
+import PublicOnlyOutlet from 'features/routing/PublicOnlyOutlet';
 import { Container, PageContainer } from 'global-components/layout';
 import { Alert } from 'global-components/ui';
 import CSSReset from 'App.styles';
@@ -18,7 +19,7 @@ const App = () => (
       <PageContainer $gap="3.5rem">
         <Alert variant="danger">Error: Could not load todos</Alert>
         <Routes>
-          <Route path="/" element={<Outlet />}>
+          <Route path="/" element={<PageInitialiserOutlet />}>
             <Route path="*" element={<NotFound />} />
 
             <Route element={<PublicOnlyOutlet />}>
