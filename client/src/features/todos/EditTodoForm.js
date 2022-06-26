@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import {
   Formik,
   FormButton,
@@ -10,6 +10,7 @@ import {
   FormLabel
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
+import { capitalizeFirstLetter } from 'utils/string.utils';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 import validator from './TodoForm.validator';
@@ -19,8 +20,10 @@ import { useUpdateTodoMutation } from './todos.apislice';
 // TODO add optimistic rendering
 const EditTodoForm = () => {
   const currentTodoItemRef = useRef(null);
+  const tagsInput = useRef(null);
   const { todoDetails, todoItemRef, finishEditTodo } = useContext(TodoFormContext);
   const [updateTodo] = useUpdateTodoMutation();
+  const [tags, setTags] = useState(todoDetails.tags);
 
   const initialValues = {
     ...todoDetails,
@@ -39,13 +42,32 @@ const EditTodoForm = () => {
   }, [todoItemRef, todoDetails]);
 
   const handleSubmit = async (values) => {
-    try {
-      await updateTodo(values).unwrap();
-      finishEditTodo();
-    } catch (error) {
-      // TODO add error component
-      console.log(error);
+    if (tagsInput.current !== document.activeElement) {
+      try {
+        const todoData = { ...values, tags };
+        await updateTodo(todoData).unwrap();
+        finishEditTodo();
+      } catch (error) {
+        // TODO add error component
+        console.log(error);
+      }
     }
+  };
+
+  const handleAddTag = (newTag) => {
+    const doesTagAlreadyExist = (
+      tags
+        .map((tag) => tag.toLowerCase())
+        .includes(newTag.toLowerCase())
+    );
+
+    if (!doesTagAlreadyExist && newTag !== '') {
+      setTags((values) => [...values, capitalizeFirstLetter(newTag.toLowerCase())]);
+    }
+  };
+
+  const handleDeleteTag = (oldTag) => {
+    setTags(tags.filter((tag) => tag !== oldTag));
   };
 
   return (
@@ -83,7 +105,12 @@ const EditTodoForm = () => {
 
         <FormGroup>
           <FormLabel>Tags</FormLabel>
-          <TagsInput />
+          <TagsInput
+            ref={tagsInput}
+            tags={tags}
+            onAddTag={handleAddTag}
+            onDeleteTag={handleDeleteTag}
+          />
         </FormGroup>
 
         <S.TodoFormButtonsContainer>
