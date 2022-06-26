@@ -32,24 +32,22 @@ const AddTodoForm = () => {
   const [addTodo] = useAddTodoMutation();
 
   const handleSubmit = async (values, { resetForm }) => {
-    try {
-      await addTodo(values).unwrap();
-      resetForm();
-    } catch (error) {
-      // TODO add error component
-      console.log(error);
+    if (tagsInput.current !== document.activeElement) {
+      try {
+        const todoData = { ...values, tags };
+        await addTodo(todoData).unwrap();
+        resetForm();
+        setTags([]);
+      } catch (error) {
+        // TODO add error component
+        console.log(error);
+      }
     }
   };
 
   const handleBlur = (event) => {
     if (!form.current.contains(event.relatedTarget)) {
       setFocus(false);
-    }
-  };
-
-  const preventTagsInputSubmit = (event) => {
-    if (tagsInput.current === document.activeElement) {
-      event.preventDefault();
     }
   };
 
@@ -60,7 +58,7 @@ const AddTodoForm = () => {
         .includes(newTag.toLowerCase())
     );
 
-    if (!doesTagAlreadyExist) {
+    if (!doesTagAlreadyExist && newTag !== '') {
       setTags([...tags, capitalizeFirstLetter(newTag.toLowerCase())]);
     }
   };
@@ -86,7 +84,7 @@ const AddTodoForm = () => {
         tabIndex="0"
         onFocus={() => setFocus(true)}
         onBlur={handleBlur}
-        onSubmit={preventTagsInputSubmit}
+      // onSubmit={preventTagsInputSubmit}
       >
         {focus && <S.CloseButton onClick={() => form.current.blur()} />}
 

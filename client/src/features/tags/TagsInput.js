@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import * as S from './TagsInput.styles';
 import Tag from './Tag';
 
-const TagsInput = React.forwardRef(({ tags, onAddTag, onDeleteTag }, tagsFieldRef) => {
+const TagsInput = React.forwardRef(({ tags, onAddTag, onDeleteTag }, tagInputRef) => {
   const [tagValue, setTagValue] = useState('');
 
   const handleKeyUp = (event) => {
@@ -16,12 +16,12 @@ const TagsInput = React.forwardRef(({ tags, onAddTag, onDeleteTag }, tagsFieldRe
   return (
     <S.TagsContainer
       tabIndex="0"
-      onFocus={() => tagsFieldRef.current.focus()}
+      onFocus={() => tagInputRef.current.focus()}
     >
       {tags.map((tag) => <Tag key={tag} onDelete={onDeleteTag}>{tag}</Tag>)}
 
       <S.TagsInnerInput
-        ref={tagsFieldRef}
+        ref={tagInputRef}
         name="tagsField"
         type="text"
         autoComplete="off"
