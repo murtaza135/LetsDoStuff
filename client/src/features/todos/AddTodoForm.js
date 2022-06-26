@@ -13,15 +13,30 @@ import { Title, Text } from 'global-components/ui';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 import validator from './TodoForm.validator';
+import { useAddTodoMutation } from './todos.apislice';
 
 const initialValues = {
   title: '',
-  description: ''
+  description: '',
+  deadlineDate: null,
+  important: false
 };
 
+// TODO add optimistic rendering
 const AddTodoForm = () => {
   const form = useRef(null);
   const [focus, setFocus] = useState(false);
+  const [addTodo] = useAddTodoMutation();
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      await addTodo(values).unwrap();
+      resetForm();
+    } catch (error) {
+      // TODO add error component
+      console.log(error);
+    }
+  };
 
   const handleBlur = (event) => {
     if (!form.current.contains(event.relatedTarget)) {
@@ -33,6 +48,7 @@ const AddTodoForm = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={validator}
+      onSubmit={handleSubmit}
     >
       <S.Form
         ref={form}

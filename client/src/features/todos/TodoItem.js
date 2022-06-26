@@ -18,7 +18,7 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) =>
   const { editTodo } = useContext(TodoFormContext);
 
   return (
-    <S.TodoItemContainer ref={todoItemRef} $important={important}>
+    <S.TodoItemContainer ref={todoItemRef} tabIndex="0" $important={important}>
       <span>
         <S.TodoDataContainer>
           <S.TodoItemTitle>{title}</S.TodoItemTitle>

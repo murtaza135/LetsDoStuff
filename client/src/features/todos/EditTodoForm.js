@@ -16,6 +16,7 @@ import validator from './TodoForm.validator';
 import TodoFormContext from './TodoFormContext';
 import { useUpdateTodoMutation } from './todos.apislice';
 
+// TODO add optimistic rendering
 const EditTodoForm = () => {
   // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
@@ -39,7 +40,8 @@ const EditTodoForm = () => {
       await updateTodo(values).unwrap();
       console.log(todoRef);
       // todoRef?.current?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      window.scrollTo({ top: todoRef?.current?.scrollHeight || 0, left: 0, behavior: 'smooth' });
+      todoRef?.current?.focus();
+      // window.scrollTo({ top: todoRef?.current?.scrollHeight || 0, left: 0, behavior: 'smooth' });
       finishEditTodo();
     } catch (error) {
       // TODO add error component
