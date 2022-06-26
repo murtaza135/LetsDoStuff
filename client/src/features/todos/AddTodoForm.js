@@ -10,6 +10,7 @@ import {
   FormLabel
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
+import { capitalizeFirstLetter } from 'utils/string.utils';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 import validator from './TodoForm.validator';
@@ -26,6 +27,7 @@ const initialValues = {
 const AddTodoForm = () => {
   const form = useRef(null);
   const tagsInput = useRef(null);
+  const [tags, setTags] = useState([]);
   const [focus, setFocus] = useState(false);
   const [addTodo] = useAddTodoMutation();
 
@@ -48,6 +50,28 @@ const AddTodoForm = () => {
   const preventTagsInputSubmit = (event) => {
     if (tagsInput.current === document.activeElement) {
       event.preventDefault();
+    }
+  };
+
+  const handleAddTag = (newTag) => {
+    const doesTagAlreadyExist = (
+      tags
+        .map((tag) => tag.toLowerCase())
+        .includes(newTag.toLowerCase())
+    );
+
+    if (!doesTagAlreadyExist) {
+      setTags([...tags, capitalizeFirstLetter(newTag.toLowerCase())]);
+    }
+  };
+
+  const handleDeleteTag = (oldTag) => {
+    const tagsCopy = [...tags];
+    const tagIndex = tagsCopy.findIndex((element) => element === oldTag);
+
+    if (tagIndex !== -1) {
+      tagsCopy.splice(tagIndex, 1);
+      setTags(tagsCopy);
     }
   };
 
@@ -94,7 +118,12 @@ const AddTodoForm = () => {
 
           <FormGroup>
             <FormLabel>Tags</FormLabel>
-            <TagsInput ref={tagsInput} />
+            <TagsInput
+              ref={tagsInput}
+              tags={tags}
+              onAddTag={handleAddTag}
+              onDeleteTag={handleDeleteTag}
+            />
           </FormGroup>
 
           <FormButton type="submit" $mt="1.75rem">Add Todo</FormButton>

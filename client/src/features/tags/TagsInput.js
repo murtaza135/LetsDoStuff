@@ -1,33 +1,15 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { capitalizeFirstLetter } from 'utils/string.utils';
 import * as S from './TagsInput.styles';
 import Tag from './Tag';
 
-const TagsInput = React.forwardRef((props, tagsFieldRef) => {
+const TagsInput = React.forwardRef(({ tags, onAddTag, onDeleteTag }, tagsFieldRef) => {
   const [tagValue, setTagValue] = useState('');
-  const [tags, setTags] = useState(['Hello', 'Bye', 'Yes']);
 
-  const addTag = (event) => {
-    // TODO add validation
+  const handleKeyUp = (event) => {
     if (event.key === 'Enter') {
-      const value = event.target.value.toLowerCase();
-      const doesTagAlreadyExist = !tags.map((tag) => tag.toLowerCase()).includes(value);
-
-      if (doesTagAlreadyExist) {
-        setTags([...tags, capitalizeFirstLetter(value)]);
-      }
-
+      onAddTag(event.target.value);
       setTagValue('');
-    }
-  };
-
-  const deleteTag = (tag) => {
-    const tagsCopy = [...tags];
-    const tagIndex = tagsCopy.findIndex((element) => element === tag);
-
-    if (tagIndex !== -1) {
-      tagsCopy.splice(tagIndex, 1);
-      setTags(tagsCopy);
     }
   };
 
@@ -36,7 +18,7 @@ const TagsInput = React.forwardRef((props, tagsFieldRef) => {
       tabIndex="0"
       onFocus={() => tagsFieldRef.current.focus()}
     >
-      {tags.map((tag) => <Tag key={tag} onDelete={deleteTag}>{tag}</Tag>)}
+      {tags.map((tag) => <Tag key={tag} onDelete={onDeleteTag}>{tag}</Tag>)}
 
       <S.TagsInnerInput
         ref={tagsFieldRef}
@@ -45,7 +27,7 @@ const TagsInput = React.forwardRef((props, tagsFieldRef) => {
         autoComplete="off"
         value={tagValue}
         onChange={(event) => setTagValue(event.target.value)}
-        onKeyUp={addTag}
+        onKeyUp={handleKeyUp}
       />
     </S.TagsContainer>
   );
