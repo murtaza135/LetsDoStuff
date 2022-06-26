@@ -23,6 +23,7 @@ export const TagContainer = styled.div.attrs((props) => ({
 
 export const TagText = styled.p`
   ${noSelectMixin};
+  flex-grow: 1;
   color: ${theme.primaryShaded};
   font-size: ${({ $small }) => ($small ? '0.8em' : sizes.s)};
   font-weight: bold;

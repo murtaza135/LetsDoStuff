@@ -6,3 +6,4 @@ export { default as Subtitle } from './text/Subtitle.styles';
 export { default as Title } from './text/Title.styles';
 export { default as BigTitle } from './text/BigTitle.styles';
 export { default as Checkbox } from './checkbox/Checkbox';
+export { default as Alert } from './alert/Alert';
