@@ -3,6 +3,7 @@ import todosModel from './todos.model.js';
 import pick from '../../utils/pick.js';
 import { ensureItemExists, ensureItemBelongsToUser } from '../../utils/dbValidator.js';
 import ApiFeatures from '../../utils/apiFeatures.js';
+import { removeDuplicateStringsFromArrayAndCapitalise } from './todos.utils.js';
 
 // @desc Add a new todo for the logged in user
 // @route POST /api/todos
@@ -13,8 +14,9 @@ export const addTodo = asyncHandler(async (req, res, next) => {
   ]);
 
   const todo = await todosModel.create({
+    ...newTodoDetails,
     userId: req.user._id,
-    ...newTodoDetails
+    tags: removeDuplicateStringsFromArrayAndCapitalise(newTodoDetails.tags)
   });
 
   return res.status(201).json({
@@ -72,7 +74,10 @@ export const updateTodo = asyncHandler(async (req, res, next) => {
 
   const updatedTodo = await todosModel.findByIdAndUpdate(
     req.params.id,
-    newTodoDetails,
+    {
+      ...newTodoDetails,
+      tags: removeDuplicateStringsFromArrayAndCapitalise(newTodoDetails.tags)
+    },
     { new: true, runValidators: true }
   );
 

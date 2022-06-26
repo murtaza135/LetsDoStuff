@@ -59,7 +59,7 @@ const AddTodoForm = () => {
     );
 
     if (!doesTagAlreadyExist && newTag !== '') {
-      setTags([...tags, capitalizeFirstLetter(newTag.toLowerCase())]);
+      setTags((values) => [...values, capitalizeFirstLetter(newTag.toLowerCase())]);
     }
   };
 
@@ -84,7 +84,6 @@ const AddTodoForm = () => {
         tabIndex="0"
         onFocus={() => setFocus(true)}
         onBlur={handleBlur}
-      // onSubmit={preventTagsInputSubmit}
       >
         {focus && <S.CloseButton onClick={() => form.current.blur()} />}
 
