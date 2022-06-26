@@ -33,17 +33,19 @@ const TodoItemGroup = () => {
       <S.TodoMetaData>
         <span>Todos: {nonCompleteTodos.length}</span>
         <span>
-          Important: {' '}
-          {nonCompleteTodos.reduce((count, todo) => (todo.important ? count + 1 : count), 0)}
+          Important: {
+            nonCompleteTodos.reduce((count, todo) => (todo.important ? count + 1 : count), 0)
+          }
         </span>
       </S.TodoMetaData>
 
       <S.TodoItems>
-        {nonCompleteTodos.map(({ _id, title, deadlineDate, important, tags }) => (
+        {nonCompleteTodos.map(({ _id, title, description, deadlineDate, important, tags }) => (
           <TodoItem
             key={_id}
             _id={_id}
             title={title}
+            description={description}
             deadlineDate={deadlineDate}
             important={important}
             tags={tags}

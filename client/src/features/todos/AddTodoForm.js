@@ -19,7 +19,7 @@ const initialValues = {
   description: ''
 };
 
-const TodoForm = () => {
+const AddTodoForm = () => {
   const form = useRef(null);
   const [focus, setFocus] = useState(false);
 
@@ -82,4 +82,4 @@ const TodoForm = () => {
   );
 };
 
-export default TodoForm;
+export default AddTodoForm;

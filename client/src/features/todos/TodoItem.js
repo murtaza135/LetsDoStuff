@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import Tag from 'features/tags/Tag';
 import { FiEdit } from 'react-icons/fi';
 import { ImBin } from 'react-icons/im';
 import { CgCheckO } from 'react-icons/cg';
 import { primaryTheme as theme } from 'constants';
+import TodoFormContext from './TodoFormContext';
 import * as S from './TodoItem.styles';
 import { useUpdateTodoToCompleteMutation, useDeleteTodoMutation } from './todos.apislice';
 
-const TodoItem = ({ _id, title, deadlineDate, tags, important }) => {
+// TODO create function for parsing date ensuring exceptions are caught
+const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) => {
   const deadlineDateParsed = deadlineDate ? new Date(deadlineDate) : null;
   const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
+  const { editTodo } = useContext(TodoFormContext);
 
   return (
     <S.TodoItemContainer $important={important}>
@@ -38,7 +41,11 @@ const TodoItem = ({ _id, title, deadlineDate, tags, important }) => {
             $color={theme.success}
             onClick={() => updateTodoToComplete({ _id })}
           />
-          <S.Icon element={FiEdit} $color={theme.warning} />
+          <S.Icon
+            element={FiEdit}
+            $color={theme.warning}
+            onClick={() => editTodo({ _id, title, description, deadlineDate, tags, important })}
+          />
           <S.Icon
             element={ImBin}
             $color={theme.danger}
@@ -51,6 +58,7 @@ const TodoItem = ({ _id, title, deadlineDate, tags, important }) => {
 };
 
 TodoItem.defaultProps = {
+  description: '',
   deadlineDate: null,
   tags: [],
   important: false
@@ -59,6 +67,7 @@ TodoItem.defaultProps = {
 TodoItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  description: PropTypes.string,
   deadlineDate: PropTypes.oneOfType([
     PropTypes.instanceOf(Date),
     PropTypes.string

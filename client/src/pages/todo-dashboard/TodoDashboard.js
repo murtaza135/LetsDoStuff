@@ -1,12 +1,24 @@
 import React, { Fragment } from 'react';
-import TodoForm from 'features/todos/TodoForm';
+import AddTodoForm from 'features/todos/AddTodoForm';
+import EditTodoForm from 'features/todos/EditTodoForm';
 import TodoItemGroup from 'features/todos/TodoItemGroup';
+import TodoFormContext, { TodoFormProvider } from 'features/todos/TodoFormContext';
 
 const TodoDashboard = () => (
-  <Fragment>
-    <TodoForm />
-    <TodoItemGroup />
-  </Fragment>
+  <TodoFormProvider>
+    <TodoFormContext.Consumer>
+      {({ todoFormState }) => (
+        <Fragment>
+          {
+            todoFormState === 'edit'
+              ? <EditTodoForm autoFocus />
+              : <AddTodoForm />
+          }
+          <TodoItemGroup />
+        </Fragment>
+      )}
+    </TodoFormContext.Consumer>
+  </TodoFormProvider>
 );
 
 export default TodoDashboard;

@@ -40,6 +40,20 @@ export const TodoFormDataContainer = styled.div`
   }
 `;
 
+export const TodoFormButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+
+  @media screen and (max-width: ${breakpoints.s}) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+  }
+`;
+
 export const AnimateHeightContainer = styled(AnimateHeight)`
   & > div {
     display: flex;
