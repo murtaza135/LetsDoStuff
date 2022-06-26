@@ -28,7 +28,7 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) =>
 
       {tags.length > 0 && (
         <S.TagsContainer>
-          {tags.map(({ value, _id: tagId }) => <Tag key={tagId} $small>{value}</Tag>)}
+          {tags.map((tag) => <Tag key={tag} $small>{tag}</Tag>)}
         </S.TagsContainer>
       )}
 
@@ -74,10 +74,7 @@ TodoItem.propTypes = {
     PropTypes.instanceOf(Date),
     PropTypes.string
   ]),
-  tags: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string,
-    _id: PropTypes.string
-  })),
+  tags: PropTypes.arrayOf(PropTypes.string),
   important: PropTypes.bool,
 };
 

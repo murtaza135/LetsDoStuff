@@ -64,13 +64,7 @@ const AddTodoForm = () => {
   };
 
   const handleDeleteTag = (oldTag) => {
-    const tagsCopy = [...tags];
-    const tagIndex = tagsCopy.findIndex((element) => element === oldTag);
-
-    if (tagIndex !== -1) {
-      tagsCopy.splice(tagIndex, 1);
-      setTags(tagsCopy);
-    }
+    setTags(tags.filter((tag) => tag !== oldTag));
   };
 
   return (
