@@ -11,7 +11,7 @@ const TodoDashboard = () => (
         <Fragment>
           {
             todoFormState === 'edit'
-              ? <EditTodoForm autoFocus />
+              ? <EditTodoForm />
               : <AddTodoForm />
           }
           <TodoItemGroup />

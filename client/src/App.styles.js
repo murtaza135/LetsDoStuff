@@ -16,6 +16,7 @@ const CSSReset = createGlobalStyle`
     line-height: 1.5;
     background: ${theme.primary};
     color: ${theme.secondary};
+    scroll-behavior: smooth;
   }
 
   body #root {

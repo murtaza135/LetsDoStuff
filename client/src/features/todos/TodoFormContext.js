@@ -4,29 +4,29 @@ import PropTypes from 'prop-types';
 const TodoFormContext = createContext();
 
 export const TodoFormProvider = ({ children }) => {
-  const todoRef = useRef(null);
+  const todoItemRef = useRef(null);
   const [todoDetails, setTodoDetails] = useState(null);
   const [todoFormState, setTodoFormState] = useState('add');
 
-  const editTodo = useCallback((data, todoReference = null) => {
+  const editTodo = useCallback((data, todoItemReference = null) => {
     setTodoDetails(data);
     setTodoFormState('edit');
-    todoRef.current = todoReference;
-  }, []);
+    todoItemRef.current = todoItemReference;
+  }, [setTodoDetails, setTodoFormState, todoItemRef]);
 
   const finishEditTodo = useCallback(() => {
     setTodoDetails(null);
     setTodoFormState('add');
-    // todoRef.current = null;
-  }, []);
+    todoItemRef.current = null;
+  }, [setTodoDetails, setTodoFormState, todoItemRef]);
 
   const values = useMemo(() => ({
     todoDetails,
     todoFormState,
-    todoRef,
+    todoItemRef,
     editTodo,
     finishEditTodo
-  }), [todoDetails, todoFormState, todoRef, editTodo, finishEditTodo]);
+  }), [todoDetails, todoFormState, todoItemRef, editTodo, finishEditTodo]);
 
   return (
     <TodoFormContext.Provider value={values}>

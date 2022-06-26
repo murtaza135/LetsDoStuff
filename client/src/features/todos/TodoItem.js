@@ -45,9 +45,10 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) =>
           <S.Icon
             element={FiEdit}
             $color={theme.warning}
-            onClick={() => (
-              editTodo({ _id, title, description, deadlineDate, tags, important }, todoItemRef)
-            )}
+            onClick={() => (editTodo(
+              { _id, title, description, deadlineDate, tags, important },
+              todoItemRef.current
+            ))}
           />
           <S.Icon
             element={ImBin}

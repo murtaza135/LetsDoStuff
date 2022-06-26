@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import {
   Formik,
   FormButton,
@@ -18,11 +18,9 @@ import { useUpdateTodoMutation } from './todos.apislice';
 
 // TODO add optimistic rendering
 const EditTodoForm = () => {
-  // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-
-  const { todoDetails, todoRef, finishEditTodo } = useContext(TodoFormContext);
+  const currentTodoItemRef = useRef(null);
+  const { todoDetails, todoItemRef, finishEditTodo } = useContext(TodoFormContext);
   const [updateTodo] = useUpdateTodoMutation();
-  // console.log(todoRef);
 
   const initialValues = {
     ...todoDetails,
@@ -32,16 +30,17 @@ const EditTodoForm = () => {
   };
 
   useEffect(() => {
-    // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-  }, []);
+    window.scrollTo(0, 0);
+    currentTodoItemRef.current = todoItemRef?.current;
+
+    return () => {
+      currentTodoItemRef.current?.focus();
+    };
+  }, [todoItemRef, todoDetails]);
 
   const handleSubmit = async (values) => {
     try {
       await updateTodo(values).unwrap();
-      console.log(todoRef);
-      // todoRef?.current?.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      todoRef?.current?.focus();
-      // window.scrollTo({ top: todoRef?.current?.scrollHeight || 0, left: 0, behavior: 'smooth' });
       finishEditTodo();
     } catch (error) {
       // TODO add error component
@@ -57,6 +56,7 @@ const EditTodoForm = () => {
       onSubmit={handleSubmit}
     >
       <S.Form>
+        <S.CloseButton onClick={() => finishEditTodo()} />
         <Title $size="m" $color="secondary">Edit Todo</Title>
         <FormInputGroup name="title" label="Title *" placeholder="Title" type="text" />
 
