@@ -79,6 +79,7 @@ export const initialiseAuth = () => (dispatch) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem('token');
   dispatch(authSlice.actions.logout());
+  dispatch(authApiSlice.util.invalidateTags([{ type: 'Todo', id: 'LIST' }]));
 };
 
 export default authSlice.reducer;

@@ -22,6 +22,7 @@ const LoginForm = () => {
     } catch (error) {
       const { message } = error.data;
       setAlert({ message, variant: 'danger' });
+      window.scrollTo(0, 0);
     }
   };
 

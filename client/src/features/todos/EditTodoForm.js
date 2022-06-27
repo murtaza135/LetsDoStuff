@@ -11,6 +11,7 @@ import {
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
 import { capitalizeFirstLetter } from 'utils/string.utils';
+import { useSetAlert } from 'features/alert/alert.hooks';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 import validator from './TodoForm.validator';
@@ -24,6 +25,7 @@ const EditTodoForm = () => {
   const { todoDetails, todoItemRef, finishEditTodo } = useContext(TodoFormContext);
   const [updateTodo] = useUpdateTodoMutation();
   const [tags, setTags] = useState(todoDetails.tags);
+  const setAlert = useSetAlert();
 
   const initialValues = {
     ...todoDetails,
@@ -48,8 +50,9 @@ const EditTodoForm = () => {
         await updateTodo(todoData).unwrap();
         finishEditTodo();
       } catch (error) {
-        // TODO add error component
-        console.log(error);
+        const { message } = error.data;
+        setAlert({ message, variant: 'danger' });
+        window.scrollTo(0, 0);
       }
     }
   };

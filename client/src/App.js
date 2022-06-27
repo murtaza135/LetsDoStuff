@@ -3,7 +3,6 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import { Login, Register, TodoDashboard, NotFound } from 'pages';
 import Navbar from 'features/navbar/Navbar';
 import Footer from 'features/footer/Footer';
-import PageInitialiserOutlet from 'features/routing/PageInitialiserOutlet';
 import PrivateOutlet from 'features/routing/PrivateOutlet';
 import PublicOnlyOutlet from 'features/routing/PublicOnlyOutlet';
 import { Container, PageContainer } from 'global-components/layout';
@@ -29,9 +28,9 @@ const App = () => (
                 <Route path="/register" element={<Register />} />
               </Route>
 
-              {/* <Route element={<PrivateOutlet />}> */}
-              <Route index element={<TodoDashboard />} />
-              {/* </Route> */}
+              <Route element={<PrivateOutlet />}>
+                <Route index element={<TodoDashboard />} />
+              </Route>
             </Route>
           </Routes>
         </AlertWrapper>

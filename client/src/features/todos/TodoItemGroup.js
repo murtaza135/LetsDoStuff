@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Spinner, Text } from 'global-components/ui';
+import { useSetAlert } from 'features/alert/alert.hooks';
 import TodoItem from './TodoItem';
 import * as S from './TodoItemGroup.styles';
 import { useCustomGetAllTodosQuery } from './todos.hooks';
 
 const TodoItemGroup = () => {
-  const { data: todos, isLoading, isError } = useCustomGetAllTodosQuery();
+  const { data: todos, isLoading, isError, error } = useCustomGetAllTodosQuery();
   const nonCompleteTodos = todos ? todos.filter(({ complete }) => !complete) : [];
+  const setAlert = useSetAlert();
+
+  useEffect(() => {
+    if (isError) {
+      const { message } = error.data;
+      setAlert({ message, variant: 'danger' });
+    }
+  }, [isError, error, setAlert]);
 
   if (isLoading) {
     return <Spinner />;

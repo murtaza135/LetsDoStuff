@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, FormTitle, FormInputGroup, FormButton } from 'global-components/form';
 import { useRegisterMutation } from 'features/auth/auth.apislice';
 import { useNavigate } from 'react-router-dom';
+import { useSetAlert } from 'features/alert/alert.hooks';
 import validator from './RegisterForm.validator';
 
 const initialValues = {
@@ -15,14 +16,16 @@ const initialValues = {
 const RegisterForm = () => {
   const navigate = useNavigate();
   const [register] = useRegisterMutation();
+  const setAlert = useSetAlert();
 
   const handleRegister = async (values) => {
     try {
       await register(values).unwrap();
       navigate('/');
     } catch (error) {
-      // TODO add error component
-      console.log(error);
+      const { message } = error.data;
+      setAlert({ message, variant: 'danger' });
+      window.scrollTo(0, 0);
     }
   };
 

@@ -11,6 +11,7 @@ import {
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
 import { capitalizeFirstLetter } from 'utils/string.utils';
+import { useSetAlert } from 'features/alert/alert.hooks';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 import validator from './TodoForm.validator';
@@ -23,13 +24,13 @@ const initialValues = {
   important: false
 };
 
-// TODO add optimistic rendering
 const AddTodoForm = () => {
   const form = useRef(null);
   const tagsInput = useRef(null);
   const [tags, setTags] = useState([]);
   const [focus, setFocus] = useState(false);
   const [addTodo] = useAddTodoMutation();
+  const setAlert = useSetAlert();
 
   const handleSubmit = async (values, { resetForm }) => {
     if (tagsInput.current !== document.activeElement) {
@@ -39,8 +40,9 @@ const AddTodoForm = () => {
         resetForm();
         setTags([]);
       } catch (error) {
-        // TODO add error component
-        console.log(error);
+        const { message } = error.data;
+        setAlert({ message, variant: 'danger' });
+        window.scrollTo(0, 0);
       }
     }
   };
