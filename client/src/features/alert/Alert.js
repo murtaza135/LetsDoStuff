@@ -5,7 +5,7 @@ import { useClearAlert } from './alert.hooks';
 import { selectAlertMessage, selectAlertVariant } from './alert.selectors';
 import * as S from './Alert.styles';
 
-const Alert = ({ timer }) => {
+const Alert = ({ timer, preventManualClose }) => {
   const message = useSelector(selectAlertMessage);
   const variant = useSelector(selectAlertVariant);
   const clearAlert = useClearAlert();
@@ -19,18 +19,20 @@ const Alert = ({ timer }) => {
     message && (
       <S.AlertContainer $variant={variant}>
         <S.AlertText>{message}</S.AlertText>
-        <S.AlertCloseIcon onClick={() => clearAlert()} />
+        {!preventManualClose && <S.AlertCloseIcon onClick={() => clearAlert()} />}
       </S.AlertContainer>
     )
   );
 };
 
 Alert.defaultProps = {
-  timer: 30000
+  timer: 60000,
+  preventManualClose: false
 };
 
 Alert.propTypes = {
-  timer: PropTypes.number
+  timer: PropTypes.number,
+  preventManualClose: PropTypes.bool
 };
 
 export default Alert;
