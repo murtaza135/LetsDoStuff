@@ -6,7 +6,7 @@ import Footer from 'features/footer/Footer';
 import PrivateOutlet from 'features/routing/PrivateOutlet';
 import PublicOnlyOutlet from 'features/routing/PublicOnlyOutlet';
 import { Container, PageContainer } from 'global-components/layout';
-import { Alert } from 'global-components/ui';
+import Alert from 'features/alert/Alert';
 import CSSReset from 'App.styles';
 import '@fontsource/roboto';
 import AlertWrapper from 'features/alert/AlertWrapper';
@@ -17,7 +17,7 @@ const App = () => (
     <Navbar />
     <Container>
       <PageContainer $gap="3.5rem">
-        <Alert variant="danger">Error: Could not load todos</Alert>
+        <Alert />
         <AlertWrapper>
           <Routes>
             <Route path="/" element={<Outlet />}>

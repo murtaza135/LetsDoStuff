@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectAlertMessage, selectAlertVariant } from 'features/alert/alert.selectors';
-import { useClearAlert } from 'features/alert/alert.hooks';
+import { useClearAlert } from './alert.hooks';
+import { selectAlertMessage, selectAlertVariant } from './alert.selectors';
 import * as S from './Alert.styles';
 
 const Alert = () => {
