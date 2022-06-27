@@ -18,7 +18,10 @@ const TodoSchema = new mongoose.Schema(
       trim: true,
       maxlength: [100, 'Title cannot be more than 100 characters long']
     },
-    description: String,
+    description: {
+      type: String,
+      default: ''
+    },
     deadlineDate: Date,
     tags: [String],
     important: {

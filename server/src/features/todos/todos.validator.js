@@ -7,7 +7,7 @@ export const setIncludeTodoIdValidationRules = () => [
 export const setAddTodoValidationRules = () => [
   body('title', 'Please provide a title').not().isEmpty(),
   body('description', 'Please provide a valid description')
-    .optional({ nullable: true }).not().isEmpty(),
+    .optional({ nullable: true }).isString(),
   body('deadlineDate', 'Please provide a valid date')
     .optional({ nullable: true }).toDate(),
   body('tags', 'Please provide an array of tags which are to be in String format')
@@ -21,9 +21,9 @@ export const setUpdateTodoValidationRules = () => [
   body('complete', '"Complete" may only be true or false')
     .optional({ nullable: true }).isBoolean(),
   body('title', 'Please provide a title')
-    .optional().not().isEmpty(),
-  body('description', 'Please provide a valid description')
     .optional({ nullable: true }).not().isEmpty(),
+  body('description', 'Please provide a valid description')
+    .optional({ nullable: true }).isString(),
   body('deadlineDate', 'Please provide a valid date')
     .optional({ nullable: true }).toDate(),
   body('tags', 'Please provide an array of tags which are to be in String format')
