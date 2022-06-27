@@ -2,6 +2,7 @@ import React from 'react';
 import { Formik, Form, FormTitle, FormInputGroup, FormButton } from 'global-components/form';
 import { useLoginMutation } from 'features/auth/auth.apislice';
 import { useNavigate } from 'react-router-dom';
+import { useSetAlert } from 'features/alert/alert.hooks';
 import validator from './LoginForm.validator';
 
 const initialValues = {
@@ -12,14 +13,15 @@ const initialValues = {
 const LoginForm = () => {
   const navigate = useNavigate();
   const [login] = useLoginMutation();
+  const setAlert = useSetAlert();
 
   const handleLogin = async (values) => {
     try {
       await login(values).unwrap();
       navigate('/');
     } catch (error) {
-      // TODO add error component
-      console.log(error);
+      const { message } = error.data;
+      setAlert({ message, variant: 'danger' });
     }
   };
 

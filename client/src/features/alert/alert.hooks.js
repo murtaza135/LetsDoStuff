@@ -4,7 +4,9 @@ import { setAlert, clearAlert } from './alert.slice';
 
 export const useSetAlert = () => {
   const dispatch = useDispatch();
-  return useCallback((alertData) => dispatch(setAlert(alertData)), [dispatch]);
+  return useCallback(({ message, variant }) => (
+    dispatch(setAlert({ message, variant }))
+  ), [dispatch]);
 };
 
 export const useClearAlert = () => {

@@ -10,6 +10,7 @@ import { Container, PageContainer } from 'global-components/layout';
 import { Alert } from 'global-components/ui';
 import CSSReset from 'App.styles';
 import '@fontsource/roboto';
+import AlertWrapper from 'features/alert/AlertWrapper';
 
 const App = () => (
   <Fragment>
@@ -18,20 +19,22 @@ const App = () => (
     <Container>
       <PageContainer $gap="3.5rem">
         <Alert variant="danger">Error: Could not load todos</Alert>
-        <Routes>
-          <Route path="/" element={<PageInitialiserOutlet />}>
-            <Route path="*" element={<NotFound />} />
+        <AlertWrapper>
+          <Routes>
+            <Route path="/" element={<Outlet />}>
+              <Route path="*" element={<NotFound />} />
 
-            <Route element={<PublicOnlyOutlet />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route element={<PublicOnlyOutlet />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+              </Route>
+
+              {/* <Route element={<PrivateOutlet />}> */}
+              <Route index element={<TodoDashboard />} />
+              {/* </Route> */}
             </Route>
-
-            {/* <Route element={<PrivateOutlet />}> */}
-            <Route index element={<TodoDashboard />} />
-            {/* </Route> */}
-          </Route>
-        </Routes>
+          </Routes>
+        </AlertWrapper>
       </PageContainer>
     </Container>
     <Footer />

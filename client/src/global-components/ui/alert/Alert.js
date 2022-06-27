@@ -1,28 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { selectAlertMessage, selectAlertVariant } from 'features/alert/alert.selectors';
+import { useClearAlert } from 'features/alert/alert.hooks';
 import * as S from './Alert.styles';
 
-const Alert = ({ variant, children }) => {
-  const temp = 0;
+const Alert = () => {
+  const message = useSelector(selectAlertMessage);
+  const variant = useSelector(selectAlertVariant);
+  const clearAlert = useClearAlert();
 
   return (
-    <S.AlertContainer $variant={variant}>
-      <S.AlertText>{children}</S.AlertText>
-      <S.AlertCloseIcon />
-    </S.AlertContainer>
+    message && (
+      <S.AlertContainer $variant={variant}>
+        <S.AlertText>{message}</S.AlertText>
+        <S.AlertCloseIcon onClick={() => clearAlert()} />
+      </S.AlertContainer>
+    )
   );
-};
-
-Alert.defaultProps = {
-  variant: 'secondary'
-};
-
-Alert.propTypes = {
-  variant: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired
 };
 
 export default Alert;
