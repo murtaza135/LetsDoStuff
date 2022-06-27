@@ -16,7 +16,7 @@ const App = () => (
     <CSSReset />
     <Navbar />
     <Container>
-      <PageContainer $gap="3.5rem">
+      <PageContainer>
         <Alert />
         <AlertWrapper>
           <Routes>

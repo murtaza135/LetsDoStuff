@@ -18,7 +18,7 @@ const TodoItemGroup = () => {
   }, [isError, error, setAlert]);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner text="Loading todos..." />;
   }
 
   if (isError) {

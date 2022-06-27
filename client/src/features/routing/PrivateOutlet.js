@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectCurrentUser, selectCurrentToken } from '../auth/auth.selectors';
+import { selectCurrentToken } from '../auth/auth.selectors';
 
 const PrivateOutlet = () => {
   const location = useLocation();

@@ -1,14 +1,24 @@
 import styled from 'styled-components';
-import spinner from './Spinner.gif';
+import spinnerImage from './Spinner.gif';
+import Text from '../text/Text.styles';
 
-// @props src || alt
-const Spinner = styled.img.attrs(() => ({
-  src: spinner,
-  alt: 'Loading...'
+export const SpinnerContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+`;
+
+export const Spinner = styled.img.attrs(() => ({
+  src: spinnerImage
 }))`
   display: block;
-  margin: 2.5rem auto;
   width: 75px;
 `;
 
-export default Spinner;
+export const SpinnerText = styled(Text).attrs(() => ({
+  $color: 'secondary'
+}))`
+  font-size: 1.15rem;
+`;

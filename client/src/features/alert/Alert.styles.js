@@ -7,6 +7,7 @@ import { marginMixin } from 'global-components/layout';
 import getVariantCSS from './Alert.variants';
 
 export const AlertContainer = styled.div`
+  margin-bottom: 1.5rem;
   ${marginMixin};
   ${({ $variant }) => getVariantCSS($variant)};
   max-width: ${widths.alertContainer};
