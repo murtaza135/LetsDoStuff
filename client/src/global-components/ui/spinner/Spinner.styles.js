@@ -14,7 +14,7 @@ export const Spinner = styled.img.attrs(() => ({
   src: spinnerImage
 }))`
   display: block;
-  width: 75px;
+  width: ${({ $size }) => $size || '75px'};
 `;
 
 export const SpinnerText = styled(Text).attrs(() => ({

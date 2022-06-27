@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Formik, Form, FormTitle, FormInputGroup, FormButton } from 'global-components/form';
 import { useLoginMutation } from 'features/auth/auth.apislice';
 import { useNavigate } from 'react-router-dom';
 import { useSetAlert } from 'features/alert/alert.hooks';
+import { Spinner } from 'global-components/ui';
 import validator from './LoginForm.validator';
 
 const initialValues = {
@@ -12,7 +13,7 @@ const initialValues = {
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const setAlert = useSetAlert();
 
   const handleLogin = async (values) => {
@@ -32,22 +33,25 @@ const LoginForm = () => {
       validationSchema={validator}
       onSubmit={handleLogin}
     >
-      <Form>
-        <FormTitle>Login</FormTitle>
-        <FormInputGroup
-          name="username"
-          type="text"
-          placeholder="Enter Username"
-          label="Username"
-        />
-        <FormInputGroup
-          name="password"
-          type="password"
-          placeholder="Enter Password"
-          label="Password"
-        />
-        <FormButton type="submit">Login</FormButton>
-      </Form>
+      <Fragment>
+        <Form>
+          <FormTitle>Login</FormTitle>
+          <FormInputGroup
+            name="username"
+            type="text"
+            placeholder="Enter Username"
+            label="Username"
+          />
+          <FormInputGroup
+            name="password"
+            type="password"
+            placeholder="Enter Password"
+            label="Password"
+          />
+          <FormButton type="submit">Login</FormButton>
+        </Form>
+        {isLoading && <Spinner size="50px" />}
+      </Fragment>
     </Formik>
   );
 };

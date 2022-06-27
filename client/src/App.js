@@ -7,9 +7,9 @@ import PrivateOutlet from 'features/routing/PrivateOutlet';
 import PublicOnlyOutlet from 'features/routing/PublicOnlyOutlet';
 import { Container, PageContainer } from 'global-components/layout';
 import Alert from 'features/alert/Alert';
+import AlertWrapper from 'features/alert/AlertWrapper';
 import CSSReset from 'App.styles';
 import '@fontsource/roboto';
-import AlertWrapper from 'features/alert/AlertWrapper';
 
 const App = () => (
   <Fragment>

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Formik, Form, FormTitle, FormInputGroup, FormButton } from 'global-components/form';
 import { useRegisterMutation } from 'features/auth/auth.apislice';
 import { useNavigate } from 'react-router-dom';
 import { useSetAlert } from 'features/alert/alert.hooks';
+import { Spinner } from 'global-components/ui';
 import validator from './RegisterForm.validator';
 
 const initialValues = {
@@ -15,7 +16,7 @@ const initialValues = {
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-  const [register] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const setAlert = useSetAlert();
 
   const handleRegister = async (values) => {
@@ -35,40 +36,43 @@ const RegisterForm = () => {
       validationSchema={validator}
       onSubmit={handleRegister}
     >
-      <Form>
-        <FormTitle>Register</FormTitle>
-        <FormInputGroup
-          name="name"
-          type="text"
-          placeholder="Enter Name"
-          label="Name"
-        />
-        <FormInputGroup
-          name="email"
-          type="email"
-          placeholder="Enter Email"
-          label="Email"
-        />
-        <FormInputGroup
-          name="username"
-          type="text"
-          placeholder="Enter Username"
-          label="Username"
-        />
-        <FormInputGroup
-          name="password"
-          type="password"
-          placeholder="Enter Password"
-          label="Password"
-        />
-        <FormInputGroup
-          name="confirmPassword"
-          type="password"
-          placeholder="Confirm Password"
-          label="Confirm Password"
-        />
-        <FormButton type="submit">Register</FormButton>
-      </Form>
+      <Fragment>
+        <Form>
+          <FormTitle>Register</FormTitle>
+          <FormInputGroup
+            name="name"
+            type="text"
+            placeholder="Enter Name"
+            label="Name"
+          />
+          <FormInputGroup
+            name="email"
+            type="email"
+            placeholder="Enter Email"
+            label="Email"
+          />
+          <FormInputGroup
+            name="username"
+            type="text"
+            placeholder="Enter Username"
+            label="Username"
+          />
+          <FormInputGroup
+            name="password"
+            type="password"
+            placeholder="Enter Password"
+            label="Password"
+          />
+          <FormInputGroup
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
+            label="Confirm Password"
+          />
+          <FormButton type="submit">Register</FormButton>
+        </Form>
+        {isLoading && <Spinner size="50px" />}
+      </Fragment>
     </Formik>
   );
 };
