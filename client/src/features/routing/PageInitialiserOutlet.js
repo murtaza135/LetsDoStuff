@@ -1,10 +1,10 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { useClearError } from 'features/error/error.hooks';
+import { useClearAlert } from 'features/alert/alert.hooks';
 
 const PageInitialiserOutlet = () => {
-  const clearError = useClearError();
-  clearError();
+  const clearAlert = useClearAlert();
+  clearAlert();
 
   return (
     <Outlet />
