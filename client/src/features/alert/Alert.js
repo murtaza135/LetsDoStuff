@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useClearAlert } from './alert.hooks';
 import { selectAlertMessage, selectAlertVariant } from './alert.selectors';
 import * as S from './Alert.styles';
 
-const Alert = () => {
+const Alert = ({ timer }) => {
   const message = useSelector(selectAlertMessage);
   const variant = useSelector(selectAlertVariant);
   const clearAlert = useClearAlert();
+
+  useEffect(() => {
+    const clearAlertAfterDelay = timer && setTimeout(() => clearAlert(), timer);
+    return () => timer && clearTimeout(clearAlertAfterDelay);
+  }, [clearAlert, timer, message]);
 
   return (
     message && (
@@ -17,6 +23,14 @@ const Alert = () => {
       </S.AlertContainer>
     )
   );
+};
+
+Alert.defaultProps = {
+  timer: 30000
+};
+
+Alert.propTypes = {
+  timer: PropTypes.number
 };
 
 export default Alert;
