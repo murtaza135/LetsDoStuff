@@ -1,4 +1,4 @@
-import { capitalise } from '../../utils/stringUtils.js';
+import { capitalizeFirstLetter } from '../../utils/string.utils.js';
 
 export const removeDuplicateStringsFromArrayAndCapitalise = (array) => {
   if (!Array.isArray(array)) return array;
@@ -6,6 +6,8 @@ export const removeDuplicateStringsFromArrayAndCapitalise = (array) => {
     typeof value === 'string' ? value.toLowerCase() : value
   ));
   const arrayWithNoDuplicates = [...new Set(arrayLowerCase)];
-  const arrayWithTagsCapitalised = arrayWithNoDuplicates.map((value) => capitalise(value));
+  const arrayWithTagsCapitalised = arrayWithNoDuplicates.map((value) => (
+    capitalizeFirstLetter(value)
+  ));
   return arrayWithTagsCapitalised;
 };

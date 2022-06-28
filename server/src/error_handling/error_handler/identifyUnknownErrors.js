@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { capitalise } from '../../utils/stringUtils.js';
+import { capitalizeFirstLetter } from '../../utils/string.utils.js';
 
 const checkJwtInvalidError = (error) => {
   if (error.name === 'JsonWebTokenError') {
@@ -50,7 +50,7 @@ const checkDbBadObjectIdError = (error) => {
 const checkDbDuplicateKeyError = (error) => {
   if (error.code === 11000) {
     const errorKey = Object.keys(error.keyValue)[0];
-    const message = `${capitalise(errorKey)} is already taken`;
+    const message = `${capitalizeFirstLetter(errorKey)} is already taken`;
     error.message = message;
     error.type = 'DuplicateItemError';
     error.httpCode = 400;
