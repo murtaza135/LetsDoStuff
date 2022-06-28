@@ -8,6 +8,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         body: { ...data }
       }),
+      transformResponse: (response) => response.data,
       invalidatesTags: [{ type: 'Todo', id: 'LIST' }]
     }),
     getAllTodos: builder.query({
@@ -28,6 +29,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body: { ...data }
       }),
+      transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
     }),
     updateTodoToComplete: builder.mutation({
@@ -35,6 +37,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         url: `/todos/${data._id}/complete`,
         method: 'PUT'
       }),
+      transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
     }),
     updateTodoToIncomplete: builder.mutation({
@@ -42,6 +45,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         url: `/todos/${data._id}/incomplete`,
         method: 'PUT'
       }),
+      transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
     }),
     deleteTodo: builder.mutation({
@@ -49,6 +53,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         url: `/todos/${data._id}`,
         method: 'DELETE'
       }),
+      transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
     }),
   })
