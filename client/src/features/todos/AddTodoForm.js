@@ -47,9 +47,10 @@ const AddTodoForm = () => {
     }
   };
 
-  const handleBlur = (event) => {
+  const handleBlur = (event, formikProps) => {
     if (!form.current.contains(event.relatedTarget)) {
       setFocus(false);
+      formikProps.setTouched({});
     }
   };
 
@@ -75,55 +76,57 @@ const AddTodoForm = () => {
       validationSchema={validator}
       onSubmit={handleSubmit}
     >
-      <S.Form
-        ref={form}
-        tabIndex="0"
-        onFocus={() => setFocus(true)}
-        onBlur={handleBlur}
-      >
-        {focus && <S.CloseButton onClick={() => form.current.blur()} />}
+      {(props) => (
+        <S.Form
+          ref={form}
+          tabIndex="0"
+          onFocus={() => setFocus(true)}
+          onBlur={(event) => handleBlur(event, props)}
+        >
+          {focus && <S.CloseButton onClick={() => form.current.blur()} />}
 
-        <Title $size="m" $color="secondary">Add a Todo</Title>
-        <FormInputGroup name="title" label="Title *" placeholder="Title" type="text" />
+          <Title $size="m" $color="secondary">Add a Todo</Title>
+          <FormInputGroup name="title" label="Title *" placeholder="Title" type="text" />
 
-        <S.AnimateHeightContainer duration={500} height={focus ? 'auto' : 0}>
-          <FormTextAreaGroup
-            name="description"
-            label="Description"
-            placeholder="Description"
-            $height="8rem"
-          />
-
-          <S.TodoFormDataContainer>
-            <FormDateGroup
-              name="deadlineDate"
-              label="Deadline Date"
-              onCalendarClose={() => form.current.focus({ preventScroll: true })}
-              minDate={new Date()}
-              placeholderText="Date"
-              isClearable
+          <S.AnimateHeightContainer duration={500} height={focus ? 'auto' : 0}>
+            <FormTextAreaGroup
+              name="description"
+              label="Description"
+              placeholder="Description"
+              $height="8rem"
             />
 
-            <FormCheckboxGroup name="important" label="Important?" $stretch>
-              Important?
-            </FormCheckboxGroup>
-          </S.TodoFormDataContainer>
+            <S.TodoFormDataContainer>
+              <FormDateGroup
+                name="deadlineDate"
+                label="Deadline Date"
+                onCalendarClose={() => form.current.focus({ preventScroll: true })}
+                minDate={new Date()}
+                placeholderText="Date"
+                isClearable
+              />
 
-          <FormGroup>
-            <FormLabel>Tags</FormLabel>
-            <TagsInput
-              ref={tagsInput}
-              tags={tags}
-              onAddTag={handleAddTag}
-              onDeleteTag={handleDeleteTag}
-            />
-          </FormGroup>
+              <FormCheckboxGroup name="important" label="Important?" $stretch>
+                Important?
+              </FormCheckboxGroup>
+            </S.TodoFormDataContainer>
 
-          <FormButton type="submit" $mt="1.75rem">Add Todo</FormButton>
+            <FormGroup>
+              <FormLabel>Tags</FormLabel>
+              <TagsInput
+                ref={tagsInput}
+                tags={tags}
+                onAddTag={handleAddTag}
+                onDeleteTag={handleDeleteTag}
+              />
+            </FormGroup>
 
-          <Text $color="medium" $mt="1rem">* required</Text>
-        </S.AnimateHeightContainer>
-      </S.Form>
+            <FormButton type="submit" $mt="1.75rem">Add Todo</FormButton>
+
+            <Text $color="medium" $mt="1rem">* required</Text>
+          </S.AnimateHeightContainer>
+        </S.Form>
+      )}
     </Formik>
   );
 };
