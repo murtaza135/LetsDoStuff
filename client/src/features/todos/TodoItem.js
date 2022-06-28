@@ -4,19 +4,25 @@ import Tag from 'features/tags/Tag';
 import { FiEdit } from 'react-icons/fi';
 import { ImBin } from 'react-icons/im';
 import { CgCheckO } from 'react-icons/cg';
+import { FaUndoAlt } from 'react-icons/fa';
 import { primaryTheme as theme } from 'constants';
 import TodoFormContext from './TodoFormContext';
 import * as S from './TodoItem.styles';
 import { useUpdateTodoToCompleteMutation, useDeleteTodoMutation } from './todos.apislice';
 
-const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) => {
+const TodoItem = ({ _id, title, description, deadlineDate, tags, important, complete }) => {
   const todoItemRef = useRef(null);
   const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
   const { editTodo } = useContext(TodoFormContext);
 
   return (
-    <S.TodoItemContainer ref={todoItemRef} tabIndex="0" $important={important}>
+    <S.TodoItemContainer
+      ref={todoItemRef}
+      tabIndex="0"
+      $important={important}
+      $complete={complete}
+    >
       <S.TodoDataContainer>
         <S.TodoItemTitle>{title}</S.TodoItemTitle>
         {deadlineDate && (
@@ -30,15 +36,25 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) =>
         </S.TagsContainer>
       )}
 
-      {important && <S.TodoItemImportant />}
+      {important && !complete && <S.TodoItemImportant />}
+      {complete && <S.TodoItemComplete />}
 
       <S.IconsContainer>
-        <S.Icon
-          element={CgCheckO}
-          $size="1.2rem"
-          $color={theme.success}
-          onClick={() => updateTodoToComplete({ _id })}
-        />
+        {!complete && (
+          <S.Icon
+            element={CgCheckO}
+            $size="1.2rem"
+            $color={theme.success}
+            onClick={() => updateTodoToComplete({ _id })}
+          />
+        )}
+        {complete && (
+          <S.Icon
+            element={FaUndoAlt}
+            $color={theme.medium}
+            onClick={() => updateTodoToComplete({ _id })}
+          />
+        )}
         <S.Icon
           element={FiEdit}
           $color={theme.warning}
@@ -61,7 +77,8 @@ TodoItem.defaultProps = {
   description: '',
   deadlineDate: null,
   tags: [],
-  important: false
+  important: false,
+  complete: false
 };
 
 TodoItem.propTypes = {
@@ -71,6 +88,7 @@ TodoItem.propTypes = {
   deadlineDate: PropTypes.instanceOf(Date),
   tags: PropTypes.arrayOf(PropTypes.string),
   important: PropTypes.bool,
+  complete: PropTypes.bool
 };
 
 export default TodoItem;

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { widths, sizes, breakpoints, primaryTheme as theme } from 'constants';
 import { noSelectMixin } from 'global-components/other';
 
@@ -14,8 +14,12 @@ export const TodoItemContainer = styled.div`
   flex-direction: column;
   gap: 0.75rem;
 
-  border: ${({ $important }) => (
-    $important ? `1px solid ${theme.danger}` : `1px solid ${theme.secondary}`
+  border: ${({ $important, $complete }) => (
+    $complete
+      ? `1px solid ${theme.success}`
+      : $important
+        ? `1px solid ${theme.danger}`
+        : `1px solid ${theme.secondary}`
   )};
 `;
 
@@ -67,6 +71,11 @@ export const Icon = styled(({ element, children, ...props }) => (
   color: ${({ $color }) => $color || theme.secondary};
   transition: opacity 0.25s ease;
   cursor: pointer;
+
+  ${({ $border }) => $border && css`
+    border: 2px solid ${theme.medium};
+    border-radius: 50%;
+  `}
   
   &:hover {
     opacity: 0.6;
@@ -109,6 +118,68 @@ export const TodoItemImportant = styled.div.attrs(() => ({
     bottom: 125%;
     left: 50%;
     margin-left: -35.5px;
+    margin-bottom: 3px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* Tooltip arrow */
+  & > .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: ${theme.medium} transparent transparent transparent;
+  }
+
+  &:hover > .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
+export const TodoItemComplete = styled.div.attrs(() => ({
+  children: ['✓', <span key="1" className="tooltiptext">Completed</span>]
+}))`
+  ${noSelectMixin};
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: ${theme.primaryShaded};
+  color: ${theme.success};
+  border: 3px solid ${theme.success};
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  position: absolute;
+  top: -10px;
+  left: -10px;
+
+  & > .tooltiptext {
+    visibility: hidden;
+    background-color: ${theme.medium};
+    color: ${theme.light};
+    text-align: center;
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -38.5px;
     margin-bottom: 3px;
 
     /* Fade in tooltip */

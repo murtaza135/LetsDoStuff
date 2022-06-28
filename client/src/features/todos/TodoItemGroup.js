@@ -60,7 +60,7 @@ const TodoItemGroup = () => {
 
       <S.TodoItems>
         {filteredTodos
-          .map(({ _id, title, description, deadlineDate, important, tags }) => (
+          .map(({ _id, title, description, deadlineDate, important, complete, tags }) => (
             <TodoItem
               key={_id}
               _id={_id}
@@ -68,6 +68,7 @@ const TodoItemGroup = () => {
               description={description}
               deadlineDate={deadlineDate}
               important={important}
+              complete={complete}
               tags={tags}
             />
           ))}
