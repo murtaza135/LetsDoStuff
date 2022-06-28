@@ -112,6 +112,31 @@ export const udpateTodoToComplete = asyncHandler(async (req, res, next) => {
   });
 });
 
+// @desc Update the specified todo to NOT complete if it belongs to the logged in user
+// @route PUT /api/todos/:id/incomplete
+// @access Private
+export const udpateTodoToNotComplete = asyncHandler(async (req, res, next) => {
+  const todo = await todosModel.findById(req.params.id);
+  ensureItemExists(todo, 'Todo does not exist');
+  ensureItemBelongsToUser(
+    todo,
+    req.user.id.toString(),
+    'Todo does not exist',
+    'You do not have authorisation to access this todo'
+  );
+
+  const updatedTodo = await todosModel.findByIdAndUpdate(
+    req.params.id,
+    { complete: false },
+    { new: true, runValidators: true }
+  );
+
+  return res.status(200).json({
+    success: true,
+    data: updatedTodo.getData()
+  });
+});
+
 // @desc Delete the specified todo if it belongs to the logged in user
 // @route DELETE /api/todos/:id
 // @access Private

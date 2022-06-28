@@ -19,4 +19,7 @@ router.route('/:id')
 router.route('/:id/complete')
   .put(validator.setIncludeTodoIdValidationRules(), validate, controller.udpateTodoToComplete);
 
+router.route('/:id/incomplete')
+  .put(validator.setIncludeTodoIdValidationRules(), validate, controller.udpateTodoToNotComplete);
+
 export default router;

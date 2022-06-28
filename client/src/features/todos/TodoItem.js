@@ -8,11 +8,16 @@ import { FaUndoAlt } from 'react-icons/fa';
 import { primaryTheme as theme } from 'constants';
 import TodoFormContext from './TodoFormContext';
 import * as S from './TodoItem.styles';
-import { useUpdateTodoToCompleteMutation, useDeleteTodoMutation } from './todos.apislice';
+import {
+  useUpdateTodoToCompleteMutation,
+  useUpdateTodoToIncompleteMutation,
+  useDeleteTodoMutation
+} from './todos.apislice';
 
 const TodoItem = ({ _id, title, description, deadlineDate, tags, important, complete }) => {
   const todoItemRef = useRef(null);
   const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
+  const [updateTodoToIncomplete] = useUpdateTodoToIncompleteMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
   const { editTodo } = useContext(TodoFormContext);
 
@@ -52,7 +57,7 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important, comp
           <S.Icon
             element={FaUndoAlt}
             $color={theme.medium}
-            onClick={() => updateTodoToComplete({ _id })}
+            onClick={() => updateTodoToIncomplete({ _id })}
           />
         )}
         <S.Icon
