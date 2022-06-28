@@ -12,7 +12,7 @@ const TodoItemGroup = () => {
 
   useEffect(() => {
     if (isError) {
-      const { message } = error.data;
+      const message = error.data.message || 'Internal Server Error';
       setAlert({ message, variant: 'danger' });
     }
   }, [isError, error, setAlert]);

@@ -50,7 +50,7 @@ const EditTodoForm = () => {
         await updateTodo(todoData).unwrap();
         finishEditTodo();
       } catch (error) {
-        const { message } = error.data;
+        const message = error.data.message || 'Internal Server Error';
         setAlert({ message, variant: 'danger' });
         window.scrollTo(0, 0);
       }
