@@ -5,14 +5,14 @@ import { FiEdit } from 'react-icons/fi';
 import { ImBin } from 'react-icons/im';
 import { CgCheckO } from 'react-icons/cg';
 import { primaryTheme as theme } from 'constants';
+import { parseDateString } from 'utils/date.utils';
 import TodoFormContext from './TodoFormContext';
 import * as S from './TodoItem.styles';
 import { useUpdateTodoToCompleteMutation, useDeleteTodoMutation } from './todos.apislice';
 
-// TODO create function for parsing date ensuring exceptions are caught
 const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) => {
   const todoItemRef = useRef(null);
-  const deadlineDateParsed = deadlineDate ? new Date(deadlineDate) : null;
+  const deadlineDateParsed = parseDateString(deadlineDate);
   const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
   const { editTodo } = useContext(TodoFormContext);
