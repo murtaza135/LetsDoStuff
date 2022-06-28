@@ -21,7 +21,10 @@ export const pillData = [
     _id: 'important',
     value: 'Important',
     variant: 'danger',
-    filterFn: (todos) => (todos ? todos.filter(({ important }) => important) : [])
+    filterFn: (todos) => (todos
+      ? todos.filter(({ important, complete }) => important && !complete)
+      : []
+    )
   }
 ];
 
@@ -50,7 +53,10 @@ export const pillData2 = {
       _id: 'important',
       value: 'Important',
       variant: 'danger',
-      filterFn: (todos) => (todos ? todos.filter(({ important }) => important) : [])
+      filterFn: (todos) => (todos
+        ? todos.filter(({ important, complete }) => important && !complete)
+        : []
+      )
     }
   }
 };
