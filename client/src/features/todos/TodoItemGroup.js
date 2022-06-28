@@ -40,17 +40,20 @@ const TodoItemGroup = () => {
   return (
     <S.TodoItemGroupContainer>
       <S.TodoMetaData>
-        <span>
-          Todos: {nonCompleteTodos.length} | {' '}
+        <S.TodoMetaDataItem>Todos: {nonCompleteTodos.length}</S.TodoMetaDataItem>
+        <S.PillContainer>
           <Pill value="All1" active>All2</Pill>
           <Pill value="Hello">Hello</Pill>
           <Pill>Bye</Pill>
-        </span>
-        {/* <span>
-          Important: {
-            nonCompleteTodos.reduce((count, todo) => (todo.important ? count + 1 : count), 0)
-          }
-        </span> */}
+          <Pill>Bye</Pill>
+          <Pill>Bye</Pill>
+          <Pill>Bye</Pill>
+          <Pill>Bye</Pill>
+          <Pill>Bye</Pill>
+          <Pill>Bye</Pill>
+          <Pill>Bye</Pill>
+          <Pill>Bye</Pill>
+        </S.PillContainer>
       </S.TodoMetaData>
 
       <S.TodoItems>
