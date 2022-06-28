@@ -40,6 +40,7 @@ export const PillContainer = styled.span`
   padding: 0.15rem 1rem;
   overflow-x: scroll;
   ${hideScrollBarMixin};
+  margin-right: -1.45rem;
 `;
 
 export const TodoItems = styled.div`
