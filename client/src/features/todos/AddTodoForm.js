@@ -10,7 +10,6 @@ import {
   FormLabel
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
-import { capitalizeFirstLetter } from 'utils/string.utils';
 import { useSetAlert } from 'features/alert/alert.hooks';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
@@ -21,13 +20,13 @@ const initialValues = {
   title: '',
   description: '',
   deadlineDate: null,
-  important: false
+  important: false,
+  tags: []
 };
 
 const AddTodoForm = () => {
   const form = useRef(null);
   const tagsInput = useRef(null);
-  const [tags, setTags] = useState([]);
   const [focus, setFocus] = useState(false);
   const [addTodo] = useAddTodoMutation();
   const setAlert = useSetAlert();
@@ -35,10 +34,8 @@ const AddTodoForm = () => {
   const handleSubmit = async (values, { resetForm }) => {
     if (tagsInput.current !== document.activeElement) {
       try {
-        const todoData = { ...values, tags };
-        await addTodo(todoData).unwrap();
+        await addTodo(values).unwrap();
         resetForm();
-        setTags([]);
         setFocus(false);
       } catch (error) {
         const message = error.data.message || 'Internal Server Error';
@@ -55,34 +52,24 @@ const AddTodoForm = () => {
     }
   };
 
-  const handleAddTag = (newTag) => {
-    const doesTagAlreadyExist = (
-      tags
-        .map((tag) => tag.toLowerCase())
-        .includes(newTag.toLowerCase())
-    );
-
-    if (!doesTagAlreadyExist && newTag !== '') {
-      setTags((values) => [...values, capitalizeFirstLetter(newTag.toLowerCase())]);
-    }
-  };
-
-  const handleDeleteTag = (oldTag) => {
-    setTags(tags.filter((tag) => tag !== oldTag));
-  };
-
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validator}
       onSubmit={handleSubmit}
     >
-      {(props) => (
+      {(formikProps) => (
         <S.Form
           ref={form}
           tabIndex="0"
           onFocus={() => setFocus(true)}
-          onBlur={(event) => handleBlur(event, props)}
+          onBlur={(event) => handleBlur(event, formikProps)}
+          onSubmit={(event) => {
+            if (tagsInput.current !== document.activeElement) {
+              formikProps.handleSubmit(event);
+            }
+            event.preventDefault();
+          }}
         >
           {focus && <S.CloseButton onClick={() => form.current.blur()} />}
 
@@ -116,9 +103,8 @@ const AddTodoForm = () => {
               <FormLabel>Tags</FormLabel>
               <TagsInput
                 ref={tagsInput}
-                tags={tags}
-                onAddTag={handleAddTag}
-                onDeleteTag={handleDeleteTag}
+                name="tags"
+                placeholder="Enter Tag"
               />
             </FormGroup>
 

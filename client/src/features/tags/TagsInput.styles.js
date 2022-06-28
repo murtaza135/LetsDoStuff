@@ -15,6 +15,10 @@ export const TagsContainer = styled.div`
   outline: none !important;
   padding: 0.75rem 0.7rem;
 
+  &:focus-within {
+    border: 2px solid ${theme.warning};
+  }
+
   @media screen and (max-width: ${breakpoints.sm}) {
     padding: 0.6rem;
   }

@@ -4,11 +4,11 @@ import { ErrorMessage, useFormikContext } from 'formik';
 import { FormErrorMessageContainer } from './FormErrorMessage.styles';
 
 const FormErrorMessage = ({ name }) => {
-  const formikContext = useFormikContext();
+  const formik = useFormikContext();
 
   return (
     <FormErrorMessageContainer>
-      <ErrorMessage formik={formikContext} name={name} />
+      <ErrorMessage formik={formik} name={name} />
     </FormErrorMessageContainer>
   );
 };
