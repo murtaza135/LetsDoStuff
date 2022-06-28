@@ -6,3 +6,4 @@ export { default as Title } from './text/Title.styles';
 export { default as BigTitle } from './text/BigTitle.styles';
 export { default as Checkbox } from './checkbox/Checkbox';
 export { default as Spinner } from './spinner/Spinner';
+export { default as Pill } from './pills/Pill';

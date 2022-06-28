@@ -39,6 +39,7 @@ const AddTodoForm = () => {
         await addTodo(todoData).unwrap();
         resetForm();
         setTags([]);
+        setFocus(false);
       } catch (error) {
         const message = error.data.message || 'Internal Server Error';
         setAlert({ message, variant: 'danger' });

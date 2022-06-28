@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Spinner, Text } from 'global-components/ui';
+import { Spinner, Text, Pill } from 'global-components/ui';
 import { useSetAlert } from 'features/alert/alert.hooks';
 import TodoItem from './TodoItem';
 import * as S from './TodoItemGroup.styles';
@@ -40,12 +40,17 @@ const TodoItemGroup = () => {
   return (
     <S.TodoItemGroupContainer>
       <S.TodoMetaData>
-        <span>Todos: {nonCompleteTodos.length}</span>
         <span>
+          Todos: {nonCompleteTodos.length} | {' '}
+          <Pill value="All1" active>All2</Pill>
+          <Pill value="Hello">Hello</Pill>
+          <Pill>Bye</Pill>
+        </span>
+        {/* <span>
           Important: {
             nonCompleteTodos.reduce((count, todo) => (todo.important ? count + 1 : count), 0)
           }
-        </span>
+        </span> */}
       </S.TodoMetaData>
 
       <S.TodoItems>
