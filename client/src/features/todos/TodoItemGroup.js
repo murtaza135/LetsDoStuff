@@ -7,9 +7,7 @@ import { useCustomGetAllTodosQuery } from './todos.hooks';
 
 const TodoItemGroup = () => {
   const { data: todos, isLoading, isError, error } = useCustomGetAllTodosQuery();
-  // eslint-disable-next-line max-len
-  const sortedTodos = todos ? [...todos].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) : [];
-  const nonCompleteTodos = sortedTodos ? sortedTodos.filter(({ complete }) => !complete) : [];
+  const nonCompleteTodos = todos ? todos.filter(({ complete }) => !complete) : [];
   const setAlert = useSetAlert();
 
   useEffect(() => {

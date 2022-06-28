@@ -5,14 +5,12 @@ import { FiEdit } from 'react-icons/fi';
 import { ImBin } from 'react-icons/im';
 import { CgCheckO } from 'react-icons/cg';
 import { primaryTheme as theme } from 'constants';
-import { parseDateString } from 'utils/date.utils';
 import TodoFormContext from './TodoFormContext';
 import * as S from './TodoItem.styles';
 import { useUpdateTodoToCompleteMutation, useDeleteTodoMutation } from './todos.apislice';
 
 const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) => {
   const todoItemRef = useRef(null);
-  const deadlineDateParsed = parseDateString(deadlineDate);
   const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
   const { editTodo } = useContext(TodoFormContext);
@@ -21,8 +19,8 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important }) =>
     <S.TodoItemContainer ref={todoItemRef} tabIndex="0" $important={important}>
       <S.TodoDataContainer>
         <S.TodoItemTitle>{title}</S.TodoItemTitle>
-        {deadlineDateParsed && (
-          <S.TodoItemDate>{deadlineDateParsed?.toDateString().substring(4)}</S.TodoItemDate>
+        {deadlineDate && (
+          <S.TodoItemDate>{deadlineDate?.toDateString().substring(4)}</S.TodoItemDate>
         )}
       </S.TodoDataContainer>
 
@@ -70,10 +68,7 @@ TodoItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  deadlineDate: PropTypes.oneOfType([
-    PropTypes.instanceOf(Date),
-    PropTypes.string
-  ]),
+  deadlineDate: PropTypes.instanceOf(Date),
   tags: PropTypes.arrayOf(PropTypes.string),
   important: PropTypes.bool,
 };
