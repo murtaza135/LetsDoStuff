@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 import { primaryTheme as theme } from 'constants';
 
 const variantCSS = (borderColor, backgroundColor, color) => css`
-  border: 1px solid ${borderColor};
+  border: 2px solid ${borderColor};
   background-color: ${backgroundColor};
   color: ${color};
 `;

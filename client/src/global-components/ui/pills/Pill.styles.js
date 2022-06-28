@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import getVariantCSS from './Pill.variants';
 
 export const Pill = styled.span`
@@ -7,8 +7,13 @@ export const Pill = styled.span`
   border-radius: 1000px;
   cursor: pointer;
   transition: opacity 0.2s ease;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: bold;
 
-  &:hover {
-    opacity: 0.7;
-  }
+  ${({ $active }) => (!$active && (css`
+    &:hover {
+      opacity: 0.7;
+    }
+  `))};
 `;

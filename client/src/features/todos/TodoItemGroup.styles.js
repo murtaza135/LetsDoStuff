@@ -34,6 +34,7 @@ export const PillContainer = styled.span`
   justify-content: flex-start;
   align-items: center;
   text-align: center;
+  flex-wrap: nowrap;
   gap: 0.5rem;
   border-left: 1px solid ${theme.medium};
   padding: 0.15rem 1rem;
