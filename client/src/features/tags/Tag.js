@@ -10,7 +10,7 @@ const Tag = ({ children, onDelete, $small }) => (
 );
 
 Tag.defaultProps = {
-  onDelete: () => { },
+  onDelete: null,
   $small: false
 };
 
