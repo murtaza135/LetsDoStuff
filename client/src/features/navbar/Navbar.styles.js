@@ -54,7 +54,7 @@ export const NavLogo = styled(Link)`
   }
 `;
 
-export const NavIcon = styled(({ element, children, ...props }) => (
+export const NavLogoIcon = styled(({ element, children, ...props }) => (
   React.createElement(element, props, children)
 ))`
   font-size: ${sizes.xxl};
@@ -84,6 +84,21 @@ export const NavOptions = styled.ul`
 
 export const NavItem = styled.li`
   display: inline-block;
+`;
+
+export const NavIcon = styled(({ element, children, ...props }) => (
+  React.createElement(element, props, children)
+))`
+  color: ${theme.primary};
+  font-size: 1.75rem;
+  transform: translateY(5px);
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    opacity: 0.7;
+    transform: translateY(5px) scale(1.2);
+  }
 `;
 
 export const NavLink = styled(Link).attrs((props) => ({

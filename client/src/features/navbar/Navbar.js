@@ -16,8 +16,8 @@ const Navbar = () => {
   return (
     <S.NavContainer>
       <S.NavContentContainer>
-        <S.NavLogo to="/">
-          <S.NavIcon element={TbChecklist} />
+        <S.NavLogo to="/" onClick={() => window.scrollTo(0, 0)}>
+          <S.NavLogoIcon element={TbChecklist} />
           <Text $size="m" $color="primary" $bold>LetsDoStuff</Text>
         </S.NavLogo>
 

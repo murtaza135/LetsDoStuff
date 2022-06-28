@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 // @props $gap
 const PageContainer = styled.div`
+  position: relative;
   width: 100%;
   & > * { width: 100%; }
   display: flex;
