@@ -32,16 +32,14 @@ const AddTodoForm = () => {
   const setAlert = useSetAlert();
 
   const handleSubmit = async (values, { resetForm }) => {
-    if (tagsInput.current !== document.activeElement) {
-      try {
-        await addTodo(values).unwrap();
-        resetForm();
-        setFocus(false);
-      } catch (error) {
-        const message = error.data.message || 'Internal Server Error';
-        setAlert({ message, variant: 'danger' });
-        window.scrollTo(0, 0);
-      }
+    try {
+      await addTodo(values).unwrap();
+      resetForm();
+      setFocus(false);
+    } catch (error) {
+      const message = error.data.message || 'Internal Server Error';
+      setAlert({ message, variant: 'danger' });
+      window.scrollTo(0, 0);
     }
   };
 
@@ -64,12 +62,7 @@ const AddTodoForm = () => {
           tabIndex="0"
           onFocus={() => setFocus(true)}
           onBlur={(event) => handleBlur(event, formikProps)}
-          onSubmit={(event) => {
-            if (tagsInput.current !== document.activeElement) {
-              formikProps.handleSubmit(event);
-            }
-            event.preventDefault();
-          }}
+          nonSubmittableNodes={[tagsInput]}
         >
           {focus && <S.CloseButton onClick={() => form.current.blur()} />}
 

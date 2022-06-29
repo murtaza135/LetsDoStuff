@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import {
   Formik,
   FormButton,
@@ -10,7 +10,6 @@ import {
   FormLabel
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
-import { capitalizeFirstLetter } from 'utils/string.utils';
 import { useSetAlert } from 'features/alert/alert.hooks';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
@@ -24,15 +23,7 @@ const EditTodoForm = () => {
   const tagsInput = useRef(null);
   const { todoDetails, todoItemRef, finishEditTodo } = useContext(TodoFormContext);
   const [updateTodo] = useUpdateTodoMutation();
-  const [tags, setTags] = useState(todoDetails.tags);
   const setAlert = useSetAlert();
-
-  const initialValues = {
-    ...todoDetails,
-    deadlineDate: todoDetails.deadlineDate
-      ? new Date(todoDetails.deadlineDate)
-      : null
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,43 +35,24 @@ const EditTodoForm = () => {
   }, [todoItemRef, todoDetails]);
 
   const handleSubmit = async (values) => {
-    if (tagsInput.current !== document.activeElement) {
-      try {
-        const todoData = { ...values, tags };
-        await updateTodo(todoData).unwrap();
-        finishEditTodo();
-      } catch (error) {
-        const message = error.data.message || 'Internal Server Error';
-        setAlert({ message, variant: 'danger' });
-        window.scrollTo(0, 0);
-      }
+    try {
+      await updateTodo(values).unwrap();
+      finishEditTodo();
+    } catch (error) {
+      const message = error.data.message || 'Internal Server Error';
+      setAlert({ message, variant: 'danger' });
+      window.scrollTo(0, 0);
     }
-  };
-
-  const handleAddTag = (newTag) => {
-    const doesTagAlreadyExist = (
-      tags
-        .map((tag) => tag.toLowerCase())
-        .includes(newTag.toLowerCase())
-    );
-
-    if (!doesTagAlreadyExist && newTag !== '') {
-      setTags((values) => [...values, capitalizeFirstLetter(newTag.toLowerCase())]);
-    }
-  };
-
-  const handleDeleteTag = (oldTag) => {
-    setTags(tags.filter((tag) => tag !== oldTag));
   };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={todoDetails}
       enableReinitialize
       validationSchema={validator}
       onSubmit={handleSubmit}
     >
-      <S.Form>
+      <S.Form nonSubmittableNodes={[tagsInput]}>
         <S.CloseButton onClick={() => finishEditTodo()} />
         <Title $size="m" $color="secondary">Edit Todo</Title>
         <FormInputGroup name="title" label="Title *" placeholder="Title" type="text" />
@@ -110,9 +82,8 @@ const EditTodoForm = () => {
           <FormLabel>Tags</FormLabel>
           <TagsInput
             ref={tagsInput}
-            tags={tags}
-            onAddTag={handleAddTag}
-            onDeleteTag={handleDeleteTag}
+            name="tags"
+            placeholder="Enter Tag"
           />
         </FormGroup>
 

@@ -1,5 +1,5 @@
 export { Formik } from 'formik';
-export { default as Form } from './Form.styles';
+export { default as Form } from './Form';
 export { default as FormButton } from './FormButton.styles';
 export { default as FormGroup } from './FormGroup.styles';
 export { default as FormLabel } from './FormLabel.styles';

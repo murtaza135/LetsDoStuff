@@ -3,7 +3,7 @@ import { Form as FormikForm } from 'formik';
 import { widths, breakpoints, primaryTheme as theme } from 'constants';
 
 // @props $stretch || $noBorder
-const Form = styled(FormikForm)`
+export const FormikFormStyled = styled(FormikForm)`
   max-width: ${({ $stretch }) => ($stretch ? '1000rem' : widths.formContainer)};
   & > * { width: 100%; }
   display: flex;
@@ -20,5 +20,3 @@ const Form = styled(FormikForm)`
     padding: 1.75rem 1.5rem 2.25rem;
   }
 `;
-
-export default Form;

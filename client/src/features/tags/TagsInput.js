@@ -23,7 +23,6 @@ const TagsInput = React.forwardRef(({ name, placeholder }, tagInputRef) => {
         formik.setFieldValue(
           name,
           [...formik.values.tags, capitalizeFirstLetter(newTag)],
-          false
         );
       }
 
@@ -32,7 +31,7 @@ const TagsInput = React.forwardRef(({ name, placeholder }, tagInputRef) => {
   };
 
   const handleDeleteTag = (oldTag) => {
-    formik.setFieldValue(name, formik.values.tags.filter((tag) => tag !== oldTag), false);
+    formik.setFieldValue(name, formik.values.tags.filter((tag) => tag !== oldTag));
   };
 
   return (
