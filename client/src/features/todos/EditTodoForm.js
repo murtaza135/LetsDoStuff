@@ -84,6 +84,7 @@ const EditTodoForm = () => {
             ref={tagsInput}
             name="tags"
             placeholder="Enter Tag"
+            validationRegex={/^[a-zA-Z-#.']*$/i}
           />
         </FormGroup>
 

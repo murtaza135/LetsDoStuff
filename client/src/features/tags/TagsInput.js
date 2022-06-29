@@ -5,9 +5,15 @@ import { capitalizeFirstLetter } from 'utils/string.utils';
 import * as S from './TagsInput.styles';
 import Tag from './Tag';
 
-const TagsInput = React.forwardRef(({ name, placeholder }, tagInputRef) => {
+const TagsInput = React.forwardRef(({ name, placeholder, validationRegex }, tagInputRef) => {
   const formik = useFormikContext();
   const [inputValue, setInputValue] = useState('');
+
+  const handleInnerInputChange = (event) => {
+    if (event.target.value.match(validationRegex)) {
+      setInputValue(event.target.value);
+    }
+  };
 
   const handleAddTag = (event) => {
     if (event.key === 'Enter') {
@@ -49,7 +55,7 @@ const TagsInput = React.forwardRef(({ name, placeholder }, tagInputRef) => {
         autoComplete="off"
         value={inputValue}
         placeholder={placeholder}
-        onChange={(event) => setInputValue(event.target.value)}
+        onChange={handleInnerInputChange}
         onKeyUp={handleAddTag}
       />
     </S.TagsContainer>
@@ -57,12 +63,17 @@ const TagsInput = React.forwardRef(({ name, placeholder }, tagInputRef) => {
 });
 
 TagsInput.defaultProps = {
-  placeholder: ''
+  placeholder: '',
+  validationRegex: null
 };
 
 TagsInput.propTypes = {
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  validationRegex: PropTypes.oneOfType([
+    PropTypes.instanceOf(RegExp),
+    PropTypes.string
+  ])
 };
 
 export default TagsInput;
