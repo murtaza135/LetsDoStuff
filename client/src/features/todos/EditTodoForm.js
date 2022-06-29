@@ -7,10 +7,12 @@ import {
   FormInputGroup,
   FormTextAreaGroup,
   FormGroup,
-  FormLabel
+  FormLabel,
+  FormErrorMessage
 } from 'global-components/form';
 import { Title, Text } from 'global-components/ui';
 import { useSetAlert } from 'features/alert/alert.hooks';
+import { re } from 'constants';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 import validator from './TodoForm.validator';
@@ -84,7 +86,12 @@ const EditTodoForm = () => {
             ref={tagsInput}
             name="tags"
             placeholder="Enter Tag"
-            validationRegex={/^[a-zA-Z-#.']*$/i}
+            validationRegex={re.tagsValidation}
+          />
+          <FormErrorMessage
+            name="tags"
+            transformError={(error) => error?.find((errorItem) => errorItem)}
+            touchAllowed
           />
         </FormGroup>
 

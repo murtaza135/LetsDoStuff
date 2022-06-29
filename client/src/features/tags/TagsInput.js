@@ -7,10 +7,11 @@ import Tag from './Tag';
 
 const TagsInput = React.forwardRef(({ name, placeholder, validationRegex }, tagInputRef) => {
   const formik = useFormikContext();
+  const isError = !!(formik.errors[name]);
   const [inputValue, setInputValue] = useState('');
 
   const handleInnerInputChange = (event) => {
-    if (event.target.value.match(validationRegex)) {
+    if (!validationRegex || event.target.value.match(validationRegex)) {
       setInputValue(event.target.value);
     }
   };
@@ -26,10 +27,7 @@ const TagsInput = React.forwardRef(({ name, placeholder, validationRegex }, tagI
       );
 
       if (!doesTagAlreadyExist && newTag !== '') {
-        formik.setFieldValue(
-          name,
-          [...formik.values.tags, capitalizeFirstLetter(newTag)],
-        );
+        formik.setFieldValue(name, [...formik.values.tags, capitalizeFirstLetter(newTag)]);
       }
 
       setInputValue('');
@@ -45,6 +43,7 @@ const TagsInput = React.forwardRef(({ name, placeholder, validationRegex }, tagI
       tabIndex="0"
       onFocus={() => tagInputRef.current.focus()}
       onBlur={() => formik.setFieldTouched(name)}
+      $error={isError}
     >
       {formik.values.tags.map((tag) => <Tag key={tag} onDelete={handleDeleteTag}>{tag}</Tag>)}
 

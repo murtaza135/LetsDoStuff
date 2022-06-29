@@ -5,13 +5,16 @@
     "airbnb"
   ],
   "rules": {
-    "max-len": ["error", {"code": 100}],
+    "max-len": ["error", {"code": 100, "ignoreStrings": true}],
     "no-nested-ternary": "off",
     "comma-dangle": "off",
     "linebreak-style": "off",
     "react/jsx-props-no-spreading": "off",
     "import/prefer-default-export": "off",
-    "no-unused-vars": "warn",
+    "no-unused-vars": ["warn", {
+      "ignoreRestSiblings": true,
+      "destructuredArrayIgnorePattern": "[A-Z]"
+    }],
     "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id"] }],
     "react/jsx-fragments": ["error", "element"],
     "object-curly-newline": ["off", {

@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { re } from 'constants';
 
 const getYesterdaysDate = () => {
   const date = new Date();
@@ -13,6 +14,11 @@ const validator = Yup.object({
   deadlineDate: Yup.date().nullable()
     .min(getYesterdaysDate(), 'You must use a future date'),
   important: Yup.boolean().required(),
+  tags: Yup.array()
+    .of(Yup.string().matches(
+      re.tagsValidation,
+      'Tag is invalid, please ensure you only use letters A-Z or the following special characters: . \' # -'
+    )).ensure()
 });
 
 export default validator;

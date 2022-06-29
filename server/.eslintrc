@@ -8,12 +8,16 @@
   },
   "rules": {
     "import/extensions": ["error", "ignorePackages"],
-    "max-len": ["error", { "code": 100 }],
+    "max-len": ["error", { "code": 100, "ignoreStrings": true }],
     "no-nested-ternary": "off",
     "comma-dangle": "off",
     "linebreak-style": "off",
     "import/prefer-default-export": "off",
-    "no-unused-vars": ["warn", { "argsIgnorePattern": "^error$|^req$|^res$|^next$" }],
+    "no-unused-vars": ["warn", {
+      "argsIgnorePattern": "^error$|^req$|^res$|^next$",
+      "ignoreRestSiblings": true,
+      "destructuredArrayIgnorePattern": "[A-Z]"
+    }],
     "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id", "__v"] }],
     "object-curly-newline": ["off", {
       "ObjectExpression": "always",

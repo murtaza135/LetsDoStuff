@@ -10,13 +10,16 @@ export const TagsContainer = styled.div`
   gap: 0.75rem;
   color: ${theme.secondary};
   background-color: ${theme.primaryShaded};
-  border: 1px solid ${theme.secondary};
+  border: ${({ $error }) => (
+    $error ? `2px solid ${theme.danger}` : `1px solid ${theme.secondary}`
+  )};
   border-radius: 5px;
   outline: none !important;
   padding: 0.75rem 0.7rem;
 
   &:focus-within {
-    border: 2px solid ${theme.warning};
+    border: 
+      ${({ $error }) => ($error ? `2px solid ${theme.danger}` : `2px solid ${theme.warning}`)};
   }
 
   @media screen and (max-width: ${breakpoints.sm}) {

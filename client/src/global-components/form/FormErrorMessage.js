@@ -1,20 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ErrorMessage, useFormikContext } from 'formik';
+import { useField } from 'formik';
 import { FormErrorMessageContainer } from './FormErrorMessage.styles';
 
-const FormErrorMessage = ({ name }) => {
-  const formik = useFormikContext();
+const FormErrorMessage = ({ name, transformError, touchAllowed }) => {
+  const [fields, meta] = useField({ name });
+  const isError = !touchAllowed ? meta.touched && meta.error : !!meta.error;
+  const error = meta.error ? transformError(meta.error) : meta.error;
 
   return (
     <FormErrorMessageContainer>
-      <ErrorMessage formik={formik} name={name} />
+      {isError && error}
     </FormErrorMessageContainer>
   );
 };
 
+FormErrorMessage.defaultProps = {
+  transformError: (error) => (error),
+  touchAllowed: false
+};
+
 FormErrorMessage.propTypes = {
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  transformError: PropTypes.func,
+  touchAllowed: PropTypes.bool
 };
 
 export default FormErrorMessage;
