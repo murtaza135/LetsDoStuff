@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useFormikContext } from 'formik';
@@ -27,13 +28,11 @@ const Form = React.forwardRef(({ nonSubmittableNodes, children, ...props }, ref)
 });
 
 Form.defaultProps = {
-  nonSubmittableNodes: [],
   children: null
 
 };
 
 Form.propTypes = {
-  nonSubmittableNodes: PropTypes.arrayOf(PropTypes.node),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
