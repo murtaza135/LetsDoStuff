@@ -16,7 +16,7 @@
     "no-unused-vars": ["warn", {
       "argsIgnorePattern": "^error$|^req$|^res$|^next$",
       "ignoreRestSiblings": true,
-      "destructuredArrayIgnorePattern": "[A-Z]"
+      "destructuredArrayIgnorePattern": "[A-Za-z]"
     }],
     "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id", "__v"] }],
     "object-curly-newline": ["off", {

@@ -13,7 +13,7 @@
     "import/prefer-default-export": "off",
     "no-unused-vars": ["warn", {
       "ignoreRestSiblings": true,
-      "destructuredArrayIgnorePattern": "[A-Z]"
+      "destructuredArrayIgnorePattern": "[A-Za-z]"
     }],
     "no-underscore-dangle": ["error", { "allow": ["__dirname", "_id"] }],
     "react/jsx-fragments": ["error", "element"],
