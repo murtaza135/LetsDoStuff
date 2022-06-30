@@ -1,6 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo, useContext } from 'react';
 import { parseDateString } from 'utils/date.utils';
 import { useGetAllTodosQuery } from './todos.apislice';
+import TodoFormContext from './TodoFormContext';
+
+export const useTodoFormContext = () => (
+  useContext(TodoFormContext)
+);
 
 export const useCustomGetAllTodosQuery = () => {
   const { data: { data, pagination, count } = [], ...rest } = useGetAllTodosQuery();
@@ -17,7 +22,7 @@ export const useCustomGetAllTodosQuery = () => {
     : []
   ), [todos]);
 
-  return {
+  return useMemo(() => ({
     data: sortedTodos, pagination, count, ...rest
-  };
+  }), [sortedTodos, pagination, count, rest]);
 };

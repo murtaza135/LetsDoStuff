@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Formik,
   FormButton,
@@ -16,14 +16,14 @@ import { re } from 'constants';
 import TagsInput from '../tags/TagsInput';
 import * as S from './TodoForm.styles';
 import validator from './TodoForm.validator';
-import TodoFormContext from './TodoFormContext';
 import { useUpdateTodoMutation } from './todos.apislice';
+import { useTodoFormContext } from './todos.hooks';
 
 // TODO add optimistic rendering
 const EditTodoForm = () => {
   const currentTodoItemRef = useRef(null);
   const tagsInput = useRef(null);
-  const { todoDetails, todoItemRef, finishEditTodo } = useContext(TodoFormContext);
+  const { todoDetails, todoItemRef, finishEditTodo } = useTodoFormContext();
   const [updateTodo] = useUpdateTodoMutation();
   const setAlert = useSetAlert();
 

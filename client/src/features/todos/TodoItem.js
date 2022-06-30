@@ -1,4 +1,4 @@
-import React, { useContext, useRef, memo } from 'react';
+import React, { useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import Tag from 'features/tags/Tag';
 import { FiEdit } from 'react-icons/fi';
@@ -6,7 +6,6 @@ import { ImBin } from 'react-icons/im';
 import { CgCheckO } from 'react-icons/cg';
 import { FaUndoAlt } from 'react-icons/fa';
 import { primaryTheme as theme } from 'constants';
-import TodoFormContext from './TodoFormContext';
 import * as S from './TodoItem.styles';
 import {
   useUpdateTodoToCompleteMutation,
@@ -14,13 +13,14 @@ import {
   useDeleteTodoMutation
 } from './todos.apislice';
 import TodoDate from './TodoDate';
+import { useTodoFormContext } from './todos.hooks';
 
 const TodoItem = ({ _id, title, description, deadlineDate, tags, important, complete }) => {
   const todoItemRef = useRef(null);
   const [updateTodoToComplete] = useUpdateTodoToCompleteMutation();
   const [updateTodoToIncomplete] = useUpdateTodoToIncompleteMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
-  const { editTodo } = useContext(TodoFormContext);
+  const { editTodo } = useTodoFormContext();
 
   return (
     <S.TodoItemContainer
