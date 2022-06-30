@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, memo } from 'react';
 import PropTypes from 'prop-types';
 import Tag from 'features/tags/Tag';
 import { FiEdit } from 'react-icons/fi';
@@ -96,4 +96,4 @@ TodoItem.propTypes = {
   complete: PropTypes.bool
 };
 
-export default TodoItem;
+export default memo(TodoItem);

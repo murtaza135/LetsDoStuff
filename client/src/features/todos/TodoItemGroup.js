@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Spinner, Text, Pill } from 'global-components/ui';
 import { useSetAlert } from 'features/alert/alert.hooks';
 import TodoItem from './TodoItem';
@@ -10,7 +10,7 @@ const TodoItemGroup = () => {
   const { data: todos, isLoading, isError, error } = useCustomGetAllTodosQuery();
   const setAlert = useSetAlert();
   const [activePill, setActivePill] = useState(pillData[1]);
-  const filteredTodos = activePill.filterFn(todos);
+  const filteredTodos = useMemo(() => activePill.filterFn(todos), [activePill, todos]);
 
   useEffect(() => {
     if (isError) {
