@@ -13,6 +13,7 @@ import {
   useUpdateTodoToIncompleteMutation,
   useDeleteTodoMutation
 } from './todos.apislice';
+import TodoDate from './TodoDate';
 
 const TodoItem = ({ _id, title, description, deadlineDate, tags, important, complete }) => {
   const todoItemRef = useRef(null);
@@ -30,9 +31,7 @@ const TodoItem = ({ _id, title, description, deadlineDate, tags, important, comp
     >
       <S.TodoDataContainer>
         <S.TodoItemTitle>{title}</S.TodoItemTitle>
-        {deadlineDate && (
-          <S.TodoItemDate>{deadlineDate?.toDateString().substring(4)}</S.TodoItemDate>
-        )}
+        {deadlineDate && <TodoDate date={deadlineDate} />}
       </S.TodoDataContainer>
 
       {tags.length > 0 && (

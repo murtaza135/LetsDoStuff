@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { widths, sizes, breakpoints, primaryTheme as theme } from 'constants';
 import { noSelectMixin } from 'global-components/other';
+import { TbBellRinging } from 'react-icons/tb';
 
 export const TodoItemContainer = styled.div`
   max-width: ${({ $stretch }) => ($stretch ? '1000rem' : widths.todoContainer)};
@@ -31,12 +32,6 @@ export const TodoItemTitle = styled.h1`
   font-size: ${sizes.m};
   font-weight: bold;
   cursor: default;
-`;
-
-export const TodoItemDate = styled.p`
-  ${noSelectMixin};
-  font-size: ${sizes.s};
-  transform: translateY(-1px);
 `;
 
 export const TagsContainer = styled.div`
@@ -180,6 +175,74 @@ export const TodoItemComplete = styled.div.attrs(() => ({
     bottom: 125%;
     left: 50%;
     margin-left: -38.5px;
+    margin-bottom: 3px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  /* Tooltip arrow */
+  & > .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: ${theme.medium} transparent transparent transparent;
+  }
+
+  &:hover > .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+`;
+
+export const TodoItemDue = styled.div.attrs((props) => ({
+  ...props,
+  children: [<TbBellRinging key="0" />, <span key="1" className="tooltiptext">Due</span>]
+}))`
+  ${noSelectMixin};
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: ${theme.primaryShaded};
+  color: ${({ $color }) => $color ?? theme.danger};
+  border: 3px solid ${({ $color }) => $color ?? theme.danger};
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  position: absolute;
+  top: -10px;
+  left: -10px;
+
+  & svg {
+    position: relative;
+    left: 1px;
+  }
+
+  & > .tooltiptext {
+    visibility: hidden;
+    background-color: ${theme.medium};
+    color: ${theme.light};
+    text-align: center;
+    padding: 0.3rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -18.5px;
     margin-bottom: 3px;
 
     /* Fade in tooltip */

@@ -70,7 +70,7 @@ const EditTodoForm = () => {
           <FormDateGroup
             name="deadlineDate"
             label="Deadline Date"
-            minDate={new Date()}
+            // minDate={new Date()}
             placeholderText="Date"
             isClearable
           />

@@ -1,10 +1,6 @@
-export const parseDateString = (dateString) => {
-  if (typeof dateString !== 'string') return null;
+import { isValid, parseISO } from 'date-fns';
 
-  try {
-    const parsedDate = dateString ? new Date(dateString) : null;
-    return parsedDate?.toString() !== 'Invalid Date' ? parsedDate : null;
-  } catch (error) {
-    return null;
-  }
+export const parseDateString = (dateString) => {
+  const dateParsed = parseISO(dateString);
+  return isValid(dateParsed) ? dateParsed : null;
 };
