@@ -41,6 +41,7 @@ export const PillContainer = styled.span`
   overflow-x: scroll;
   ${hideScrollBarMixin};
   margin-right: -1.45rem;
+  scroll-behavior: smooth;
 `;
 
 export const TodoItems = styled.div`

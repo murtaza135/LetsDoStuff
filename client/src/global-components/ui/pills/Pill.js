@@ -7,7 +7,7 @@ const Pill = ({ value, variant, active, onClick, children, ...rest }) => (
     {...rest}
     $variant={variant}
     $active={active}
-    onClick={() => onClick(value || children)}
+    onClick={(event) => onClick(event, value ?? children)}
   >
     {children}
   </S.Pill>

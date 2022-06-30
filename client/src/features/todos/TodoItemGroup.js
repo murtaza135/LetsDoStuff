@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { Spinner, Text, Pill } from 'global-components/ui';
 import { useSetAlert } from 'features/alert/alert.hooks';
 import TodoItem from './TodoItem';
@@ -11,6 +11,7 @@ const TodoItemGroup = () => {
   const setAlert = useSetAlert();
   const [activePill, setActivePill] = useState(pillData[1]);
   const filteredTodos = useMemo(() => activePill.filterFn(todos), [activePill, todos]);
+  const pillContainer = useRef(null);
 
   useEffect(() => {
     if (isError) {
@@ -19,17 +20,22 @@ const TodoItemGroup = () => {
     }
   }, [isError, error, setAlert]);
 
+  const handlePillClick = (event, value, pill) => {
+    event.target?.scrollIntoView({ inline: 'center', block: 'nearest' });
+    setActivePill(pill);
+  };
+
   const metaData = (
     <S.TodoMetaData>
       <S.TodoMetaDataItem>Todos: {filteredTodos.length}</S.TodoMetaDataItem>
-      <S.PillContainer>
+      <S.PillContainer ref={pillContainer}>
         {pillData.map((pill) => (
           <Pill
             key={pill._id}
             value={pill._id}
             variant={pill.variant}
             active={pill._id === activePill._id}
-            onClick={() => setActivePill(pill)}
+            onClick={(event, value) => handlePillClick(event, value, pill)}
           >
             {pill.value}
           </Pill>
