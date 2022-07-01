@@ -11,8 +11,8 @@ const validator = Yup.object({
   title: Yup.string()
     .required('Please provide a title'),
   description: Yup.string(),
-  deadlineDate: Yup.date().nullable(),
-  // .min(getYesterdaysDate(), 'You must use a future date'),
+  deadlineDate: Yup.date().nullable()
+    .min(getYesterdaysDate(), 'You must use a future date'),
   important: Yup.boolean().required(),
   tags: Yup.array()
     .of(Yup.string().matches(

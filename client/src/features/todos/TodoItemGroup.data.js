@@ -28,7 +28,7 @@ export const pillData = [
   }
 ];
 
-export const pillData2 = {
+export const pillDataNormalised = {
   ids: ['All', 'notCompleted', 'completed', 'important'],
   data: {
     all: {
