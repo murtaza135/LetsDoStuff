@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { apiSlice } from 'features/api/api.slice';
+import { setAlert } from 'features/alert/alert.slice';
 
 export const todosApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -12,7 +13,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response.data,
       invalidatesTags: [{ type: 'Todo', id: 'LIST' }],
       async onQueryStarted(values, { dispatch, queryFulfilled }) {
-        const postResult = dispatch(
+        const result = dispatch(
           todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
             draft.data.unshift({
               ...values,
@@ -25,8 +26,10 @@ export const todosApiSlice = apiSlice.injectEndpoints({
 
         try {
           await queryFulfilled;
-        } catch {
-          postResult.undo();
+        } catch (error) {
+          result.undo();
+          const message = error.error.data.message || 'Internal Server Error';
+          dispatch(setAlert({ message, variant: 'danger' }));
         }
       }
     }),
@@ -51,7 +54,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
       async onQueryStarted(values, { dispatch, queryFulfilled }) {
-        const postResult = dispatch(
+        const result = dispatch(
           todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
             const newValues = { ...values, deadlineDate: values.deadlineDate?.toISOString() };
             const currentTodo = draft.data.find((todo) => todo._id === values._id);
@@ -61,8 +64,10 @@ export const todosApiSlice = apiSlice.injectEndpoints({
 
         try {
           await queryFulfilled;
-        } catch {
-          postResult.undo();
+        } catch (error) {
+          result.undo();
+          const message = error.error.data.message || 'Internal Server Error';
+          dispatch(setAlert({ message, variant: 'danger' }));
         }
       }
     }),
@@ -74,7 +79,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
       async onQueryStarted({ _id }, { dispatch, queryFulfilled }) {
-        const postResult = dispatch(
+        const result = dispatch(
           todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
             const currentTodo = draft.data.find((todo) => todo._id === _id);
             if (currentTodo) currentTodo.complete = true;
@@ -83,8 +88,10 @@ export const todosApiSlice = apiSlice.injectEndpoints({
 
         try {
           await queryFulfilled;
-        } catch {
-          postResult.undo();
+        } catch (error) {
+          result.undo();
+          const message = error.error.data.message || 'Internal Server Error';
+          dispatch(setAlert({ message, variant: 'danger' }));
         }
       }
     }),
@@ -96,7 +103,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
       async onQueryStarted({ _id }, { dispatch, queryFulfilled }) {
-        const postResult = dispatch(
+        const result = dispatch(
           todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
             const currentTodo = draft.data.find((todo) => todo._id === _id);
             if (currentTodo) currentTodo.complete = false;
@@ -105,8 +112,10 @@ export const todosApiSlice = apiSlice.injectEndpoints({
 
         try {
           await queryFulfilled;
-        } catch {
-          postResult.undo();
+        } catch (error) {
+          result.undo();
+          const message = error.error.data.message || 'Internal Server Error';
+          dispatch(setAlert({ message, variant: 'danger' }));
         }
       }
     }),
@@ -118,7 +127,7 @@ export const todosApiSlice = apiSlice.injectEndpoints({
       transformResponse: (response) => response.data,
       invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
       async onQueryStarted({ _id }, { dispatch, queryFulfilled }) {
-        const postResult = dispatch(
+        const result = dispatch(
           todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
             const remainingTodos = draft.data.filter((todo) => todo._id !== _id) ?? [];
             draft.data = remainingTodos;
@@ -127,8 +136,10 @@ export const todosApiSlice = apiSlice.injectEndpoints({
 
         try {
           await queryFulfilled;
-        } catch {
-          postResult.undo();
+        } catch (error) {
+          result.undo();
+          const message = error.error.data.message || 'Internal Server Error';
+          dispatch(setAlert({ message, variant: 'danger' }));
         }
       }
     }),
