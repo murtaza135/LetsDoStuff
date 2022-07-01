@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spinner, Text, Pill } from 'global-components/ui';
 import { useSetAlert } from 'features/alert/alert.hooks';
 import TodoItem from './TodoItem';
@@ -10,8 +10,11 @@ const TodoItemGroup = () => {
   const { data: todos, isLoading, isError, error } = useCustomGetAllTodosQuery();
   const setAlert = useSetAlert();
   const [activePill, setActivePill] = useState(pillData[1]);
-  const filteredTodos = useMemo(() => activePill.filterFn(todos), [activePill, todos]);
-  const pillContainer = useRef(null);
+  const [filteredTodos, setFilteredTodos] = useState([]);
+
+  useEffect(() => (
+    setFilteredTodos(activePill.filterFn(todos))
+  ), [activePill, todos]);
 
   useEffect(() => {
     if (isError) {
@@ -23,12 +26,13 @@ const TodoItemGroup = () => {
   const handlePillClick = (event, value, pill) => {
     event.target?.scrollIntoView({ inline: 'center', block: 'nearest' });
     setActivePill(pill);
+    setFilteredTodos(pill.filterFn(todos));
   };
 
   const metaData = (
     <S.TodoMetaData>
       <S.TodoMetaDataItem>Todos: {filteredTodos.length}</S.TodoMetaDataItem>
-      <S.PillContainer ref={pillContainer}>
+      <S.PillContainer>
         {pillData.map((pill) => (
           <Pill
             key={pill._id}
