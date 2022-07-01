@@ -45,7 +45,7 @@ const TodoItemGroup = () => {
   );
 
   if (isLoading) {
-    return <Spinner text="Loading todos..." />;
+    return <Spinner />;
   }
 
   if (isError) {

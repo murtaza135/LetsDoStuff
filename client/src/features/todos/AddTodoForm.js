@@ -35,9 +35,9 @@ const AddTodoForm = () => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      await addTodo(values).unwrap();
       resetForm();
       setFocus(false);
+      await addTodo(values).unwrap();
     } catch (error) {
       const message = error.data.message || 'Internal Server Error';
       setAlert({ message, variant: 'danger' });

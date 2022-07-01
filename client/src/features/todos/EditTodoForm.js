@@ -19,7 +19,6 @@ import validator from './TodoForm.validator';
 import { useUpdateTodoMutation } from './todos.apislice';
 import { useTodoFormContext } from './todos.hooks';
 
-// TODO add optimistic rendering
 const EditTodoForm = () => {
   const currentTodoItemRef = useRef(null);
   const tagsInput = useRef(null);
@@ -38,8 +37,8 @@ const EditTodoForm = () => {
 
   const handleSubmit = async (values) => {
     try {
-      await updateTodo(values).unwrap();
       finishEditTodo();
+      await updateTodo(values).unwrap();
     } catch (error) {
       const message = error.data.message || 'Internal Server Error';
       setAlert({ message, variant: 'danger' });
@@ -70,7 +69,7 @@ const EditTodoForm = () => {
           <FormDateGroup
             name="deadlineDate"
             label="Deadline Date"
-            // minDate={new Date()}
+            minDate={new Date()}
             placeholderText="Date"
             isClearable
           />

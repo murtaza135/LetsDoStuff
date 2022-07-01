@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { apiSlice } from 'features/api/api.slice';
 
 export const todosApiSlice = apiSlice.injectEndpoints({
@@ -9,7 +10,25 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         body: { ...data }
       }),
       transformResponse: (response) => response.data,
-      invalidatesTags: [{ type: 'Todo', id: 'LIST' }]
+      invalidatesTags: [{ type: 'Todo', id: 'LIST' }],
+      async onQueryStarted(values, { dispatch, queryFulfilled }) {
+        const postResult = dispatch(
+          todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
+            draft.data.unshift({
+              ...values,
+              _id: '0',
+              deadlineDate: values.deadlineDate?.toISOString(),
+              createdAt: new Date().toISOString()
+            });
+          })
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          postResult.undo();
+        }
+      }
     }),
     getAllTodos: builder.query({
       query: () => '/todos',
@@ -30,7 +49,22 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         body: { ...data }
       }),
       transformResponse: (response) => response.data,
-      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
+      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
+      async onQueryStarted(values, { dispatch, queryFulfilled }) {
+        const postResult = dispatch(
+          todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
+            const newValues = { ...values, deadlineDate: values.deadlineDate?.toISOString() };
+            const currentTodo = draft.data.find((todo) => todo._id === values._id);
+            Object.assign(currentTodo, newValues);
+          })
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          postResult.undo();
+        }
+      }
     }),
     updateTodoToComplete: builder.mutation({
       query: (data) => ({
@@ -38,7 +72,21 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         method: 'PUT'
       }),
       transformResponse: (response) => response.data,
-      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
+      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
+      async onQueryStarted({ _id }, { dispatch, queryFulfilled }) {
+        const postResult = dispatch(
+          todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
+            const currentTodo = draft.data.find((todo) => todo._id === _id);
+            if (currentTodo) currentTodo.complete = true;
+          })
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          postResult.undo();
+        }
+      }
     }),
     updateTodoToIncomplete: builder.mutation({
       query: (data) => ({
@@ -46,7 +94,21 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         method: 'PUT'
       }),
       transformResponse: (response) => response.data,
-      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
+      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
+      async onQueryStarted({ _id }, { dispatch, queryFulfilled }) {
+        const postResult = dispatch(
+          todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
+            const currentTodo = draft.data.find((todo) => todo._id === _id);
+            if (currentTodo) currentTodo.complete = false;
+          })
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          postResult.undo();
+        }
+      }
     }),
     deleteTodo: builder.mutation({
       query: (data) => ({
@@ -54,7 +116,21 @@ export const todosApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE'
       }),
       transformResponse: (response) => response.data,
-      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }]
+      invalidatesTags: (result, error, args) => [{ type: 'Todo', id: args._id }],
+      async onQueryStarted({ _id }, { dispatch, queryFulfilled }) {
+        const postResult = dispatch(
+          todosApiSlice.util.updateQueryData('getAllTodos', undefined, (draft) => {
+            const remainingTodos = draft.data.filter((todo) => todo._id !== _id) ?? [];
+            draft.data = remainingTodos;
+          })
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          postResult.undo();
+        }
+      }
     }),
   })
 });
