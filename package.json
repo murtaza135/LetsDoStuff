@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/murtaza135/LetsDoStuff/issues"
   },
-  "homepage": "https://github.com/murtaza135/LetsDoStuff#readme",
+  "homepage": "https://lets-do-stuff.vercel.app",
   "devDependencies": {
     "concurrently": "^7.2.1",
     "nodemon": "^2.0.16"

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://mern-lets-do-stuff.herokuapp.com/api',
+    baseUrl: 'https://lets-do-stuff.vercel.app/api',
     prepareHeaders: (headers, { getState }) => {
       const { token } = getState().auth;
       if (token) {
