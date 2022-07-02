@@ -29,7 +29,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 app.use(express.json());
 app.use(mongoSanitize());
-// app.use(helmet());
+app.use(xss());
+app.use(hpp());
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -38,29 +39,6 @@ app.use(
     },
   })
 );
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       //  "default-src" used as fallback for any undeclared directives
-//       'default-src': ["'self'"],
-//       // i am using stripe api. if you have any script add it here
-//       'script-src': ["'self'", "'unsafe-inline'", 'js.stripe.com'],
-//       // external css link here
-//       'style-src': ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
-//       'frame-src': ["'self'", 'js.stripe.com'],
-//       'font-src': [
-//         "'self'",
-//         'fonts.googleapis.com',
-//         'fonts.gstatic.com',
-//         'res.cloudinary.com/',
-//       ],
-//       'img-src': ["'self'", 'data:', 'https://res.cloudinary.com'],
-//     },
-//     reportOnly: true,
-//   })
-// );
-app.use(xss());
-app.use(hpp());
 
 // Use Routes
 app.get('/_health', (req, res) => res.status(200).json({ success: true }));
