@@ -2,9 +2,10 @@
   "name": "letsdostuff",
   "version": "1.0.0",
   "description": "A simple todo app created using the mern stack",
-  "main": "server/server.js",
+  "main": "server/src/server.js",
+  "proxy": "https://mern-lets-do-stuff.herokuapp.com:5000",
   "scripts": {
-    "start": "node server/src/server",
+    "start": "node server/src/server.js",
     "server": "nodemon server/src/server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
