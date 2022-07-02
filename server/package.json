@@ -11,7 +11,8 @@
     "seeder:d": "node scripts/seeder -d",
     "seeder:destroy": "node scripts/seeder -d",
     "seeder:delete": "node scripts/seeder -d",
-    "lint:server": "./node_modules/.bin/eslint"
+    "lint:server": "./node_modules/.bin/eslint",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
