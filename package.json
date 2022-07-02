@@ -14,8 +14,7 @@
     "seeder:d": "node server/scripts/seeder -d",
     "seeder:destroy": "node server/scripts/seeder -d",
     "seeder:delete": "node server/scripts/seeder -d",
-    "lint:server": "./server/node_modules/.bin/eslint",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix server && npm install --prefix client && npm run build --prefix client"
+    "lint:server": "./server/node_modules/.bin/eslint"
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/murtaza135/LetsDoStuff/issues"
   },
-  "homepage": "https://lets-do-stuff.vercel.app",
+  "homepage": "https://github.com/murtaza135/LetsDoStuff#readme",
   "devDependencies": {
     "concurrently": "^7.2.1",
     "nodemon": "^2.0.16"
