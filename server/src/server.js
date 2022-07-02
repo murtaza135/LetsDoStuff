@@ -2,7 +2,7 @@
 import app from './app.js';
 import 'colors';
 
-const PORT = process.env.PORT || 443;
+const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
   console.log(
     `[LetsDoStuff] server running: ${process.env.NODE_ENV} mode on port ${PORT}`
