@@ -2,7 +2,6 @@
   "name": "letsdostuff-client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://mern-lets-do-stuff.herokuapp.com:5000",
   "dependencies": {
     "@fontsource/roboto": "^4.5.7",
     "@reduxjs/toolkit": "^1.8.2",

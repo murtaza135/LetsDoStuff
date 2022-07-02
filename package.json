@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "A simple todo app created using the mern stack",
   "main": "server/src/server.js",
-  "proxy": "https://mern-lets-do-stuff.herokuapp.com:5000",
   "scripts": {
     "start": "node server/src/server.js",
     "server": "nodemon server/src/server",
@@ -16,7 +15,7 @@
     "seeder:destroy": "node server/scripts/seeder -d",
     "seeder:delete": "node server/scripts/seeder -d",
     "lint:server": "./server/node_modules/.bin/eslint",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --omit=dev --prefix server && npm install --omit=dev --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix server && npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
