@@ -30,13 +30,29 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 app.use(mongoSanitize());
 app.use(helmet());
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       connectSrc: ["'self'"]
+//     },
+//   })
+// );
 app.use(xss());
 app.use(hpp());
 
 // Use Routes
 app.get('/_health', (req, res) => res.status(200).json({ success: true }));
 app.use('/api', routes);
-app.use((req, res, next) => next(new PageNotFoundError()));
+
+// Serve Client
+if (process.env.NODE_ENV === 'production') {
+  const buildPath = path.join(__dirname, '..', '..', 'client', 'build');
+  app.use(express.static(buildPath));
+  app.get('*', (req, res) => res.sendFile(path.resolve(buildPath, 'index.html')));
+} else {
+  app.use((req, res, next) => next(new PageNotFoundError()));
+}
 
 // Error handling middleware
 app.use(errorHandler.handleErrors);
