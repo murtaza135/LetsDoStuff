@@ -10,6 +10,8 @@ const TodoItemGroup = () => {
   const { data: todos, isLoading, isError, error } = useCustomGetAllTodosQuery();
   const setAlert = useSetAlert();
   const [activePill, setActivePill] = useState(pillData[1]);
+  // TODO try to remove this redudant piece of state
+  // TODO https://beta.reactjs.org/learn/you-might-not-need-an-effect#caching-expensive-calculations
   const [filteredTodos, setFilteredTodos] = useState([]);
 
   useEffect(() => (

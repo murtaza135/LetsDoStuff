@@ -31,6 +31,7 @@ const EditTodoForm = () => {
     currentTodoItemRef.current = todoItemRef?.current;
 
     return () => {
+      // TODO use flushSync? https://beta.reactjs.org/learn/manipulating-the-dom-with-refs#when-react-attaches-the-refs
       currentTodoItemRef.current?.focus();
     };
   }, [todoItemRef, todoDetails]);

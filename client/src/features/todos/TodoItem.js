@@ -89,8 +89,8 @@ TodoItem.propTypes = {
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  deadlineDate: PropTypes.instanceOf(Date),
-  tags: PropTypes.arrayOf(PropTypes.string),
+  deadlineDate: PropTypes.instanceOf(Date), // TODO breaks memo
+  tags: PropTypes.arrayOf(PropTypes.string), // TODO breaks memo
   important: PropTypes.bool,
   complete: PropTypes.bool
 };

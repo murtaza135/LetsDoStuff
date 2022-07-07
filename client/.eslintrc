@@ -5,7 +5,7 @@
     "airbnb"
   ],
   "rules": {
-    "max-len": ["error", {"code": 100, "ignoreStrings": true}],
+    "max-len": ["error", { "code": 100, "ignoreStrings": true, "ignoreComments": true }],
     "no-nested-ternary": "off",
     "comma-dangle": "off",
     "linebreak-style": "off",

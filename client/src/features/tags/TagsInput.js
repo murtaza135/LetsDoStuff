@@ -5,6 +5,7 @@ import { capitalizeFirstLetter } from 'utils/string.utils';
 import * as S from './TagsInput.styles';
 import Tag from './Tag';
 
+// TODO https://stackoverflow.com/questions/68162617/whats-the-correct-way-to-use-useref-and-forwardref-together
 const TagsInput = React.forwardRef(({ name, placeholder, validationRegex }, tagInputRef) => {
   const formik = useFormikContext();
   const isError = !!(formik.errors[name]);
